@@ -5,7 +5,6 @@ public abstract class Person {
 	private String name;
 	private String dateOfBirth;
 	private String phone;
-
 	
 	public Person(int id, String name, String dateOfBirth, String phone) {
 		super();
