@@ -39,7 +39,7 @@ public class PGSQLConnection {
 
             this.hostname = "localhost";
             this.port = 5432;
-            this.database = "javabd";
+            this.database = "postgres";
             this.username = "root";
             this.password = "123456";
 
