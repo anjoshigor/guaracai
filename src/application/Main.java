@@ -19,19 +19,7 @@ public class Main extends Application {
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
-
-        PGSQLConnection connector = new PGSQLConnection();
-        connector.establishConnection();
-
-        ClientDAO clientDAO = new ClientDAO(connector);
-        ArrayList<Client> result = new ArrayList<Client>();
-        result = clientDAO.readAllClients();
-
-
-        for(Client t : result){
-            System.out.println(t);
-        }
-
+        
     }
 
     public static void main(String[] args) {
