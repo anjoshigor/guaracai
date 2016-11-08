@@ -162,7 +162,7 @@ public class CategoryRegisterView extends JFrame {
 		btnLimpar.setForeground(Color.WHITE);
 		btnLimpar.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		btnLimpar.setBounds(400, 400, 245, 45);
-		btnCadastrar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnLimpar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panelForm.add(btnLimpar);
 		
 		
