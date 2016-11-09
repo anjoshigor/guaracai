@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import view.MenuView;
+import view.RegisterView;
 
 /**
  * 
@@ -60,6 +61,10 @@ public class MenuControl {
 			}
 			else if(e.getSource() == menuView.getLblCloseMessage())
 				menuView.getPaneDialog().setVisible(false);
+			
+			if(e.getSource() == menuView.getLblImageButtonCadastro()){
+				new RegisterView().setVisible(true);
+			}
 		}
 		
 		@Override
@@ -70,8 +75,6 @@ public class MenuControl {
 		
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			if(menuView.getPaneDialog().isVisible())
-				return;
 			
 			if(e.getSource() == menuView.getLblImageButtonCadastro())
 				effectSelected(false, true, true, true, true);

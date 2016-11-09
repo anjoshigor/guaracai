@@ -1,6 +1,8 @@
 package app;
 
 import view.LoginView;
+import view.MenuView;
+import view.RegisterView;
 
 public class Main {
 
