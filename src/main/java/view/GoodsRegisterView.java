@@ -78,7 +78,9 @@ public class GoodsRegisterView extends JFrame {
 	private JButton btnLimpar;
 	
 	/**Back Button**/
-	private JLabel lblImageButtonBack;
+	private JLabel lblVoltar;
+	private JLabel lblImageButtonVoltar;
+	
 	
 	/**Message**/
 	private JLabel lblImageLoading;
@@ -165,11 +167,11 @@ public class GoodsRegisterView extends JFrame {
 		panelCod.setBackground((new Color(Integer.parseInt("BD7DF5", 16))));
 		panelForm.add(panelCod);
 		
-		txtNome = new JTextField();
-		txtNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
-		txtNome.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-		txtNome.setBounds(81, 238, 120, 33);
-		panelForm.add(txtNome);
+		txtCod = new JTextField();
+		txtCod.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
+		txtCod.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		txtCod.setBounds(81, 238, 120, 33);
+		panelForm.add(txtCod);
 		
 		/**Category Field**/
 		lblCategoria = new JLabel("categoria");
@@ -288,12 +290,18 @@ public class GoodsRegisterView extends JFrame {
 		panelForm.add(lblMessageError);
 
 		/**Back Button**/
-		lblImageButtonBack = new JLabel();
-		lblImageButtonBack.setSize(120, 50);
-		lblImageButtonBack.setLocation(screenSize.width-180, 20);
-		lblImageButtonBack.setIcon(GraphicsUtil.adjustImage("/drawable/botao-voltar.png", lblImageButtonBack.getSize()));
-		lblImageButtonBack.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		contentPane.add(lblImageButtonBack);
+		lblVoltar = new JLabel("Voltar");
+		lblVoltar.setForeground(Color.WHITE);
+		lblVoltar.setFont(new Font("DejaVu Sans",Font.PLAIN, 24));
+		lblVoltar.setBounds(getWidth() - 150,20,150,60);
+		contentPane.add(lblVoltar);
+		
+		lblImageButtonVoltar =  new JLabel();
+		lblImageButtonVoltar.setSize(150,60);
+		lblImageButtonVoltar.setLocation(getWidth() - 200, 20);
+		lblImageButtonVoltar.setIcon(GraphicsUtil.adjustImage("/drawable/botao-voltar.png", lblImageButtonVoltar.getSize()));
+		lblImageButtonVoltar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		contentPane.add(lblImageButtonVoltar);
 		
 	}
 
