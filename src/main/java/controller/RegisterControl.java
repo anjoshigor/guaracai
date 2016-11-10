@@ -67,16 +67,16 @@ public class RegisterControl {
 			public void mouseEntered(MouseEvent e) {
 				
 				if(e.getSource() == registerView.getLblImageButtonProduto())
-					effectSelected(true, false, false, false);
+					effectSelected(false, true, true, true);
 				
 				else if(e.getSource() == registerView.getLblImageButtonCliente())
-					effectSelected(false, true, false, false);
+					effectSelected(true, false, true, true);
 				
 				else if(e.getSource() == registerView.getLblImageButtonFuncionario())
-					effectSelected(false, false, true, false);
+					effectSelected(true, true, false, true);
 				
 				else if(e.getSource() == registerView.getLblImageButtonCategoria())
-					effectSelected(false, false, false, true);
+					effectSelected(true, true, true, false);
 				
 			}
 			
