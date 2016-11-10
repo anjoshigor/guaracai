@@ -9,6 +9,8 @@ import java.awt.event.MouseListener;
 import view.RegisterView;
 import view.MenuView;
 import view.CategoryRegisterView;
+import view.ClientRegisterView;
+import view.GoodsRegisterView;
 
 public class RegisterControl {
 	
@@ -46,6 +48,12 @@ public class RegisterControl {
 				}
 				if(e.getSource() == registerView.getLblImageButtonCategoria() ){
 					new CategoryRegisterView().setVisible(true);
+				}
+				if(e.getSource() == registerView.getLblImageButtonProduto() ){
+					new GoodsRegisterView().setVisible(true);
+				}
+				if(e.getSource() == registerView.getLblImageButtonCliente() ){
+					new ClientRegisterView().setVisible(true);
 				}
 			}
 			
