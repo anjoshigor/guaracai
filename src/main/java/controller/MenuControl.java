@@ -75,7 +75,8 @@ public class MenuControl {
 		
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			
+			if(menuView.getPaneDialog().isVisible())
+				return;
 			if(e.getSource() == menuView.getLblImageButtonCadastro())
 				effectSelected(false, true, true, true, true);
 			

@@ -35,7 +35,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Category extends TableImpl<CategoryRecord> {
 
-    private static final long serialVersionUID = -2021850341;
+    private static final long serialVersionUID = 77839961;
 
     /**
      * The reference instance of <code>public.category</code>
@@ -58,7 +58,7 @@ public class Category extends TableImpl<CategoryRecord> {
     /**
      * The column <code>public.category.name</code>.
      */
-    public final TableField<CategoryRecord, String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR.length(30).nullable(false), this, "");
+    public final TableField<CategoryRecord, String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR.length(50).nullable(false), this, "");
 
     /**
      * The column <code>public.category.description</code>.

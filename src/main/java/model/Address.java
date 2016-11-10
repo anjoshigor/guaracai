@@ -4,18 +4,18 @@ public class Address {
 	private String complement;
 	private String city;
 	private String street;
-	private String neighborhood;
+	private String district;
 	private int number;
-	private String fs;
+	private String state;
 	
 	public Address(String complement, String city, String street, String neighborhood, int number, String fs) {
 		super();
 		this.complement = complement;
 		this.city = city;
 		this.street = street;
-		this.neighborhood = neighborhood;
+		this.district = neighborhood;
 		this.number = number;
-		this.fs = fs;
+		this.state = fs;
 	}
 	
 	public String getComplement() {
@@ -36,11 +36,11 @@ public class Address {
 	public void setStreet(String street) {
 		this.street = street;
 	}
-	public String getNeighborhood() {
-		return neighborhood;
+	public String getDistrict() {
+		return district;
 	}
-	public void setNeighborhood(String neighborhood) {
-		this.neighborhood = neighborhood;
+	public void setDistrict(String district) {
+		this.district = district;
 	}
 	public int getNumber() {
 		return number;
@@ -48,12 +48,10 @@ public class Address {
 	public void setNumber(int number) {
 		this.number = number;
 	}
-	public String getFs() {
-		return fs;
+	public String getState() {
+		return state;
 	}
-	public void setFs(String fs) {
-		this.fs = fs;
+	public void setState(String state) {
+		this.state = state;
 	}
-	
-	
 }

@@ -35,7 +35,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Client extends TableImpl<ClientRecord> {
 
-    private static final long serialVersionUID = -1428293070;
+    private static final long serialVersionUID = 1179675921;
 
     /**
      * The reference instance of <code>public.client</code>
@@ -63,7 +63,7 @@ public class Client extends TableImpl<ClientRecord> {
     /**
      * The column <code>public.client.date_of_birth</code>.
      */
-    public final TableField<ClientRecord, String> DATE_OF_BIRTH = createField("date_of_birth", org.jooq.impl.SQLDataType.CHAR.length(8), this, "");
+    public final TableField<ClientRecord, String> DATE_OF_BIRTH = createField("date_of_birth", org.jooq.impl.SQLDataType.CHAR.length(8).nullable(false), this, "");
 
     /**
      * The column <code>public.client.phone</code>.

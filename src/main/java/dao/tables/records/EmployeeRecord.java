@@ -28,7 +28,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class EmployeeRecord extends UpdatableRecordImpl<EmployeeRecord> implements Record17<Integer, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String> {
 
-    private static final long serialVersionUID = 487659171;
+    private static final long serialVersionUID = 1097617367;
 
     /**
      * Setter for <code>public.employee.id</code>.
@@ -241,30 +241,30 @@ public class EmployeeRecord extends UpdatableRecordImpl<EmployeeRecord> implemen
     }
 
     /**
-     * Setter for <code>public.employee.neighborhood</code>.
+     * Setter for <code>public.employee.district</code>.
      */
-    public void setNeighborhood(String value) {
+    public void setDistrict(String value) {
         set(15, value);
     }
 
     /**
-     * Getter for <code>public.employee.neighborhood</code>.
+     * Getter for <code>public.employee.district</code>.
      */
-    public String getNeighborhood() {
+    public String getDistrict() {
         return (String) get(15);
     }
 
     /**
-     * Setter for <code>public.employee.fs</code>.
+     * Setter for <code>public.employee.state</code>.
      */
-    public void setFs(String value) {
+    public void setState(String value) {
         set(16, value);
     }
 
     /**
-     * Getter for <code>public.employee.fs</code>.
+     * Getter for <code>public.employee.state</code>.
      */
-    public String getFs() {
+    public String getState() {
         return (String) get(16);
     }
 
@@ -425,7 +425,7 @@ public class EmployeeRecord extends UpdatableRecordImpl<EmployeeRecord> implemen
      */
     @Override
     public Field<String> field16() {
-        return Employee.EMPLOYEE.NEIGHBORHOOD;
+        return Employee.EMPLOYEE.DISTRICT;
     }
 
     /**
@@ -433,7 +433,7 @@ public class EmployeeRecord extends UpdatableRecordImpl<EmployeeRecord> implemen
      */
     @Override
     public Field<String> field17() {
-        return Employee.EMPLOYEE.FS;
+        return Employee.EMPLOYEE.STATE;
     }
 
     /**
@@ -561,7 +561,7 @@ public class EmployeeRecord extends UpdatableRecordImpl<EmployeeRecord> implemen
      */
     @Override
     public String value16() {
-        return getNeighborhood();
+        return getDistrict();
     }
 
     /**
@@ -569,7 +569,7 @@ public class EmployeeRecord extends UpdatableRecordImpl<EmployeeRecord> implemen
      */
     @Override
     public String value17() {
-        return getFs();
+        return getState();
     }
 
     /**
@@ -712,7 +712,7 @@ public class EmployeeRecord extends UpdatableRecordImpl<EmployeeRecord> implemen
      */
     @Override
     public EmployeeRecord value16(String value) {
-        setNeighborhood(value);
+        setDistrict(value);
         return this;
     }
 
@@ -721,7 +721,7 @@ public class EmployeeRecord extends UpdatableRecordImpl<EmployeeRecord> implemen
      */
     @Override
     public EmployeeRecord value17(String value) {
-        setFs(value);
+        setState(value);
         return this;
     }
 
@@ -764,7 +764,7 @@ public class EmployeeRecord extends UpdatableRecordImpl<EmployeeRecord> implemen
     /**
      * Create a detached, initialised EmployeeRecord
      */
-    public EmployeeRecord(Integer id, String name, String dataOfBirth, String phone, String email, String cpf, String username, String password, String type, String agency, String count, String complement, Integer number, String city, String street, String neighborhood, String fs) {
+    public EmployeeRecord(Integer id, String name, String dataOfBirth, String phone, String email, String cpf, String username, String password, String type, String agency, String count, String complement, Integer number, String city, String street, String district, String state) {
         super(Employee.EMPLOYEE);
 
         set(0, id);
@@ -782,7 +782,7 @@ public class EmployeeRecord extends UpdatableRecordImpl<EmployeeRecord> implemen
         set(12, number);
         set(13, city);
         set(14, street);
-        set(15, neighborhood);
-        set(16, fs);
+        set(15, district);
+        set(16, state);
     }
 }

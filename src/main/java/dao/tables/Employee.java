@@ -35,7 +35,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Employee extends TableImpl<EmployeeRecord> {
 
-    private static final long serialVersionUID = 1889720219;
+    private static final long serialVersionUID = -653370421;
 
     /**
      * The reference instance of <code>public.employee</code>
@@ -126,14 +126,14 @@ public class Employee extends TableImpl<EmployeeRecord> {
     public final TableField<EmployeeRecord, String> STREET = createField("street", org.jooq.impl.SQLDataType.VARCHAR.length(60).nullable(false), this, "");
 
     /**
-     * The column <code>public.employee.neighborhood</code>.
+     * The column <code>public.employee.district</code>.
      */
-    public final TableField<EmployeeRecord, String> NEIGHBORHOOD = createField("neighborhood", org.jooq.impl.SQLDataType.VARCHAR.length(30).nullable(false), this, "");
+    public final TableField<EmployeeRecord, String> DISTRICT = createField("district", org.jooq.impl.SQLDataType.VARCHAR.length(50).nullable(false), this, "");
 
     /**
-     * The column <code>public.employee.fs</code>.
+     * The column <code>public.employee.state</code>.
      */
-    public final TableField<EmployeeRecord, String> FS = createField("fs", org.jooq.impl.SQLDataType.CHAR.length(2).nullable(false), this, "");
+    public final TableField<EmployeeRecord, String> STATE = createField("state", org.jooq.impl.SQLDataType.CHAR.length(2).nullable(false), this, "");
 
     /**
      * Create a <code>public.employee</code> table reference
