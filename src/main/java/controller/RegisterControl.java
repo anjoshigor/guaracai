@@ -48,12 +48,15 @@ public class RegisterControl {
 				}
 				if(e.getSource() == registerView.getLblImageButtonCategoria() ){
 					new CategoryRegisterView().setVisible(true);
+					registerView.dispose();
 				}
 				if(e.getSource() == registerView.getLblImageButtonProduto() ){
 					new GoodsRegisterView().setVisible(true);
+					registerView.dispose();
 				}
 				if(e.getSource() == registerView.getLblImageButtonCliente() ){
 					new ClientRegisterView().setVisible(true);
+					registerView.dispose();
 				}
 			}
 			

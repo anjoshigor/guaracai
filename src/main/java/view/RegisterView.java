@@ -65,6 +65,7 @@ public class RegisterView extends JFrame {
 		lblVoltar.setForeground(Color.WHITE);
 		lblVoltar.setFont(new Font("DejaVu Sans",Font.PLAIN, 24));
 		lblVoltar.setBounds(getWidth() - 150,20,150,60);
+		lblVoltar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		contentPane.add(lblVoltar);
 	
 		lblImageButtonVoltar =  new JLabel();
@@ -115,7 +116,6 @@ public class RegisterView extends JFrame {
 		lblProduto.setForeground(Color.WHITE);
 		lblProduto.setFont(new Font("DejaVu Sans", Font.PLAIN, 24));
 		lblProduto.setBounds(264, 224, 151, 27);
-
 		lblProduto.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panelMenu.add(lblProduto);
 	
@@ -146,12 +146,14 @@ public class RegisterView extends JFrame {
 		lblImageFuncionario = new JLabel("");
 		lblImageFuncionario.setBounds(273, 372, 128, 128);
 		lblImageFuncionario.setIcon(GraphicsUtil.adjustImage("/drawable/manager-avatar.png", lblImageFuncionario.getSize()));
+		lblImageFuncionario.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panelMenu.add(lblImageFuncionario);
 		
 		lblFuncionario = new JLabel("Funcionário (F3)");
 		lblFuncionario.setForeground(Color.WHITE);
 		lblFuncionario.setFont(new Font("DejaVu Sans", Font.PLAIN, 24));
 		lblFuncionario.setBounds(237, 525, 201, 27);
+		lblFuncionario.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panelMenu.add(lblFuncionario);
 		
 		lblImageButtonFuncionario = new JLabel();
@@ -163,15 +165,18 @@ public class RegisterView extends JFrame {
 		lblImageCategoria = new JLabel("");
 		lblImageCategoria.setBounds(632, 372, 128, 128);
 		lblImageCategoria.setIcon(GraphicsUtil.adjustImage("/drawable/category.png", lblImageCategoria.getSize()));
+		lblImageCategoria.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panelMenu.add(lblImageCategoria);
 		
 		lblCategoria = new JLabel("Categoria (F4)");
 		lblCategoria.setForeground(Color.WHITE);
+		lblCategoria.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		lblCategoria.setFont(new Font("DejaVu Sans", Font.PLAIN, 24));
 		lblCategoria.setBounds(620, 525, 171, 27);
 		panelMenu.add(lblCategoria);
 		
 		lblImageButtonCategoria = new JLabel();
+		lblImageButtonCategoria.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		lblImageButtonCategoria.setBounds(572, 338, 250, 250);
 		lblImageButtonCategoria.setIcon(GraphicsUtil.adjustImage("/drawable/background-button.png", lblImageButtonCategoria.getSize()));
 		panelMenu.add(lblImageButtonCategoria);

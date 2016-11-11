@@ -2,6 +2,8 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import view.MenuView;
@@ -44,7 +46,7 @@ public class MenuControl {
 	}
 	
 	// inner class
-	private class Events implements ActionListener, MouseListener {
+	private class Events implements ActionListener, KeyListener, MouseListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == menuView.getBtnNao())
@@ -53,7 +55,20 @@ public class MenuControl {
 			else if(e.getSource() == menuView.getBtnSim())
 				menuView.dispose();
 		}
+		@Override
+		public void keyTyped(KeyEvent e) { /* unimplemented method */ }
 		
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if(e.getID() == KeyEvent.VK_F1){
+				new RegisterView().setVisible(true);
+			}
+		}
+		
+		@Override
+		public void keyReleased(KeyEvent e) { /* unimplemented method */ }
+		
+		@Override
 		public void mouseClicked(MouseEvent e) {
 			if(e.getSource() == menuView.getLblImageButtonClose()){
 				menuView.getPaneDialog().setVisible(true);
@@ -62,7 +77,7 @@ public class MenuControl {
 			else if(e.getSource() == menuView.getLblCloseMessage())
 				menuView.getPaneDialog().setVisible(false);
 			
-			if(e.getSource() == menuView.getLblImageButtonCadastro()){
+			else if(e.getSource() == menuView.getLblImageButtonCadastro()){
 				new RegisterView().setVisible(true);
 			}
 		}

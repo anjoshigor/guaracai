@@ -8,14 +8,13 @@ public class Address {
 	private int number;
 	private String state;
 	
-	public Address(String complement, String city, String street, String neighborhood, int number, String fs) {
-		super();
+	public Address(String complement, String city, String street, String district, int number, String state) {
 		this.complement = complement;
 		this.city = city;
 		this.street = street;
-		this.district = neighborhood;
+		this.district = district;
 		this.number = number;
-		this.state = fs;
+		this.state = state;
 	}
 	
 	public String getComplement() {

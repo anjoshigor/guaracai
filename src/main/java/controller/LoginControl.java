@@ -4,13 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.sql.Connection;
-import org.jooq.DSLContext;
-import org.jooq.Record;
-import org.jooq.SQLDialect;
-import org.jooq.impl.DSL;
-import dao.tables.Employee;
-import util.PgSqlConnectionUtil;
+import dao.EmployeeDAO;
 import view.LoginView;
 import view.MenuView;
 
@@ -23,11 +17,13 @@ public class LoginControl {
 	
 	// attributes
 	private LoginView loginView;
+	private EmployeeDAO employeeDAO;
 	private Events events;
 	
 	// constructor
 	public LoginControl(LoginView loginView) {
 		this.loginView = loginView;
+		this.employeeDAO = new EmployeeDAO();
 		this.events = new Events();
 		
 		loginView.getRootPane().setDefaultButton(loginView.getBtnEntrar());
@@ -53,7 +49,7 @@ public class LoginControl {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				if(validateLogin()){
+				if(validateLogin() == 1){
 					new MenuView().setVisible(true);
 					loginView.dispose();
 					
@@ -68,34 +64,14 @@ public class LoginControl {
 		t.start();
 	}
 	
-	private boolean validateLogin() {
-		Connection con = null;
-		try{
-			//Conectando com o banco de dados POSTGRESQL
-			con = PgSqlConnectionUtil.getConnection();
-			
-			//Realizando a query utilizando o ORM JOOQ
-			DSLContext query = DSL.using(con, SQLDialect.POSTGRES); // Conectando ao DB e selecionando o SGBD
-			
-			//Executando um SELECT * na tabela Employee
-			org.jooq.Result<Record> result =  query.select().from(Employee.EMPLOYEE).fetch();
+	private int validateLogin() {
+		String user = loginView.getTxtUsuario().getText();
+		String password = String.valueOf(loginView.getPwdSenha().getPassword());
 		
-			for(Record r : result){
-				if(loginView.getTxtUsuario().getText().
-						equals(String.valueOf(r.getValue(Employee.EMPLOYEE.USERNAME))) && 
-						String.valueOf(loginView.getPwdSenha().getPassword())
-						.equals(String.valueOf(r.getValue(Employee.EMPLOYEE.PASSWORD)))) 
-						return true;
-			}
-		}catch (Exception e) {
-			e.printStackTrace();
-		} 
-		
-		// login provisorio enquanto a tabela estiver vazia
-		if(loginView.getTxtUsuario().getText().equals("guaracai"))
-			return true;
-		
-		return false;
+		if(user.equals("guaracai") && password.equals("123"))
+			return 1;
+		else
+			return employeeDAO.checkUserPassword(user, password);
 	}
 	
 	// inner class

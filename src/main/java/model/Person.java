@@ -6,21 +6,26 @@ public abstract class Person {
 	private String dateOfBirth;
 	private String phone;
 
-	public Person(){}
+	public Person(){
+		this.id = 0;
+		this.name = "";
+		this.dateOfBirth = "";
+		this.phone = "";
+	}
 	
 	public Person(int id, String name, String dateOfBirth, String phone) {
 		super();
-		this.id = id;
+		this.id = 0;
 		this.name = name;
 		this.dateOfBirth = dateOfBirth;
 		this.phone = phone;
 	}
-
-	public int getId() {
+	
+	public int getId(){
 		return id;
 	}
 	
-	public void setId(int id) {
+	public void setId(int id){
 		this.id = id;
 	}
 	

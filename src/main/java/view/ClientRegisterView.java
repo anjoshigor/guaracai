@@ -20,6 +20,7 @@ import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
 
+import controller.ClientRegisterControl;
 import controller.LoginControl;
 import model.Category;
 
@@ -95,13 +96,12 @@ public class ClientRegisterView extends JFrame {
 	private JLabel lblImageLoading;
 	private JLabel lblMessageError;
 
-	// TODO controller
-	//private ClientRegisterControl clientRegisterControl;
+	private ClientRegisterControl clientRegisterControl;
 	
 	// constructor
 	public ClientRegisterView() {
 		initLoginView();
-		//clientRegisterControl = new ClientRegisterControl(this);
+		clientRegisterControl = new ClientRegisterControl(this);
 	}
 	
 	// methods
@@ -335,6 +335,7 @@ public class ClientRegisterView extends JFrame {
 		lblVoltar.setForeground(Color.WHITE);
 		lblVoltar.setFont(new Font("DejaVu Sans",Font.PLAIN, 24));
 		lblVoltar.setBounds(getWidth() - 150,20,150,60);
+		lblVoltar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		contentPane.add(lblVoltar);
 		
 		lblImageButtonVoltar =  new JLabel();
@@ -345,8 +346,8 @@ public class ClientRegisterView extends JFrame {
 		contentPane.add(lblImageButtonVoltar);
 	}
 
-	public JTextField gettxtDataNasc() {
-		return txtDataNasc;
+	public JLabel getLblImageButtonVoltar() {
+		return lblImageButtonVoltar;
 	}
 
 	public JTextField getTxtEmail() {
@@ -378,6 +379,13 @@ public class ClientRegisterView extends JFrame {
 		return txtNome;
 	}
 
+	public JButton getBtnCadastrar() {
+		return btnCadastrar;
+	}
+
+	public JButton getBtnLimpar() {
+		return btnLimpar;
+	}
 
 }
 	

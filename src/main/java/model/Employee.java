@@ -5,13 +5,26 @@ public class Employee extends Person {
 	private String email;
 	private String cpf;
 	private String username;
+	private String password;
 	private Address address;
 	private String agency;
 	private String count;
 	private String type;
 	
+	public Employee(){
+		super();
+		this.cpf = "";
+		this.username = "";
+		this.address = null;
+		this.agency = "";
+		this.count = "";
+		this.type = "";
+		this.email = "";
+		this.password = "";
+	}
+	
 	public Employee(int id, String name, String dateOfBirth, String phone, String cpf, String username, Address address,
-			String agency, String count, String type, String email) {
+					String agency, String count, String type, String email) {
 		super(id, name, dateOfBirth, phone);
 		this.cpf = cpf;
 		this.username = username;
@@ -78,4 +91,11 @@ public class Employee extends Person {
 		this.type = type;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }

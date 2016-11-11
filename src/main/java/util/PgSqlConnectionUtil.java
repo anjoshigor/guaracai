@@ -65,7 +65,7 @@ public abstract class PgSqlConnectionUtil {
 		            .withExcludes("")
 		            .withInputSchema("public"))
 		        .withTarget(new Target()
-		            .withPackageName("dao")
+		            .withPackageName("service")
 		            .withDirectory("src/main/java")));
 
 		//Log configuration
