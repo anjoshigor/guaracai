@@ -10,8 +10,8 @@ public class Client extends Person {
 		this.balance = 0.0;
 	}
 	
-	public Client(int id, String name, String dateOfBirth, String phone, double amountSpent, double balance) {
-		super(id, name, dateOfBirth, phone);
+	public Client(int id, String name, String dateOfBirth, String phone, String email, double amountSpent, double balance) {
+		super(id, name, dateOfBirth, phone, email);
 		this.amountSpent = amountSpent;
 		this.balance = balance;
 	}

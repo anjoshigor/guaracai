@@ -35,7 +35,7 @@ import service.tables.records.TbEmployeeRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TbEmployee extends TableImpl<TbEmployeeRecord> {
 
-    private static final long serialVersionUID = -577908831;
+    private static final long serialVersionUID = -1036299655;
 
     /**
      * The reference instance of <code>public.tb_employee</code>
@@ -63,12 +63,12 @@ public class TbEmployee extends TableImpl<TbEmployeeRecord> {
     /**
      * The column <code>public.tb_employee.data_of_birth</code>.
      */
-    public final TableField<TbEmployeeRecord, String> DATA_OF_BIRTH = createField("data_of_birth", org.jooq.impl.SQLDataType.CHAR.length(8).nullable(false), this, "");
+    public final TableField<TbEmployeeRecord, String> DATA_OF_BIRTH = createField("data_of_birth", org.jooq.impl.SQLDataType.CHAR.length(10).nullable(false), this, "");
 
     /**
      * The column <code>public.tb_employee.phone</code>.
      */
-    public final TableField<TbEmployeeRecord, String> PHONE = createField("phone", org.jooq.impl.SQLDataType.CHAR.length(11).nullable(false), this, "");
+    public final TableField<TbEmployeeRecord, String> PHONE = createField("phone", org.jooq.impl.SQLDataType.CHAR.length(13).nullable(false), this, "");
 
     /**
      * The column <code>public.tb_employee.email</code>.
@@ -78,7 +78,7 @@ public class TbEmployee extends TableImpl<TbEmployeeRecord> {
     /**
      * The column <code>public.tb_employee.cpf</code>.
      */
-    public final TableField<TbEmployeeRecord, String> CPF = createField("cpf", org.jooq.impl.SQLDataType.CHAR.length(11).nullable(false), this, "");
+    public final TableField<TbEmployeeRecord, String> CPF = createField("cpf", org.jooq.impl.SQLDataType.CHAR.length(14).nullable(false), this, "");
 
     /**
      * The column <code>public.tb_employee.username</code>.

@@ -8,27 +8,21 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import util.GraphicsUtil;
 import java.awt.Color;
 import java.awt.Cursor;
-
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.JFormattedTextField.AbstractFormatter;
+import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
-
 import controller.ClientRegisterControl;
-import controller.LoginControl;
-import model.Category;
-
 import java.awt.Font;
 import javax.swing.JTextField;
-import javax.swing.JTextArea;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -114,8 +108,8 @@ public class ClientRegisterView extends JFrame {
 		setLocationRelativeTo(null);
 		
 		/**Formats**/
-		DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
-		
+	//	DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
+		/*
 		NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 		format.setMaximumFractionDigits(2);
 
@@ -124,7 +118,7 @@ public class ClientRegisterView extends JFrame {
 		formatter.setMaximum(10000000.0);
 		formatter.setAllowsInvalid(false);
 		formatter.setOverwriteMode(true);
-		
+		*/
 		
 		/**Setting outermost content**/
 		contentPane = new JPanel(null);
@@ -212,7 +206,7 @@ public class ClientRegisterView extends JFrame {
 		txtTelefone.setBounds(156, 275, 210, 33);
 		MaskFormatter phoneMask;
 		try {
-			phoneMask = new MaskFormatter("(##) ####-####");
+			phoneMask = new MaskFormatter("(##) #####-####");
 			phoneMask.install(txtTelefone);
 		} catch (ParseException e1) {
 			e1.printStackTrace();
@@ -236,7 +230,7 @@ public class ClientRegisterView extends JFrame {
 		panelDataNasc.setBackground((new Color(Integer.parseInt("BD7DF5", 16))));
 		panelForm.add(panelDataNasc);
 		
-		txtDataNasc = new JFormattedTextField(dateFormat);
+		txtDataNasc = new JFormattedTextField();
 		txtDataNasc.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		txtDataNasc.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		txtDataNasc.setBounds(496, 275, 268, 33);
@@ -266,13 +260,15 @@ public class ClientRegisterView extends JFrame {
 		panelSaldo.setBackground((new Color(Integer.parseInt("BD7DF5", 16))));
 		panelForm.add(panelSaldo);
 		
-		txtSaldo = new JFormattedTextField(formatter);
+		
+		txtSaldo = new JFormattedTextField();
 		txtSaldo.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		txtSaldo.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		txtSaldo.setBounds(156, 312, 190, 33);
-		txtSaldo.setValue(0.0);
-		
+		txtSaldo.setValue("R$ 0,00");
+		txtSaldo.setForeground(Color.GRAY);
 		panelForm.add(txtSaldo);
+	
 		
 		/**Amount Spent Field**/
 		lblValorEmCompras = new JLabel("valor em compras");
@@ -287,12 +283,13 @@ public class ClientRegisterView extends JFrame {
 		panelValorEmCompras.setBackground((new Color(Integer.parseInt("BD7DF5", 16))));
 		panelForm.add(panelValorEmCompras);
 		
-		txtValorEmCompras = new JFormattedTextField(formatter);
+
+		txtValorEmCompras = new JFormattedTextField();
 		txtValorEmCompras.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		txtValorEmCompras.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		txtValorEmCompras.setBounds(551, 312, 213, 33);
-		txtValorEmCompras.setValue(0.0);
-		
+		txtValorEmCompras.setValue("R$ 0,00");
+		txtValorEmCompras.setForeground(Color.GRAY);	
 		panelForm.add(txtValorEmCompras);
 		
 		

@@ -1,10 +1,20 @@
 package controller;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
 
+import javax.swing.JOptionPane;
+
+import dao.ClientDAO;
 import model.Client;
 import view.ClientRegisterView;
 import view.RegisterView;
@@ -14,15 +24,19 @@ public class ClientRegisterControl {
 	// attributes
 	private ClientRegisterView clientRegisterView;
 	private Events events;
-	private Client client;
-	
+	private ClientDAO clientDAO;
+	private Client client;	
+
 	// constructor
 	public ClientRegisterControl(ClientRegisterView clientRegisterView){
 		this.clientRegisterView = clientRegisterView;
 		this.events = new Events();
+		this.clientDAO = new ClientDAO();
 		this.client = null;
 		
 		// add listeners
+		clientRegisterView.getTxtSaldo().addFocusListener(events);
+		clientRegisterView.getTxtValorEmCompras().addFocusListener(events);
 		clientRegisterView.getBtnCadastrar().addActionListener(events);
 		clientRegisterView.getBtnLimpar().addActionListener(events);
 		clientRegisterView.getLblImageButtonVoltar().addMouseListener(events);
@@ -32,9 +46,9 @@ public class ClientRegisterControl {
 		clientRegisterView.getTxtDataNasc().setText("");
 		clientRegisterView.getTxtEmail().setText("");
 		clientRegisterView.getTxtNome().setText("");
-		clientRegisterView.getTxtSaldo().setText("");
+		clientRegisterView.getTxtSaldo().setText("R$ 0,00");
 		clientRegisterView.getTxtTelefone().setText("");
-		clientRegisterView.getTxtValorEmCompras().setText("");
+		clientRegisterView.getTxtValorEmCompras().setText("R$ 0,00");
 	}
 	
 	private void insert(){
@@ -43,16 +57,31 @@ public class ClientRegisterControl {
 		client.setName(clientRegisterView.getTxtNome().getText());
 		client.setPhone(clientRegisterView.getTxtTelefone().getText());
 		client.setDateOfBirth(clientRegisterView.getTxtDataNasc().getText());
-		client.setBalance(Double.parseDouble(clientRegisterView.getTxtSaldo().getText()));
-		client.setAmountSpent(Double.parseDouble(clientRegisterView.getTxtValorEmCompras().getText()));
+		client.setEmail(clientRegisterView.getTxtEmail().getText());
+		
+		// TODO
+	    double balance = 0.0, amountSpent = 0.0;
+		/*
+		 NumberFormat nf = NumberFormat.getNumberInstance(new Locale("pt", "BR"));
+		 try {
+			balance = nf.parse(clientRegisterView.getTxtSaldo().getText()).doubleValue();
+			amountSpent = nf.parse(clientRegisterView.getTxtValorEmCompras().getText()).doubleValue();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}*/
+		
+		client.setBalance(balance);
+		client.setAmountSpent(amountSpent);
+	
+		clientDAO.add(client);
 	}
 	
 	// inner class
-	private class Events implements ActionListener, MouseListener {
+	private class Events implements ActionListener, FocusListener, MouseListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == clientRegisterView.getBtnCadastrar())
-				;
+				insert();
 			else if(e.getSource() == clientRegisterView.getBtnLimpar())
 				cleanFields();
 		}
@@ -73,5 +102,30 @@ public class ClientRegisterControl {
 		
 		@Override
 		public void mouseExited(MouseEvent e) { /* unimplemented method */ }
+
+		@Override
+		public void focusGained(FocusEvent e) {
+			if(e.getSource() == clientRegisterView.getTxtSaldo()){
+				clientRegisterView.getTxtSaldo().setForeground(Color.BLACK);
+				clientRegisterView.getTxtSaldo().setText("");
+			}
+			else if(e.getSource() == clientRegisterView.getTxtValorEmCompras()){
+				clientRegisterView.getTxtValorEmCompras().setForeground(Color.BLACK);
+				clientRegisterView.getTxtValorEmCompras().setText("");
+			}
+		}
+
+		@Override
+		public void focusLost(FocusEvent e) {
+			if(e.getSource() == clientRegisterView.getTxtSaldo() && clientRegisterView.getTxtSaldo().getText().isEmpty()){
+				clientRegisterView.getTxtSaldo().setForeground(Color.GRAY);
+				clientRegisterView.getTxtSaldo().setText("R$ 0,00");
+			}
+			else if(e.getSource() == clientRegisterView.getTxtValorEmCompras() && 
+					clientRegisterView.getTxtValorEmCompras().getText().isEmpty()){
+				clientRegisterView.getTxtValorEmCompras().setForeground(Color.GRAY);
+				clientRegisterView.getTxtValorEmCompras().setText("R$ 0,00");
+			}
+		}
 	}
 }

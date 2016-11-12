@@ -36,7 +36,7 @@ import service.tables.records.TbExpensesRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TbExpenses extends TableImpl<TbExpensesRecord> {
 
-    private static final long serialVersionUID = -2019551049;
+    private static final long serialVersionUID = 1977525527;
 
     /**
      * The reference instance of <code>public.tb_expenses</code>
@@ -64,7 +64,7 @@ public class TbExpenses extends TableImpl<TbExpensesRecord> {
     /**
      * The column <code>public.tb_expenses.cost</code>.
      */
-    public final TableField<TbExpensesRecord, Float> COST = createField("cost", org.jooq.impl.SQLDataType.REAL.nullable(false), this, "");
+    public final TableField<TbExpensesRecord, Double> COST = createField("cost", org.jooq.impl.SQLDataType.DOUBLE.nullable(false), this, "");
 
     /**
      * The column <code>public.tb_expenses.employee_id</code>.

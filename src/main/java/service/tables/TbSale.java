@@ -36,7 +36,7 @@ import service.tables.records.TbSaleRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TbSale extends TableImpl<TbSaleRecord> {
 
-    private static final long serialVersionUID = 1878942365;
+    private static final long serialVersionUID = -584614760;
 
     /**
      * The reference instance of <code>public.tb_sale</code>
@@ -59,7 +59,7 @@ public class TbSale extends TableImpl<TbSaleRecord> {
     /**
      * The column <code>public.tb_sale.date</code>.
      */
-    public final TableField<TbSaleRecord, String> DATE = createField("date", org.jooq.impl.SQLDataType.CHAR.length(8).nullable(false), this, "");
+    public final TableField<TbSaleRecord, String> DATE = createField("date", org.jooq.impl.SQLDataType.CHAR.length(10).nullable(false), this, "");
 
     /**
      * The column <code>public.tb_sale.observation</code>.

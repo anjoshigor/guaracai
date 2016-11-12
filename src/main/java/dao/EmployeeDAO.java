@@ -9,7 +9,6 @@ import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 import model.Address;
 import model.Employee;
-import service.tables.TbEmployee;
 import static service.tables.TbEmployee.TB_EMPLOYEE;
 /**
  * 
@@ -55,7 +54,7 @@ public class EmployeeDAO extends BasicDAO {
 		employee = (Employee) e;
 
 		return context.deleteFrom(TB_EMPLOYEE)
-				      .where(TB_EMPLOYEE.CPF.equal(employee.getCpf()))
+				      .where(TB_EMPLOYEE.ID.equal(employee.getId()))
 				      .execute();
 	}
 	
@@ -67,7 +66,7 @@ public class EmployeeDAO extends BasicDAO {
 		DSLContext query = DSL.using(connection, SQLDialect.POSTGRES); // Conectando ao DB e selecionando o SGBD
 		
 		//Executando um SELECT * na tabela Employee
-		Result<Record> result =  query.select().from(TbEmployee.TB_EMPLOYEE).fetch();
+		Result<Record> result =  query.select().from(TB_EMPLOYEE).fetch();
 		
 		for(Record r: result){
 			adress = new Address(r.getValue(TB_EMPLOYEE.COMPLEMENT),

@@ -2,7 +2,6 @@ package model;
 
 public class Employee extends Person {
 	
-	private String email;
 	private String cpf;
 	private String username;
 	private String password;
@@ -25,22 +24,13 @@ public class Employee extends Person {
 	
 	public Employee(int id, String name, String dateOfBirth, String phone, String cpf, String username, Address address,
 					String agency, String count, String type, String email) {
-		super(id, name, dateOfBirth, phone);
+		super(id, name, dateOfBirth, phone, email);
 		this.cpf = cpf;
 		this.username = username;
 		this.address = address;
 		this.agency = agency;
 		this.count = count;
 		this.type = type;
-		this.email = email;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public String getCpf() {

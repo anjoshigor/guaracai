@@ -36,7 +36,7 @@ import service.tables.records.TbGoodsRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TbGoods extends TableImpl<TbGoodsRecord> {
 
-    private static final long serialVersionUID = 1276386681;
+    private static final long serialVersionUID = 732856813;
 
     /**
      * The reference instance of <code>public.tb_goods</code>
@@ -64,7 +64,7 @@ public class TbGoods extends TableImpl<TbGoodsRecord> {
     /**
      * The column <code>public.tb_goods.price</code>.
      */
-    public final TableField<TbGoodsRecord, Float> PRICE = createField("price", org.jooq.impl.SQLDataType.REAL.nullable(false), this, "");
+    public final TableField<TbGoodsRecord, Double> PRICE = createField("price", org.jooq.impl.SQLDataType.DOUBLE.nullable(false), this, "");
 
     /**
      * The column <code>public.tb_goods.name</code>.

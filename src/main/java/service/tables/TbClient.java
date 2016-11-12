@@ -35,7 +35,7 @@ import service.tables.records.TbClientRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TbClient extends TableImpl<TbClientRecord> {
 
-    private static final long serialVersionUID = 1807024974;
+    private static final long serialVersionUID = -523637570;
 
     /**
      * The reference instance of <code>public.tb_client</code>
@@ -63,22 +63,27 @@ public class TbClient extends TableImpl<TbClientRecord> {
     /**
      * The column <code>public.tb_client.date_of_birth</code>.
      */
-    public final TableField<TbClientRecord, String> DATE_OF_BIRTH = createField("date_of_birth", org.jooq.impl.SQLDataType.CHAR.length(8).nullable(false), this, "");
+    public final TableField<TbClientRecord, String> DATE_OF_BIRTH = createField("date_of_birth", org.jooq.impl.SQLDataType.CHAR.length(10).nullable(false), this, "");
 
     /**
      * The column <code>public.tb_client.phone</code>.
      */
-    public final TableField<TbClientRecord, String> PHONE = createField("phone", org.jooq.impl.SQLDataType.CHAR.length(11), this, "");
+    public final TableField<TbClientRecord, String> PHONE = createField("phone", org.jooq.impl.SQLDataType.CHAR.length(13), this, "");
 
     /**
      * The column <code>public.tb_client.amount_spent</code>.
      */
-    public final TableField<TbClientRecord, Float> AMOUNT_SPENT = createField("amount_spent", org.jooq.impl.SQLDataType.REAL, this, "");
+    public final TableField<TbClientRecord, Double> AMOUNT_SPENT = createField("amount_spent", org.jooq.impl.SQLDataType.DOUBLE, this, "");
 
     /**
      * The column <code>public.tb_client.balance</code>.
      */
-    public final TableField<TbClientRecord, Float> BALANCE = createField("balance", org.jooq.impl.SQLDataType.REAL, this, "");
+    public final TableField<TbClientRecord, Double> BALANCE = createField("balance", org.jooq.impl.SQLDataType.DOUBLE, this, "");
+
+    /**
+     * The column <code>public.tb_client.email</code>.
+     */
+    public final TableField<TbClientRecord, String> EMAIL = createField("email", org.jooq.impl.SQLDataType.VARCHAR.length(60), this, "");
 
     /**
      * Create a <code>public.tb_client</code> table reference

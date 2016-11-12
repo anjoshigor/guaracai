@@ -25,6 +25,8 @@ public class MenuControl {
 		this.menuView = menuView;
 		this.events = new Events();
 		
+		menuView.addKeyListener(events);
+		
 		menuView.getLblImageButtonCadastro().addMouseListener(events);
 		menuView.getLblImageButtonRelatorio().addMouseListener(events);
 		menuView.getLblImageButtonConsulta().addMouseListener(events);
@@ -60,7 +62,7 @@ public class MenuControl {
 		
 		@Override
 		public void keyPressed(KeyEvent e) {
-			if(e.getID() == KeyEvent.VK_F1){
+			if(e.getID() == KeyEvent.VK_1){
 				new RegisterView().setVisible(true);
 			}
 		}
