@@ -4,14 +4,14 @@ public class Expenses {
 	
 	private int id;
 	private String description;
-	private float cost;
-	private Employee employee;
+	private double cost;
+	private int employeeId;
 	
-	public Expenses(int id, String description, float cost, Employee employee) {
+	public Expenses(int id, String description, double cost, int employeeId) {
 		this.id = id;
 		this.description = description;
 		this.cost = cost;
-		this.employee = employee;
+		this.employeeId = employeeId;
 	}
 
 	public int getId() {
@@ -30,23 +30,19 @@ public class Expenses {
 		this.description = description;
 	}
 
-	public float getCost() {
+	public double getCost() {
 		return cost;
 	}
 
-	public void setCost(float cost) {
+	public void setCost(double cost) {
 		this.cost = cost;
 	}
 
-	public Employee getEmployee() {
-		return employee;
+	public int getEmployeeId() {
+		return employeeId;
 	}
 
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
+	public void setEmployeeId(int employeeId) {
+		this.employeeId = employeeId;
 	}
-	
-	
-	
-	
 }
