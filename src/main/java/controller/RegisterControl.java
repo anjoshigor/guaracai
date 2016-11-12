@@ -10,6 +10,7 @@ import view.RegisterView;
 import view.MenuView;
 import view.CategoryRegisterView;
 import view.ClientRegisterView;
+import view.EmployeeRegisterView;
 import view.GoodsRegisterView;
 
 public class RegisterControl {
@@ -56,6 +57,10 @@ public class RegisterControl {
 				}
 				if(e.getSource() == registerView.getLblImageButtonCliente() ){
 					new ClientRegisterView().setVisible(true);
+					registerView.dispose();
+				}
+				if(e.getSource() == registerView.getLblImageButtonFuncionario() ){
+					new EmployeeRegisterView().setVisible(true);
 					registerView.dispose();
 				}
 			}
