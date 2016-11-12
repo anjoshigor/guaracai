@@ -2,11 +2,8 @@ package dao;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.jooq.DSLContext;
 import org.jooq.Record;
 import org.jooq.Result;
-import org.jooq.SQLDialect;
-import org.jooq.impl.DSL;
 import model.Address;
 import model.Employee;
 import static service.tables.TbEmployee.TB_EMPLOYEE;
@@ -62,11 +59,8 @@ public class EmployeeDAO extends BasicDAO {
 	public List<Employee> getAll() {
 		List<Employee> employeeList = new ArrayList<Employee>();
 		
-		//Realizando a query utilizando o ORM JOOQ
-		DSLContext query = DSL.using(connection, SQLDialect.POSTGRES); // Conectando ao DB e selecionando o SGBD
-		
 		//Executando um SELECT * na tabela Employee
-		Result<Record> result =  query.select().from(TB_EMPLOYEE).fetch();
+		Result<Record> result =  context.select().from(TB_EMPLOYEE).fetch();
 		
 		for(Record r: result){
 			adress = new Address(r.getValue(TB_EMPLOYEE.COMPLEMENT),

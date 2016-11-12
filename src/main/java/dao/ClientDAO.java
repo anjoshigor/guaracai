@@ -2,11 +2,8 @@ package dao;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.jooq.DSLContext;
 import org.jooq.Record;
 import org.jooq.Result;
-import org.jooq.SQLDialect;
-import org.jooq.impl.DSL;
 import model.Client;
 import static service.tables.TbClient.TB_CLIENT;
 
@@ -24,8 +21,8 @@ public class ClientDAO extends BasicDAO {
 	}
 
 	@Override
-	public int add(Object e) {
-		client = (Client) e;
+	public int add(Object c) {
+		client = (Client) c;
 		
 		return context.insertInto(TB_CLIENT)
 			          .set(TB_CLIENT.DATE_OF_BIRTH, client.getDateOfBirth())
@@ -38,8 +35,8 @@ public class ClientDAO extends BasicDAO {
 	}
 	
 	@Override
-	public int delete(Object e) {
-		client = (Client) e;
+	public int delete(Object c) {
+		client = (Client) c;
 
 		return context.deleteFrom(TB_CLIENT)
 				      .where(TB_CLIENT.ID.equal(client.getId()))
@@ -49,12 +46,9 @@ public class ClientDAO extends BasicDAO {
 	@Override
 	public List<Client> getAll() {
 		List<Client> clientList = new ArrayList<Client>();
-		
-		//Realizando a query utilizando o ORM JOOQ
-		DSLContext query = DSL.using(connection, SQLDialect.POSTGRES); // Conectando ao DB e selecionando o SGBD
-		
-		//Executando um SELECT * na tabela Employee
-		Result<Record> result =  query.select().from(TB_CLIENT).fetch();
+	
+		//Executando um SELECT * na tabela Client
+		Result<Record> result =  context.select().from(TB_CLIENT).fetch();
 		
 		for(Record r: result){
 			client = new Client(r.getValue(TB_CLIENT.ID),
@@ -70,8 +64,8 @@ public class ClientDAO extends BasicDAO {
 	}
 	
 	@Override
-	public int update(Object e) {
-		client = (Client) e;
+	public int update(Object c) {
+		client = (Client) c;
 		
 		return context.update(TB_CLIENT)
 					  .set(TB_CLIENT.DATE_OF_BIRTH, client.getDateOfBirth())

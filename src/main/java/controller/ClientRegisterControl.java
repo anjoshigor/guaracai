@@ -87,8 +87,10 @@ public class ClientRegisterControl {
 		}
 		
 		public void mouseClicked(MouseEvent e) {
-			if(e.getSource() == clientRegisterView.getLblImageButtonVoltar())
+			if(e.getSource() == clientRegisterView.getLblImageButtonVoltar()){
 				clientRegisterView.dispose();
+				clientDAO.disconnect();
+			}
 		}
 		
 		@Override
