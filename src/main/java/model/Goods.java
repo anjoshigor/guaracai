@@ -1,22 +1,31 @@
 package model;
 
 public class Goods {
+	private int id;
 	private int code;
-	private float price;
+	private double price;
 	private String name; 
 	private String description;
-	private String size;
-	private Category category;
+	private int size;
+	private int categoryId;
 	
-	public Goods(int code, float price, String name, String description, String size, Category category) {
+	public Goods(int id, int code, double price, String name, String description, int size, int categoryId) {
+		this.id = id;
 		this.code = code;
 		this.price = price;
 		this.name = name;
 		this.description = description;
 		this.size = size;
-		this.category = category;
+		this.categoryId = categoryId;
 	}
 	
+	public int getId(){
+		return id;
+	}
+	
+	public void setId(int id){
+		this.id = id;
+	}
 
 	public int getCode() {
 		return code;
@@ -26,11 +35,11 @@ public class Goods {
 		this.code = code;
 	}
 	
-	public float getPrice() {
+	public double getPrice() {
 		return price;
 	}
 	
-	public void setPrice(float price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 	
@@ -50,19 +59,19 @@ public class Goods {
 		this.description = description;
 	}
 	
-	public String getSize() {
+	public int getSize() {
 		return size;
 	}
 
-	public void setSize(String size) {
+	public void setSize(int size) {
 		this.size = size;
 	}
 
-	public Category getCategory() {
-		return category;
+	public int getCategoryId() {
+		return categoryId;
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
 	}
 }
