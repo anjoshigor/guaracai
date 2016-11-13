@@ -36,7 +36,7 @@ import service.tables.records.TbSaleRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TbSale extends TableImpl<TbSaleRecord> {
 
-    private static final long serialVersionUID = -584614760;
+    private static final long serialVersionUID = 55112184;
 
     /**
      * The reference instance of <code>public.tb_sale</code>
@@ -69,12 +69,12 @@ public class TbSale extends TableImpl<TbSaleRecord> {
     /**
      * The column <code>public.tb_sale.total</code>.
      */
-    public final TableField<TbSaleRecord, Float> TOTAL = createField("total", org.jooq.impl.SQLDataType.REAL.nullable(false), this, "");
+    public final TableField<TbSaleRecord, Double> TOTAL = createField("total", org.jooq.impl.SQLDataType.DOUBLE.nullable(false), this, "");
 
     /**
      * The column <code>public.tb_sale.discount</code>.
      */
-    public final TableField<TbSaleRecord, Float> DISCOUNT = createField("discount", org.jooq.impl.SQLDataType.REAL.nullable(false), this, "");
+    public final TableField<TbSaleRecord, Double> DISCOUNT = createField("discount", org.jooq.impl.SQLDataType.DOUBLE.nullable(false), this, "");
 
     /**
      * The column <code>public.tb_sale.client_id</code>.

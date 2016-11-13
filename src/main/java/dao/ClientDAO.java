@@ -17,7 +17,7 @@ public class ClientDAO extends BasicDAO {
 	
 	public ClientDAO() {
 		connect();
-		this.client = null;
+		client = null;
 	}
 
 	@Override

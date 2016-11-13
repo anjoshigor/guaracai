@@ -35,7 +35,7 @@ import service.tables.records.TbClientRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TbClient extends TableImpl<TbClientRecord> {
 
-    private static final long serialVersionUID = -523637570;
+    private static final long serialVersionUID = -599906240;
 
     /**
      * The reference instance of <code>public.tb_client</code>
@@ -68,7 +68,7 @@ public class TbClient extends TableImpl<TbClientRecord> {
     /**
      * The column <code>public.tb_client.phone</code>.
      */
-    public final TableField<TbClientRecord, String> PHONE = createField("phone", org.jooq.impl.SQLDataType.CHAR.length(13), this, "");
+    public final TableField<TbClientRecord, String> PHONE = createField("phone", org.jooq.impl.SQLDataType.CHAR.length(15), this, "");
 
     /**
      * The column <code>public.tb_client.amount_spent</code>.

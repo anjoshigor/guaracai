@@ -19,8 +19,8 @@ public class EmployeeDAO extends BasicDAO {
 
 	public EmployeeDAO() {
 		connect();
-		this.adress = null;
-		this.employee = null;
+		adress = null;
+		employee = null;
 	}
 
 	@Override

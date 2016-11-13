@@ -1,25 +1,23 @@
 package model;
 
-import java.util.Date;
-
 public class Sale {
 	
 	private int id;
-	private Date date;
+	private String date;
 	private String observation;
-	private float total;
-	private float discount;
-	private Client client;
-	private Employee employee;
+	private double total;
+	private double discount;
+	private int clientId;
+	private int employeeId;
 	
-	public Sale(int id, Date date, String observation, float total, float discount, Client client, Employee employee) {
+	public Sale(int id, String date, String observation, double total, double discount, int clientId, int employeeId) {
 		this.id = id;
 		this.date = date;
 		this.observation = observation;
 		this.total = total;
 		this.discount = discount;
-		this.client = client;
-		this.employee = employee;
+		this.clientId = clientId;
+		this.employeeId = employeeId;
 	}
 
 	public int getId() {
@@ -30,11 +28,11 @@ public class Sale {
 		this.id = id;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
@@ -46,36 +44,36 @@ public class Sale {
 		this.observation = observation;
 	}
 
-	public float getTotal() {
+	public double getTotal() {
 		return total;
 	}
 
-	public void setTotal(float total) {
+	public void setTotal(double total) {
 		this.total = total;
 	}
 
-	public float getDiscount() {
+	public double getDiscount() {
 		return discount;
 	}
 
-	public void setDiscount(float discount) {
+	public void setDiscount(double discount) {
 		this.discount = discount;
 	}
 
-	public Client getClient() {
-		return client;
+	public int getClientId() {
+		return clientId;
 	}
 
-	public void setClient(Client client) {
-		this.client = client;
+	public void setClientId(int clientId) {
+		this.clientId = clientId;
 	}
 
-	public Employee getEmployee() {
-		return employee;
+	public int getEmployeeId() {
+		return employeeId;
 	}
 
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
+	public void setEmployeeId(int employeeId) {
+		this.employeeId = employeeId;
 	}
 
 }

@@ -16,6 +16,11 @@ public class ExpensesDAO extends BasicDAO {
 	
 	private Expenses expenses;
 	
+	public ExpensesDAO() {
+		connect();
+		expenses = null;
+	}
+	
 	@Override
 	public int add(Object e) {
 		expenses = (Expenses) e;
