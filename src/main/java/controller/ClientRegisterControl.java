@@ -5,19 +5,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.text.NumberFormat;
-import java.text.ParseException;
-import java.util.Locale;
-
-import javax.swing.JOptionPane;
-
 import dao.ClientDAO;
 import model.Client;
 import view.ClientRegisterView;
-import view.RegisterView;
+
 
 public class ClientRegisterControl {
 	
