@@ -11,6 +11,7 @@ import java.awt.Cursor;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import controller.CategoryRegisterControl;
 import controller.LoginControl;
 
 import java.awt.Font;
@@ -61,17 +62,17 @@ public class CategoryRegisterView extends JFrame {
 	private JLabel lblImageLoading;
 	private JLabel lblMessageError;
 	
-	// TODO controller
-	//private CategoryRegisterControl categoryRegisterControl;
+	
+	private CategoryRegisterControl categoryRegisterControl;
 	
 	// constructor
 	public CategoryRegisterView() {
-		initLoginView();
-		//categoryRegisterControl = new CategoryRegisterControl(this);
+		initCategoryRegisterView();
+		categoryRegisterControl = new CategoryRegisterControl(this);
 	}
 	
 	// methods
-	private void initLoginView() {
+	private void initCategoryRegisterView() {
 		final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setUndecorated(true);
@@ -187,6 +188,7 @@ public class CategoryRegisterView extends JFrame {
 		lblVoltar.setForeground(Color.WHITE);
 		lblVoltar.setFont(new Font("DejaVu Sans",Font.PLAIN, 24));
 		lblVoltar.setBounds(getWidth() - 150,20,150,60);
+		lblVoltar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		contentPane.add(lblVoltar);
 		
 		lblImageButtonVoltar =  new JLabel();
@@ -202,10 +204,6 @@ public class CategoryRegisterView extends JFrame {
 		return lblMessageError;
 	}
 
-	public void setLblMessageError(JLabel lblMessageError) {
-		this.lblMessageError = lblMessageError;
-	}
-
 	public JTextField getTxtNome() {
 		return txtNome;
 	}
@@ -213,6 +211,20 @@ public class CategoryRegisterView extends JFrame {
 	public JTextArea getTxtDescricao() {
 		return txtDescricao;
 	}
+
+	public JButton getBtnCadastrar() {
+		return btnCadastrar;
+	}
+
+	public JButton getBtnLimpar() {
+		return btnLimpar;
+	}
+
+	public JLabel getLblImageButtonVoltar() {
+		return lblImageButtonVoltar;
+	}
+	
+	
 
 }
 	
