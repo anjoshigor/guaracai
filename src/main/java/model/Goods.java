@@ -9,6 +9,8 @@ public class Goods {
 	private int size;
 	private int categoryId;
 	
+	public Goods(){}
+	
 	public Goods(int id, int code, double price, String name, String description, int size, int categoryId) {
 		this.id = id;
 		this.code = code;

@@ -11,6 +11,7 @@ import java.awt.Cursor;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import controller.GoodsRegisterControl;
 import controller.LoginControl;
 import model.Category;
 
@@ -88,12 +89,12 @@ public class GoodsRegisterView extends JFrame {
 	
 	
 	// TODO controller
-	//private GoodsRegisterControl goodsRegisterControl;
+	private GoodsRegisterControl goodsRegisterControl;
 	
 	// constructor
 	public GoodsRegisterView() {
 		initLoginView();
-		//goodsRegisterControl = new GoodsRegisterControl(this);
+		goodsRegisterControl = new GoodsRegisterControl(this);
 	}
 	
 	// methods
@@ -336,6 +337,18 @@ public class GoodsRegisterView extends JFrame {
 
 	public JTextArea getTxtDescricao() {
 		return txtDescricao;
+	}
+
+	public JButton getBtnCadastrar() {
+		return btnCadastrar;
+	}
+
+	public JButton getBtnLimpar() {
+		return btnLimpar;
+	}
+
+	public JLabel getLblImageButtonVoltar() {
+		return lblImageButtonVoltar;
 	}
 
 }
