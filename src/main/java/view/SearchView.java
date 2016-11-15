@@ -7,15 +7,11 @@ import javax.swing.JPanel;
 import util.GraphicsUtil;
 import java.awt.Color;
 import java.awt.Cursor;
-
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-
-
+import controller.SearchControl;
 import java.awt.Font;
 import javax.swing.JTextField;
-import javax.swing.JTextArea;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -62,13 +58,12 @@ public class SearchView extends JFrame {
 	private JLabel lblImageLoading;
 	private JLabel lblMessageError;
 	
-	// TODO controller
-	//private SearchControl searchControl;
+	private SearchControl searchControl;
 	
 	// constructor
 	public SearchView() {
 		initLoginView();
-		//searchControl = new SearchControl(this);
+		searchControl = new SearchControl(this);
 	}
 	
 	// methods
@@ -122,7 +117,7 @@ public class SearchView extends JFrame {
 		panelFiltro.setBackground((new Color(Integer.parseInt("BD7DF5", 16))));
 		panelForm.add(panelFiltro);
 		
-		comboFiltro = new JComboBox<>(new String[] {"Produto", "Cliente", "Funcionário", "Categoria"});
+		comboFiltro = new JComboBox<>(new String[] {"produto", "cliente", "funcionário", "categoria"});
 		comboFiltro.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		comboFiltro.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		comboFiltro.setBounds(143, 238, 200, 33);
@@ -181,6 +176,7 @@ public class SearchView extends JFrame {
 		lblVoltar.setForeground(Color.WHITE);
 		lblVoltar.setFont(new Font("DejaVu Sans",Font.PLAIN, 24));
 		lblVoltar.setBounds(getWidth() - 150,20,150,60);
+		lblVoltar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		contentPane.add(lblVoltar);
 		
 		lblImageButtonVoltar =  new JLabel();
@@ -196,8 +192,20 @@ public class SearchView extends JFrame {
 		return lblMessageError;
 	}
 
-	public void setLblMessageError(JLabel lblMessageError) {
-		this.lblMessageError = lblMessageError;
+	public JComboBox<String> getComboFiltro() {
+		return comboFiltro;
+	}
+
+	public JComboBox<String> getComboCampo() {
+		return comboCampo;
+	}
+
+	public JLabel getLblButtonPesquisar() {
+		return lblButtonPesquisar;
+	}
+
+	public JLabel getLblImageButtonVoltar() {
+		return lblImageButtonVoltar;
 	}
 }
 	
