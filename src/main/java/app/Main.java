@@ -1,7 +1,7 @@
 package app;
 
 import util.PgSqlConnectionUtil;
-import view.LoginView;
+import view.*;
 
 public class Main {
 
