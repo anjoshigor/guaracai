@@ -6,12 +6,20 @@ public class Goods {
 	private double price;
 	private String name; 
 	private String description;
-	private int size;
+	private String size;
 	private int categoryId;
 	
-	public Goods(){}
+	public Goods(){
+		this.id = 0;
+		this.code = 0;
+		this.price = 0.0;
+		this.name = "";
+		this.description = "";
+		this.size = "";
+		this.categoryId = 0;
+	}
 	
-	public Goods(int id, int code, double price, String name, String description, int size, int categoryId) {
+	public Goods(int id, int code, double price, String name, String description, String size, int categoryId) {
 		this.id = id;
 		this.code = code;
 		this.price = price;
@@ -61,11 +69,11 @@ public class Goods {
 		this.description = description;
 	}
 	
-	public int getSize() {
+	public String getSize() {
 		return size;
 	}
 
-	public void setSize(int size) {
+	public void setSize(String size) {
 		this.size = size;
 	}
 

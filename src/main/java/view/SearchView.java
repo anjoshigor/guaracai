@@ -13,6 +13,7 @@ import controller.SearchControl;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 /**
@@ -48,7 +49,7 @@ public class SearchView extends JFrame {
 	
 	/**search field**/
 	private JLabel lblButtonPesquisar;
-	private JTextField txtPesquisar;
+	private JFormattedTextField txtPesquisar;
 	
 	/**Back Button**/
 	private JLabel lblVoltar;
@@ -62,12 +63,12 @@ public class SearchView extends JFrame {
 	
 	// constructor
 	public SearchView() {
-		initLoginView();
+		initSearchView();
 		searchControl = new SearchControl(this);
 	}
 	
 	// methods
-	private void initLoginView() {
+	private void initSearchView() {
 		final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setUndecorated(true);
@@ -143,7 +144,7 @@ public class SearchView extends JFrame {
 		panelForm.add(comboCampo);
 		
 		/**Searchbar**/
-		txtPesquisar = new JTextField();
+		txtPesquisar = new JFormattedTextField();
 		txtPesquisar.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		txtPesquisar.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		txtPesquisar.setBounds(30, 275, 655, 33);
@@ -206,6 +207,10 @@ public class SearchView extends JFrame {
 
 	public JLabel getLblImageButtonVoltar() {
 		return lblImageButtonVoltar;
+	}
+
+	public JFormattedTextField getTxtPesquisar() {
+		return txtPesquisar;
 	}
 }
 	

@@ -95,7 +95,7 @@ public class GoodsDAO extends BasicDAO {
 		return goodsList;
 	}
 	
-	public List<Goods> findById(int id){
+	public Goods findById(int id){
 		
 		Result<TbGoodsRecord> result = context.selectFrom(TB_GOODS)
 		 		  							   .where(TB_GOODS.ID.equal(id))
@@ -103,14 +103,14 @@ public class GoodsDAO extends BasicDAO {
 		 		  							   .fetch();
 		inflate(result);
 		
-		return goodsList;
+		return goodsList.get(0);
 	}
 	
 	
 	public List<Goods> findByName(String name){
 		
 		Result<TbGoodsRecord> result = context.selectFrom(TB_GOODS)
-		 		  							   .where(TB_GOODS.NAME.equal(name))
+		 		  							   .where(TB_GOODS.NAME.like("%"+name+"%"))
 		 		  							   .orderBy(TB_GOODS.NAME)
 		 		  							   .fetch();
 		inflate(result);
@@ -121,7 +121,7 @@ public class GoodsDAO extends BasicDAO {
 	public List<Goods> findByPrice(double price){
 		
 		Result<TbGoodsRecord> result = context.selectFrom(TB_GOODS)
-		 		  							   .where(TB_GOODS.PRICE.equal(price))
+		 		  							   .where(TB_GOODS.PRICE.like(price+"%"))
 		 		  							   .orderBy(TB_GOODS.NAME)
 		 		  							   .fetch();
 		inflate(result);
@@ -132,7 +132,7 @@ public class GoodsDAO extends BasicDAO {
 	public List<Goods> findBySize(int size){
 		
 		Result<TbGoodsRecord> result = context.selectFrom(TB_GOODS)
-		 		  							   .where(TB_GOODS.SIZE.equal(size))
+		 		  							   .where(TB_GOODS.SIZE.like(size+"%"))
 		 		  							   .orderBy(TB_GOODS.NAME)
 		 		  							   .fetch();
 		inflate(result);

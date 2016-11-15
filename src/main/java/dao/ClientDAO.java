@@ -74,7 +74,7 @@ public class ClientDAO extends BasicDAO {
 	public List<Client> findByAmountSpent(double amountSpent){
 		
 		Result<TbClientRecord> result = context.selectFrom(TB_CLIENT)
-		 		  							   .where(TB_CLIENT.AMOUNT_SPENT.equal(amountSpent))
+		 		  							   .where(TB_CLIENT.AMOUNT_SPENT.like(amountSpent+"%"))
 		 		  							   .orderBy(TB_CLIENT.NAME)
 		 		  							   .fetch();
 		inflate(result);
@@ -85,7 +85,7 @@ public class ClientDAO extends BasicDAO {
 	public List<Client> findByBalance(double balance){
 		
 		Result<TbClientRecord> result = context.selectFrom(TB_CLIENT)
-		 		  							   .where(TB_CLIENT.BALANCE.equal(balance))
+		 		  							   .where(TB_CLIENT.BALANCE.like(balance+"%"))
 		 		  							   .orderBy(TB_CLIENT.NAME)
 		 		  							   .fetch();
 		inflate(result);
@@ -105,21 +105,20 @@ public class ClientDAO extends BasicDAO {
 		return clientList;
 	}
 	
-	public List<Client> findById(int id){
+	public Client findById(int id){
 		
 		Result<TbClientRecord> result = context.selectFrom(TB_CLIENT)
 		 		  							   .where(TB_CLIENT.ID.equal(id))
-		 		  							   .orderBy(TB_CLIENT.NAME)
 		 		  							   .fetch();
 		inflate(result);
 		
-		return clientList;
+		return clientList.get(0);
 	}
 	
 	public List<Client> findByName(String name){
 		
 		Result<TbClientRecord> result = context.selectFrom(TB_CLIENT)
-		 		  							   .where(TB_CLIENT.NAME.equal(name))
+		 		  							   .where(TB_CLIENT.NAME.like("%"+name+"%"))
 		 		  							   .orderBy(TB_CLIENT.NAME)
 		 		  							   .fetch();
 		inflate(result);

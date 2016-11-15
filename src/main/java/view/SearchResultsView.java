@@ -12,23 +12,14 @@ import javax.swing.JTable;
 
 import util.GraphicsUtil;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Cursor;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
-
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JTextArea;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 /**
  * 
  * @author anjoshigor
@@ -197,4 +188,7 @@ public class SearchResultsView extends JFrame {
 		
 	}
 
+	public JTable getResultTable() {
+		return resultTable;
+	}
 }

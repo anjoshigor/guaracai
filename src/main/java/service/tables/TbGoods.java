@@ -36,7 +36,7 @@ import service.tables.records.TbGoodsRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TbGoods extends TableImpl<TbGoodsRecord> {
 
-    private static final long serialVersionUID = 732856813;
+    private static final long serialVersionUID = -320038312;
 
     /**
      * The reference instance of <code>public.tb_goods</code>
@@ -77,14 +77,14 @@ public class TbGoods extends TableImpl<TbGoodsRecord> {
     public final TableField<TbGoodsRecord, String> DESCRIPTION = createField("description", org.jooq.impl.SQLDataType.VARCHAR.length(100), this, "");
 
     /**
-     * The column <code>public.tb_goods.size</code>.
-     */
-    public final TableField<TbGoodsRecord, Integer> SIZE = createField("size", org.jooq.impl.SQLDataType.INTEGER, this, "");
-
-    /**
      * The column <code>public.tb_goods.category_id</code>.
      */
     public final TableField<TbGoodsRecord, Integer> CATEGORY_ID = createField("category_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
+     * The column <code>public.tb_goods.size</code>.
+     */
+    public final TableField<TbGoodsRecord, String> SIZE = createField("size", org.jooq.impl.SQLDataType.VARCHAR.length(30).nullable(false), this, "");
 
     /**
      * Create a <code>public.tb_goods</code> table reference

@@ -7,11 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
-
-import org.springframework.expression.spel.ast.RealLiteral;
-
 import dao.GoodsDAO;
 import model.Goods;
 import view.GoodsRegisterView;
@@ -59,7 +54,7 @@ public class GoodsRegisterControl {
 		goods.setCode(Integer.parseInt(goodsRegisterView.getTxtCod().getText()));
 		//goods.setCategoryId(); Depois que alterar a combo box
 		goods.setPrice(Double.parseDouble(goodsRegisterView.getTxtValor().getText()));
-		goods.setSize(Integer.parseInt(goodsRegisterView.getTxtTamanho().getText()));
+		goods.setSize(goodsRegisterView.getTxtTamanho().getText());
 		goods.setDescription(goodsRegisterView.getTxtDescricao().getText());
 		
 		goodsDAO.add(goods);
