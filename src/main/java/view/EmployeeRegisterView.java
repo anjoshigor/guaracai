@@ -31,6 +31,8 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+
+import controller.EmployeeRegisterControl;
 /**
  * 
  * @author anjoshigor
@@ -152,12 +154,12 @@ public class EmployeeRegisterView extends JFrame {
 	private JLabel lblMessageError;
 
 	// TODO controller
-	//private EmployeeRegisterControl employeeRegisterControl;
+	private EmployeeRegisterControl employeeRegisterControl;
 	
 	// constructor
 	public EmployeeRegisterView() {
 		initLoginView();
-		//employeeRegisterControl = new EmployeeRegisterControl(this);
+		employeeRegisterControl = new EmployeeRegisterControl(this);
 	}
 	
 	// methods
@@ -687,6 +689,10 @@ public class EmployeeRegisterView extends JFrame {
 
 	public JTextField getTxtNome() {
 		return txtNome;
+	}
+
+	public JLabel getLblImageButtonVoltar() {
+		return lblImageButtonVoltar;
 	}
 
 
