@@ -7,6 +7,8 @@ import org.jooq.Record;
 import org.jooq.Result;
 
 import model.Sale;
+import service.tables.records.TbSaleRecord;
+
 import static service.tables.TbSale.TB_SALE;
 /**
  * 
@@ -16,10 +18,12 @@ import static service.tables.TbSale.TB_SALE;
 public class SaleDAO extends BasicDAO {
 	
 	private Sale sale;
+	private List<Sale> saleList;
 	
 	public SaleDAO(){
 		connect();
 		sale = null;
+		saleList = null;
 	}
 	
 	@Override
@@ -47,10 +51,17 @@ public class SaleDAO extends BasicDAO {
 
 	@Override
 	public List<Sale> getAll() {
-		List<Sale> saleList = new ArrayList<Sale>();
 		
-		Result<Record> result = context.select().from(TB_SALE).fetch();
+		Result<TbSaleRecord> result = context.selectFrom(TB_SALE).fetch();
 		
+		inflate(result);
+		
+		return saleList;
+	}
+
+	private void inflate(List<TbSaleRecord> result){
+		saleList = new ArrayList<>();
+
 		for(Record r: result){
 			sale = new Sale(r.getValue(TB_SALE.ID),
 							r.getValue(TB_SALE.DATE),
@@ -61,10 +72,81 @@ public class SaleDAO extends BasicDAO {
 							r.getValue(TB_SALE.EMPLOYEE_ID));
 			saleList.add(sale);
 		}
+	}
+	
+	public List<Sale> findByClientId(int clientId){
+		
+		Result<TbSaleRecord> result = context.selectFrom(TB_SALE)
+											.where(TB_SALE.CLIENT_ID.equal(clientId))
+											.orderBy(TB_SALE.TOTAL)
+											.fetch();
+		
+		inflate(result);
+		
+		return saleList;
+	}
+	
+	public List<Sale> findByDate(String date){
+		
+		Result<TbSaleRecord> result = context.selectFrom(TB_SALE)
+											.where(TB_SALE.DATE.equal(date))
+											.orderBy(TB_SALE.TOTAL)
+											.fetch();
+		
+		inflate(result);
+		
+		return saleList;
+	}
+	
+	public List<Sale> findByDiscount(double discount){
+		
+		Result<TbSaleRecord> result = context.selectFrom(TB_SALE)
+											.where(TB_SALE.DISCOUNT.equal(discount))
+											.orderBy(TB_SALE.TOTAL)
+											.fetch();
+		
+		inflate(result);
+		
+		return saleList;
+	}
+	
+	public List<Sale> findByEmployeeId(int employeeId){
+		
+		Result<TbSaleRecord> result = context.selectFrom(TB_SALE)
+											.where(TB_SALE.EMPLOYEE_ID.equal(employeeId))
+											.orderBy(TB_SALE.TOTAL)
+											.fetch();
+		
+		inflate(result);
+		
+		return saleList;
+	}
+	
+	public List<Sale> findById(int id){
+		
+		Result<TbSaleRecord> result = context.selectFrom(TB_SALE)
+											.where(TB_SALE.ID.equal(id))
+											.orderBy(TB_SALE.TOTAL)
+											.fetch();
+		
+		inflate(result);
+		
+		return saleList;
+	}
+	
+	public List<Sale> findByTotal(double total){
+		
+		Result<TbSaleRecord> result = context.selectFrom(TB_SALE)
+											.where(TB_SALE.TOTAL.equal(total))
+											.orderBy(TB_SALE.TOTAL)
+											.fetch();
+		
+		inflate(result);
 		
 		return saleList;
 	}
 
+	
 	@Override
 	public int update(Object s) {
 		sale = (Sale) s;

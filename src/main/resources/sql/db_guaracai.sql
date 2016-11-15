@@ -112,7 +112,7 @@ ALTER SEQUENCE client_id_seq OWNED BY tb_client.id;
 CREATE TABLE tb_employee (
     id integer NOT NULL,
     name character varying(70) NOT NULL,
-    data_of_birth character(10) NOT NULL,
+    date_of_birth character(10) NOT NULL,
     phone character(13) NOT NULL,
     email character varying(60),
     cpf character(14) NOT NULL,
@@ -371,7 +371,7 @@ COPY tb_client (id, name, date_of_birth, phone, amount_spent, balance, email) FR
 -- Data for Name: tb_employee; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY tb_employee (id, name, data_of_birth, phone, email, cpf, username, password, type, agency, count, complement, number, city, street, district, state) FROM stdin;
+COPY tb_employee (id, name, date_of_birth, phone, email, cpf, username, password, type, agency, count, complement, number, city, street, district, state) FROM stdin;
 1	Marcos Henrique Alves da Silva	08111995  	83999606821  	marcos.alves@cc.ci.ufpb.br	10000974471   	alvesmarcos	quinho	Administrador	\N	\N	Apto 401	611	João Pessoa	Rua Rejane Freire Matos	Bancários	PB
 \.
 

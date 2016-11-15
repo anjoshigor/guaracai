@@ -71,7 +71,7 @@ public class LoginControl {
 		if(user.equals("guaracai") && password.equals("123"))
 			return 1;
 		else
-			return employeeDAO.checkUserPassword(user, password);
+			return employeeDAO.checkLogin(user, password);
 	}
 	
 	// inner class

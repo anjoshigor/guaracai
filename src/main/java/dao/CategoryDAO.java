@@ -5,6 +5,8 @@ import java.util.List;
 import org.jooq.Record;
 import org.jooq.Result;
 import model.Category;
+import service.tables.records.TbCategoryRecord;
+
 import static service.tables.TbCategory.TB_CATEGORY;
 /**
  * 
@@ -14,10 +16,12 @@ import static service.tables.TbCategory.TB_CATEGORY;
 public class CategoryDAO extends BasicDAO {
 	
 	private Category category;
+	private List<Category> categoryList;
 	
 	public CategoryDAO() {
 		connect();
 		category = null;
+		categoryList = null;
 	}
 	
 	@Override
@@ -41,10 +45,16 @@ public class CategoryDAO extends BasicDAO {
 
 	@Override
 	public List<Category> getAll() {
-		List<Category> categoryList = new ArrayList<Category>();
 		
-		//Executando um SELECT * na tabela Category
-		Result<Record> result =  context.select().from(TB_CATEGORY).fetch();
+		Result<TbCategoryRecord> result =  context.selectFrom(TB_CATEGORY).fetch();
+		
+		inflate(result);
+		
+		return categoryList;
+	}
+	
+	private void inflate(Result<TbCategoryRecord> result){
+		categoryList = new ArrayList<>();
 		
 		for(Record r: result){
 			category = new Category(r.getValue(TB_CATEGORY.ID),
@@ -52,9 +62,30 @@ public class CategoryDAO extends BasicDAO {
 									r.getValue(TB_CATEGORY.DESCRIPTION));
 			categoryList.add(category);
 		}
+	}
+	
+	public List<Category> findById(int id){
+	
+		Result<TbCategoryRecord> result = context.selectFrom(TB_CATEGORY)
+										 		  .where(TB_CATEGORY.ID.equal(id))
+										 		  .orderBy(TB_CATEGORY.NAME)
+										          .fetch();
+		inflate(result);
+		
 		return categoryList;
 	}
-
+	
+	public List<Category> findByName(String name){
+		
+		Result<TbCategoryRecord> result = context.selectFrom(TB_CATEGORY)
+										 		  .where(TB_CATEGORY.NAME.equal(name))
+										 		  .orderBy(TB_CATEGORY.NAME)
+										          .fetch();
+		inflate(result);
+		
+		return categoryList;
+	}
+	
 	@Override
 	public int update(Object c) {
 		category = (Category) c;

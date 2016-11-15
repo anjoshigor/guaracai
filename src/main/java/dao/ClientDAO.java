@@ -5,6 +5,7 @@ import java.util.List;
 import org.jooq.Record;
 import org.jooq.Result;
 import model.Client;
+import service.tables.records.TbClientRecord;
 import static service.tables.TbClient.TB_CLIENT;
 
 /**
@@ -13,11 +14,14 @@ import static service.tables.TbClient.TB_CLIENT;
  *
  */
 public class ClientDAO extends BasicDAO {
+	
 	private Client client;
+	List<Client> clientList;
 	
 	public ClientDAO() {
 		connect();
 		client = null;
+		clientList = null;
 	}
 
 	@Override
@@ -44,12 +48,17 @@ public class ClientDAO extends BasicDAO {
 	}
 	
 	@Override
-	public List<Client> getAll() {
-		List<Client> clientList = new ArrayList<Client>();
-	
-		//Executando um SELECT * na tabela Client
-		Result<Record> result =  context.select().from(TB_CLIENT).fetch();
+	public List<Client> getAll() {	
+		Result<TbClientRecord> result = context.selectFrom(TB_CLIENT).fetch();
 		
+		inflate(result);
+		
+		return clientList;
+	}
+	
+	private void inflate(Result<TbClientRecord> result){
+		clientList = new ArrayList<Client>();
+
 		for(Record r: result){
 			client = new Client(r.getValue(TB_CLIENT.ID),
 								r.getValue(TB_CLIENT.NAME),
@@ -60,6 +69,61 @@ public class ClientDAO extends BasicDAO {
 								r.getValue(TB_CLIENT.BALANCE));	
 			clientList.add(client);
 		}
+	}
+	
+	public List<Client> findByAmountSpent(double amountSpent){
+		
+		Result<TbClientRecord> result = context.selectFrom(TB_CLIENT)
+		 		  							   .where(TB_CLIENT.AMOUNT_SPENT.equal(amountSpent))
+		 		  							   .orderBy(TB_CLIENT.NAME)
+		 		  							   .fetch();
+		inflate(result);
+		
+		return clientList;
+	}
+	
+	public List<Client> findByBalance(double balance){
+		
+		Result<TbClientRecord> result = context.selectFrom(TB_CLIENT)
+		 		  							   .where(TB_CLIENT.BALANCE.equal(balance))
+		 		  							   .orderBy(TB_CLIENT.NAME)
+		 		  							   .fetch();
+		inflate(result);
+		
+		return clientList;
+	}
+	
+	
+	public List<Client> findByDateOfBirth(String dateOfBirth){
+		
+		Result<TbClientRecord> result = context.selectFrom(TB_CLIENT)
+		 		  							   .where(TB_CLIENT.DATE_OF_BIRTH.equal(dateOfBirth))
+		 		  							   .orderBy(TB_CLIENT.NAME)
+		 		  							   .fetch();
+		inflate(result);
+		
+		return clientList;
+	}
+	
+	public List<Client> findById(int id){
+		
+		Result<TbClientRecord> result = context.selectFrom(TB_CLIENT)
+		 		  							   .where(TB_CLIENT.ID.equal(id))
+		 		  							   .orderBy(TB_CLIENT.NAME)
+		 		  							   .fetch();
+		inflate(result);
+		
+		return clientList;
+	}
+	
+	public List<Client> findByName(String name){
+		
+		Result<TbClientRecord> result = context.selectFrom(TB_CLIENT)
+		 		  							   .where(TB_CLIENT.NAME.equal(name))
+		 		  							   .orderBy(TB_CLIENT.NAME)
+		 		  							   .fetch();
+		inflate(result);
+		
 		return clientList;
 	}
 	

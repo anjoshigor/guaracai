@@ -6,6 +6,7 @@ import org.jooq.Record;
 import org.jooq.Result;
 import model.Address;
 import model.Employee;
+import service.tables.records.TbEmployeeRecord;
 import static service.tables.TbEmployee.TB_EMPLOYEE;
 /**
  * 
@@ -16,11 +17,13 @@ public class EmployeeDAO extends BasicDAO {
 	
 	private Employee employee;
 	private Address adress;
+	private List<Employee> employeeList;
 
 	public EmployeeDAO() {
 		connect();
 		adress = null;
 		employee = null;
+		employeeList = null;
 	}
 
 	@Override
@@ -35,7 +38,7 @@ public class EmployeeDAO extends BasicDAO {
 					  .set(TB_EMPLOYEE.NUMBER, employee.getAddress().getNumber())
 					  .set(TB_EMPLOYEE.STATE, employee.getAddress().getState())
 			          .set(TB_EMPLOYEE.NAME, employee.getUsername())
-			          .set(TB_EMPLOYEE.DATA_OF_BIRTH, employee.getDateOfBirth())
+			          .set(TB_EMPLOYEE.DATE_OF_BIRTH, employee.getDateOfBirth())
 			          .set(TB_EMPLOYEE.PHONE, employee.getPhone())
 			          .set(TB_EMPLOYEE.CPF, employee.getCpf())
 			          .set(TB_EMPLOYEE.USERNAME, employee.getUsername())
@@ -44,6 +47,14 @@ public class EmployeeDAO extends BasicDAO {
 			          .set(TB_EMPLOYEE.TYPE, employee.getType())
 			          .set(TB_EMPLOYEE.EMAIL, employee.getEmail())
 			          .execute();
+	}
+	
+	public int checkLogin(String user, String password){
+		
+		return context.selectFrom(TB_EMPLOYEE)
+					  .where(TB_EMPLOYEE.USERNAME.equal(user))
+					  .and(TB_EMPLOYEE.PASSWORD.equal(password))
+					  .execute();
 	}
 	
 	@Override
@@ -57,10 +68,16 @@ public class EmployeeDAO extends BasicDAO {
 	
 	@Override
 	public List<Employee> getAll() {
-		List<Employee> employeeList = new ArrayList<Employee>();
 		
-		//Executando um SELECT * na tabela Employee
-		Result<Record> result =  context.select().from(TB_EMPLOYEE).fetch();
+		Result<TbEmployeeRecord> result =  context.selectFrom(TB_EMPLOYEE).fetch();
+		
+		inflate(result);
+		
+		return employeeList;
+	}
+	
+	private void inflate(Result<TbEmployeeRecord> result){
+		employeeList = new ArrayList<>();
 		
 		for(Record r: result){
 			adress = new Address(r.getValue(TB_EMPLOYEE.COMPLEMENT),
@@ -72,7 +89,7 @@ public class EmployeeDAO extends BasicDAO {
 			
 			employee = new Employee(r.getValue(TB_EMPLOYEE.ID),
 									r.getValue(TB_EMPLOYEE.NAME),
-									r.getValue(TB_EMPLOYEE.DATA_OF_BIRTH),
+									r.getValue(TB_EMPLOYEE.DATE_OF_BIRTH),
 									r.getValue(TB_EMPLOYEE.PHONE),
 									r.getValue(TB_EMPLOYEE.CPF),
 									r.getValue(TB_EMPLOYEE.USERNAME),
@@ -83,15 +100,94 @@ public class EmployeeDAO extends BasicDAO {
 									r.getValue(TB_EMPLOYEE.EMAIL));	
 			employeeList.add(employee);
 		}
+	}
+	
+	public List<Employee> findByCity(String city){
+		
+		Result<TbEmployeeRecord> result = context.selectFrom(TB_EMPLOYEE)
+		 		  							   .where(TB_EMPLOYEE.CITY.equal(city))
+		 		  							   .orderBy(TB_EMPLOYEE.NAME)
+		 		  							   .fetch();
+		inflate(result);
+		
 		return employeeList;
 	}
 	
-	public int checkUserPassword(String user, String password){
+	public List<Employee> findByCpf(String cpf){
 		
-		return context.selectFrom(TB_EMPLOYEE)
-					  .where(TB_EMPLOYEE.USERNAME.equal(user))
-					  .and(TB_EMPLOYEE.PASSWORD.equal(password))
-					  .execute();
+		Result<TbEmployeeRecord> result = context.selectFrom(TB_EMPLOYEE)
+		 		  							   .where(TB_EMPLOYEE.CPF.equal(cpf))
+		 		  							   .orderBy(TB_EMPLOYEE.NAME)
+		 		  							   .fetch();
+		inflate(result);
+		
+		return employeeList;
+	}
+	
+	public List<Employee> findByDateOfBirth(String dateOfBirth){
+		
+		Result<TbEmployeeRecord> result = context.selectFrom(TB_EMPLOYEE)
+		 		  							   .where(TB_EMPLOYEE.DATE_OF_BIRTH.equal(dateOfBirth))
+		 		  							   .orderBy(TB_EMPLOYEE.NAME)
+		 		  							   .fetch();
+		inflate(result);
+		
+		return employeeList;
+	}
+	
+	public List<Employee> findByDistrict(String district){
+		
+		Result<TbEmployeeRecord> result = context.selectFrom(TB_EMPLOYEE)
+		 		  							   .where(TB_EMPLOYEE.DISTRICT.equal(district))
+		 		  							   .orderBy(TB_EMPLOYEE.NAME)
+		 		  							   .fetch();
+		inflate(result);
+		
+		return employeeList;
+	}
+	
+	public List<Employee> findById(int id){
+		
+		Result<TbEmployeeRecord> result = context.selectFrom(TB_EMPLOYEE)
+		 		  							   .where(TB_EMPLOYEE.ID.equal(id))
+		 		  							   .orderBy(TB_EMPLOYEE.NAME)
+		 		  							   .fetch();
+		inflate(result);
+		
+		return employeeList;
+	}
+	
+	public List<Employee> findByName(String name){
+		
+		Result<TbEmployeeRecord> result = context.selectFrom(TB_EMPLOYEE)
+		 		  							   .where(TB_EMPLOYEE.NAME.equal(name))
+		 		  							   .orderBy(TB_EMPLOYEE.NAME)
+		 		  							   .fetch();
+		inflate(result);
+		
+		return employeeList;
+	}
+	
+	public List<Employee> findByState(String state){
+		
+		Result<TbEmployeeRecord> result = context.selectFrom(TB_EMPLOYEE)
+		 		  							   .where(TB_EMPLOYEE.STATE.equal(state))
+		 		  							   .orderBy(TB_EMPLOYEE.NAME)
+		 		  							   .fetch();
+		inflate(result);
+		
+		return employeeList;
+	}
+	
+	public List<Employee> findByType(String type){
+		
+		Result<TbEmployeeRecord> result = context.selectFrom(TB_EMPLOYEE)
+		 		  							   .where(TB_EMPLOYEE.TYPE.equal(type))
+		 		  							   .orderBy(TB_EMPLOYEE.NAME)
+		 		  							   .fetch();
+		inflate(result);
+		
+		return employeeList;
 	}
 	
 	@Override
@@ -106,7 +202,7 @@ public class EmployeeDAO extends BasicDAO {
 					  .set(TB_EMPLOYEE.NUMBER, employee.getAddress().getNumber())
 					  .set(TB_EMPLOYEE.STATE, employee.getAddress().getState())
 			          .set(TB_EMPLOYEE.NAME, employee.getUsername())
-			          .set(TB_EMPLOYEE.DATA_OF_BIRTH, employee.getDateOfBirth())
+			          .set(TB_EMPLOYEE.DATE_OF_BIRTH, employee.getDateOfBirth())
 			          .set(TB_EMPLOYEE.PHONE, employee.getPhone())
 			          .set(TB_EMPLOYEE.CPF, employee.getCpf())
 			          .set(TB_EMPLOYEE.USERNAME, employee.getUsername())

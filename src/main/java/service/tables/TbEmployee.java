@@ -35,7 +35,7 @@ import service.tables.records.TbEmployeeRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TbEmployee extends TableImpl<TbEmployeeRecord> {
 
-    private static final long serialVersionUID = -1036299655;
+    private static final long serialVersionUID = 1241965821;
 
     /**
      * The reference instance of <code>public.tb_employee</code>
@@ -61,9 +61,9 @@ public class TbEmployee extends TableImpl<TbEmployeeRecord> {
     public final TableField<TbEmployeeRecord, String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR.length(70).nullable(false), this, "");
 
     /**
-     * The column <code>public.tb_employee.data_of_birth</code>.
+     * The column <code>public.tb_employee.date_of_birth</code>.
      */
-    public final TableField<TbEmployeeRecord, String> DATA_OF_BIRTH = createField("data_of_birth", org.jooq.impl.SQLDataType.CHAR.length(10).nullable(false), this, "");
+    public final TableField<TbEmployeeRecord, String> DATE_OF_BIRTH = createField("date_of_birth", org.jooq.impl.SQLDataType.CHAR.length(10).nullable(false), this, "");
 
     /**
      * The column <code>public.tb_employee.phone</code>.

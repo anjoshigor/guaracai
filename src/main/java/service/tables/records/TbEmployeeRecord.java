@@ -28,7 +28,7 @@ import service.tables.TbEmployee;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TbEmployeeRecord extends UpdatableRecordImpl<TbEmployeeRecord> implements Record17<Integer, String, String, String, String, String, String, String, String, String, String, String, Integer, String, String, String, String> {
 
-    private static final long serialVersionUID = 1559939402;
+    private static final long serialVersionUID = -188169650;
 
     /**
      * Setter for <code>public.tb_employee.id</code>.
@@ -59,16 +59,16 @@ public class TbEmployeeRecord extends UpdatableRecordImpl<TbEmployeeRecord> impl
     }
 
     /**
-     * Setter for <code>public.tb_employee.data_of_birth</code>.
+     * Setter for <code>public.tb_employee.date_of_birth</code>.
      */
-    public void setDataOfBirth(String value) {
+    public void setDateOfBirth(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>public.tb_employee.data_of_birth</code>.
+     * Getter for <code>public.tb_employee.date_of_birth</code>.
      */
-    public String getDataOfBirth() {
+    public String getDateOfBirth() {
         return (String) get(2);
     }
 
@@ -321,7 +321,7 @@ public class TbEmployeeRecord extends UpdatableRecordImpl<TbEmployeeRecord> impl
      */
     @Override
     public Field<String> field3() {
-        return TbEmployee.TB_EMPLOYEE.DATA_OF_BIRTH;
+        return TbEmployee.TB_EMPLOYEE.DATE_OF_BIRTH;
     }
 
     /**
@@ -457,7 +457,7 @@ public class TbEmployeeRecord extends UpdatableRecordImpl<TbEmployeeRecord> impl
      */
     @Override
     public String value3() {
-        return getDataOfBirth();
+        return getDateOfBirth();
     }
 
     /**
@@ -595,7 +595,7 @@ public class TbEmployeeRecord extends UpdatableRecordImpl<TbEmployeeRecord> impl
      */
     @Override
     public TbEmployeeRecord value3(String value) {
-        setDataOfBirth(value);
+        setDateOfBirth(value);
         return this;
     }
 
@@ -764,12 +764,12 @@ public class TbEmployeeRecord extends UpdatableRecordImpl<TbEmployeeRecord> impl
     /**
      * Create a detached, initialised TbEmployeeRecord
      */
-    public TbEmployeeRecord(Integer id, String name, String dataOfBirth, String phone, String email, String cpf, String username, String password, String type, String agency, String count, String complement, Integer number, String city, String street, String district, String state) {
+    public TbEmployeeRecord(Integer id, String name, String dateOfBirth, String phone, String email, String cpf, String username, String password, String type, String agency, String count, String complement, Integer number, String city, String street, String district, String state) {
         super(TbEmployee.TB_EMPLOYEE);
 
         set(0, id);
         set(1, name);
-        set(2, dataOfBirth);
+        set(2, dateOfBirth);
         set(3, phone);
         set(4, email);
         set(5, cpf);

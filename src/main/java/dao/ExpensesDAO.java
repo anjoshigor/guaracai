@@ -5,7 +5,7 @@ import java.util.List;
 import org.jooq.Record;
 import org.jooq.Result;
 import model.Expenses;
-
+import service.tables.records.TbExpensesRecord;
 import static service.tables.TbExpenses.TB_EXPENSES;
 /**
  * 
@@ -15,10 +15,12 @@ import static service.tables.TbExpenses.TB_EXPENSES;
 public class ExpensesDAO extends BasicDAO {
 	
 	private Expenses expenses;
+	private List<Expenses> expensesList;
 	
 	public ExpensesDAO() {
 		connect();
 		expenses = null;
+		expensesList = null;
 	}
 	
 	@Override
@@ -43,21 +45,59 @@ public class ExpensesDAO extends BasicDAO {
 
 	@Override
 	public List<Expenses> getAll() {
-		List<Expenses> expensesList = new ArrayList<Expenses>();
 		
-		//Executando um SELECT * na tabela expenses
-		Result<Record> result =  context.select().from(TB_EXPENSES).fetch();
+		Result<TbExpensesRecord> result =  context.selectFrom(TB_EXPENSES).fetch();
+		
+		inflate(result);
+		
+		return expensesList;
+	}
+	
+	private void inflate(Result<TbExpensesRecord> result){
+		expensesList = new ArrayList<>();
 		
 		for(Record r: result){
 			expenses = new Expenses(r.getValue(TB_EXPENSES.ID),
 									r.getValue(TB_EXPENSES.DESCRIPTION),
 									r.getValue(TB_EXPENSES.COST),
-									r.getValue(TB_EXPENSES.ID));
+									r.getValue(TB_EXPENSES.EMPLOYEE_ID));
 			expensesList.add(expenses);
 		}
+	}
+	
+	public List<Expenses> findByCost(double cost){
+		
+		Result<TbExpensesRecord> result = context.selectFrom(TB_EXPENSES)
+		 		  							   .where(TB_EXPENSES.COST.equal(cost))
+		 		  							   .orderBy(TB_EXPENSES.ID)
+		 		  							   .fetch();
+		inflate(result);
+		
 		return expensesList;
 	}
-
+	
+	public List<Expenses> findById(int id){
+		
+		Result<TbExpensesRecord> result = context.selectFrom(TB_EXPENSES)
+		 		  							   .where(TB_EXPENSES.ID.equal(id))
+		 		  							   .orderBy(TB_EXPENSES.ID)
+		 		  							   .fetch();
+		inflate(result);
+		
+		return expensesList;
+	}
+	
+	public List<Expenses> findByEmployeeId(int employeeId){
+		
+		Result<TbExpensesRecord> result = context.selectFrom(TB_EXPENSES)
+		 		  							   .where(TB_EXPENSES.EMPLOYEE_ID.equal(employeeId))
+		 		  							   .orderBy(TB_EXPENSES.ID)
+		 		  							   .fetch();
+		inflate(result);
+		
+		return expensesList;
+	}
+	
 	@Override
 	public int update(Object e) {
 		expenses = (Expenses) e;

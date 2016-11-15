@@ -2,11 +2,10 @@ package dao;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.jooq.Record;
 import org.jooq.Result;
-
 import model.Goods;
+import service.tables.records.TbGoodsRecord;
 import static service.tables.TbGoods.TB_GOODS;
 /**
  * 
@@ -16,10 +15,12 @@ import static service.tables.TbGoods.TB_GOODS;
 public class GoodsDAO extends BasicDAO {
 	
 	private Goods goods;
+	private List<Goods> goodsList;
 	
 	public GoodsDAO(){
 		connect();
 		goods = null;
+		goodsList = null;
 	}
 
 	@Override
@@ -48,10 +49,17 @@ public class GoodsDAO extends BasicDAO {
 
 	@Override
 	public List<Goods> getAll() {
-		List<Goods> goodsList = new ArrayList<Goods>();
+			
+		Result<TbGoodsRecord> result = context.selectFrom(TB_GOODS).fetch();
 		
-		Result<Record> result = context.select().from(TB_GOODS).fetch();
+		inflate(result);
 		
+		return goodsList;
+	}
+	
+	private void inflate(Result<TbGoodsRecord> result){
+		goodsList = new ArrayList<Goods>();
+
 		for(Record r: result){
 			goods = new Goods(r.getValue(TB_GOODS.ID),
 							  r.getValue(TB_GOODS.CODE),
@@ -63,10 +71,75 @@ public class GoodsDAO extends BasicDAO {
 				   
 			goodsList.add(goods);
 		}
+	}
+	
+	public List<Goods> findByCategoryId(int categoryId){
+		
+		Result<TbGoodsRecord> result = context.selectFrom(TB_GOODS)
+		 		  							   .where(TB_GOODS.CATEGORY_ID.equal(categoryId))
+		 		  							   .orderBy(TB_GOODS.NAME)
+		 		  							   .fetch();
+		inflate(result);
 		
 		return goodsList;
 	}
-
+	
+	public List<Goods> findByCode(int code){
+		
+		Result<TbGoodsRecord> result = context.selectFrom(TB_GOODS)
+		 		  							   .where(TB_GOODS.CODE.equal(code))
+		 		  							   .orderBy(TB_GOODS.NAME)
+		 		  							   .fetch();
+		inflate(result);
+		
+		return goodsList;
+	}
+	
+	public List<Goods> findById(int id){
+		
+		Result<TbGoodsRecord> result = context.selectFrom(TB_GOODS)
+		 		  							   .where(TB_GOODS.ID.equal(id))
+		 		  							   .orderBy(TB_GOODS.NAME)
+		 		  							   .fetch();
+		inflate(result);
+		
+		return goodsList;
+	}
+	
+	
+	public List<Goods> findByName(String name){
+		
+		Result<TbGoodsRecord> result = context.selectFrom(TB_GOODS)
+		 		  							   .where(TB_GOODS.NAME.equal(name))
+		 		  							   .orderBy(TB_GOODS.NAME)
+		 		  							   .fetch();
+		inflate(result);
+		
+		return goodsList;
+	}
+	
+	public List<Goods> findByPrice(double price){
+		
+		Result<TbGoodsRecord> result = context.selectFrom(TB_GOODS)
+		 		  							   .where(TB_GOODS.PRICE.equal(price))
+		 		  							   .orderBy(TB_GOODS.NAME)
+		 		  							   .fetch();
+		inflate(result);
+		
+		return goodsList;
+	}
+	
+	public List<Goods> findBySize(int size){
+		
+		Result<TbGoodsRecord> result = context.selectFrom(TB_GOODS)
+		 		  							   .where(TB_GOODS.SIZE.equal(size))
+		 		  							   .orderBy(TB_GOODS.NAME)
+		 		  							   .fetch();
+		inflate(result);
+		
+		return goodsList;
+	}
+	
 	@Override
 	public int update(Object g) {
 		goods = (Goods) g;
