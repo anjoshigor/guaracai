@@ -31,6 +31,10 @@ public class CategoryRegisterView extends JFrame {
 	
 	// attributes
 
+	public JPanel getPanelDialog() {
+		return panelDialog;
+	}
+
 	/**Outermost content**/
 	private JPanel contentPane;
 	
@@ -232,6 +236,10 @@ public class CategoryRegisterView extends JFrame {
 		lblImageButtonVoltar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		contentPane.add(lblImageButtonVoltar);
 		
+	}
+
+	public JButton getBtnOK() {
+		return btnOK;
 	}
 
 	public JLabel getLblMessageError() {

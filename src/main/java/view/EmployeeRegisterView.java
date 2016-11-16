@@ -44,6 +44,14 @@ public class EmployeeRegisterView extends JFrame {
 	
 	// attributes
 
+	public JButton getBtnOK() {
+		return btnOK;
+	}
+
+	public JPanel getPanelDialog() {
+		return panelDialog;
+	}
+
 	/**Outermost content**/
 	private JPanel contentPane;
 	
