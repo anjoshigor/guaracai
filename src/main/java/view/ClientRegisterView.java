@@ -16,6 +16,7 @@ import java.awt.Cursor;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JFormattedTextField.AbstractFormatter;
+import javax.swing.border.LineBorder;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
@@ -89,6 +90,12 @@ public class ClientRegisterView extends JFrame {
 	/**Message**/
 	private JLabel lblImageLoading;
 	private JLabel lblMessageError;
+	
+	/** DIALOG **/
+	private JLabel lblIconMessage;
+	private JLabel lblMessagedialog;
+	private JButton btnOK;
+	private JPanel panelDialog;
 
 	private ClientRegisterControl clientRegisterControl;
 	
@@ -133,6 +140,33 @@ public class ClientRegisterView extends JFrame {
 		panelForm.setLocation(GraphicsUtil.getLocaleCenter(panelForm.getSize(), screenSize));
 		panelForm.setBackground(new Color(Integer.parseInt("9013FE", 16)));
 		contentPane.add(panelForm);
+		
+		/** DIALOG MESSAGE **/
+		panelDialog = new JPanel();
+		panelDialog.setBackground(new Color(Integer.parseInt("827C7B", 16)));
+		panelDialog.setBorder(new LineBorder(Color.WHITE, 2));
+		panelDialog.setBounds(300, 190, 416, 225);
+		panelDialog.setLayout(null);
+		panelDialog.setVisible(false);
+		panelForm.add(panelDialog);
+		
+		lblIconMessage = new JLabel("");
+		lblIconMessage.setBounds(25, 46, 100, 100);
+		lblIconMessage.setIcon(GraphicsUtil.adjustImage("/drawable/like.png", lblIconMessage.getSize()));
+		panelDialog.add(lblIconMessage);
+		
+		lblMessagedialog = new JLabel("<html>Cadastro realizado<br>com sucesso!<html>");
+		lblMessagedialog.setForeground(Color.WHITE);
+		lblMessagedialog.setFont(new Font("DejaVu Sans", Font.PLAIN, 26));
+		lblMessagedialog.setBounds(151, 46, 208, 97);
+		panelDialog.add(lblMessagedialog);
+		
+		btnOK = new JButton("OK");
+		btnOK.setBackground(Color.WHITE);
+		btnOK.setForeground(Color.DARK_GRAY);
+		btnOK.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
+		btnOK.setBounds(160, 158, 105, 34);
+		panelDialog.add(btnOK);
 		
 		/**Client Icon**/
 		lblIconClient = new JLabel();
