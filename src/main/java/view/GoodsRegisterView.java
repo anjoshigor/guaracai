@@ -88,8 +88,12 @@ public class GoodsRegisterView extends JFrame {
 	private JLabel lblMessageError;
 	
 	
-	// TODO controller
+	//controller
 	private GoodsRegisterControl goodsRegisterControl;
+	
+	//Shared Variable
+	private int whoCalled;
+	
 	
 	// constructor
 	public GoodsRegisterView() {
@@ -349,6 +353,14 @@ public class GoodsRegisterView extends JFrame {
 
 	public JLabel getLblImageButtonVoltar() {
 		return lblImageButtonVoltar;
+	}
+
+	public int getWhoCalled() {
+		return whoCalled;
+	}
+
+	public void setWhoCalled(int whoCalled) {
+		this.whoCalled = whoCalled;
 	}
 
 }
