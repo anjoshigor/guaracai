@@ -113,11 +113,11 @@ CREATE TABLE tb_employee (
     id integer NOT NULL,
     name character varying(70) NOT NULL,
     date_of_birth character(10) NOT NULL,
-    phone character(13) NOT NULL,
+    phone character(15) NOT NULL,
     email character varying(60),
     cpf character(14) NOT NULL,
     username character varying(15) NOT NULL,
-    password character varying(10) NOT NULL,
+    password character varying(30) NOT NULL,
     type character varying(20) NOT NULL,
     agency character varying(8),
     count character varying(12),
@@ -198,8 +198,8 @@ CREATE TABLE tb_goods (
     price double precision NOT NULL,
     name character varying(50) NOT NULL,
     description character varying(100),
-    size integer,
-    category_id integer NOT NULL
+    category_id integer NOT NULL,
+    size character varying(30) NOT NULL
 );
 
 
@@ -310,21 +310,21 @@ ALTER TABLE ONLY tb_sale ALTER COLUMN id SET DEFAULT nextval('sale_id_seq'::regc
 -- Name: category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('category_id_seq', 1, true);
+SELECT pg_catalog.setval('category_id_seq', 2, true);
 
 
 --
 -- Name: client_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('client_id_seq', 3, true);
+SELECT pg_catalog.setval('client_id_seq', 8, true);
 
 
 --
 -- Name: employee_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('employee_id_seq', 1, false);
+SELECT pg_catalog.setval('employee_id_seq', 3, true);
 
 
 --
@@ -338,7 +338,7 @@ SELECT pg_catalog.setval('expenses_id_seq', 1, false);
 -- Name: produto_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('produto_id_seq', 1, false);
+SELECT pg_catalog.setval('produto_id_seq', 1, true);
 
 
 --
@@ -354,6 +354,7 @@ SELECT pg_catalog.setval('sale_id_seq', 1, false);
 
 COPY tb_category (id, name, description) FROM stdin;
 1	Outros	Categoria sem definiçao ate o momento
+2	Verdes	Laranjas e Frutas
 \.
 
 
@@ -362,8 +363,11 @@ COPY tb_category (id, name, description) FROM stdin;
 --
 
 COPY tb_client (id, name, date_of_birth, phone, amount_spent, balance, email) FROM stdin;
-2	Jose henrique	12/00/2212	(12) 00211-0020	0	0	jose.ehrneiqu@gmail.com
-3		  /  /    	(  )      -    	0	0	
+4	Higor Anjos	01/02/1002	(83) 10210-2111	0	0	higor.anjos@cc.ci.ufpb.br
+5	Marcos Henrique Alves	01/20/0121	(02) 11002-1012	0	0	marcosalves
+6	Higor Nobrega	12/21/2122	(12) 21222-122 	0	0	maorcos
+7	Marcos He	08/11/1194	(83) 89012-3292	12.4000000000000004	12.4000000000000004	alves.gg@hotmail.com
+8	Rubia Alves	12/03/2012	(93) 22991-2212	0	0	rubenita21@gmailc.om
 \.
 
 
@@ -372,7 +376,8 @@ COPY tb_client (id, name, date_of_birth, phone, amount_spent, balance, email) FR
 --
 
 COPY tb_employee (id, name, date_of_birth, phone, email, cpf, username, password, type, agency, count, complement, number, city, street, district, state) FROM stdin;
-1	Marcos Henrique Alves da Silva	08111995  	83999606821  	marcos.alves@cc.ci.ufpb.br	10000974471   	alvesmarcos	quinho	Administrador	\N	\N	Apto 401	611	João Pessoa	Rua Rejane Freire Matos	Bancários	PB
+1	Marcos Henrique Alves da Silva	08111995  	83999606821    	marcos.alves@cc.ci.ufpb.br	10000974471   	alvesmarcos	quinho	Administrador	\N	\N	Apto 401	611	João Pessoa	Rua Rejane Freire Matos	Bancários	PB
+3	marcos	02/12/2012	(32) 3332-2333 	amdm	100.093.299-32	marcos	ey	Gerente	2332	msa		403	JP	JP	cidade unviersid	AC
 \.
 
 
@@ -388,7 +393,9 @@ COPY tb_expenses (id, description, cost, employee_id) FROM stdin;
 -- Data for Name: tb_goods; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY tb_goods (id, code, price, name, description, size, category_id) FROM stdin;
+COPY tb_goods (id, code, price, name, description, category_id, size) FROM stdin;
+0	12	12	Maça	Um fruta	1	unico
+1	190	7.20000000000000018	Leite de manga	Leite de manga vindo da vaca.	1	Unico
 \.
 
 
@@ -446,6 +453,30 @@ ALTER TABLE ONLY tb_goods
 
 ALTER TABLE ONLY tb_sale
     ADD CONSTRAINT sale_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: tb_category_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY tb_category
+    ADD CONSTRAINT tb_category_name_key UNIQUE (name);
+
+
+--
+-- Name: tb_employee_cpf_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY tb_employee
+    ADD CONSTRAINT tb_employee_cpf_key UNIQUE (cpf);
+
+
+--
+-- Name: tb_employee_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY tb_employee
+    ADD CONSTRAINT tb_employee_username_key UNIQUE (username);
 
 
 --

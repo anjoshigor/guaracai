@@ -28,7 +28,6 @@ public class GoodsDAO extends BasicDAO {
 		goods = (Goods) g;
 
 		return context.insertInto(TB_GOODS)
-					   .set(TB_GOODS.ID, goods.getId())
 					   .set(TB_GOODS.CODE, goods.getCode())
 					   .set(TB_GOODS.PRICE, goods.getPrice())
 					   .set(TB_GOODS.NAME, goods.getName())
@@ -129,7 +128,7 @@ public class GoodsDAO extends BasicDAO {
 		return goodsList;
 	}
 	
-	public List<Goods> findBySize(int size){
+	public List<Goods> findBySize(String size){
 		
 		Result<TbGoodsRecord> result = context.selectFrom(TB_GOODS)
 		 		  							   .where(TB_GOODS.SIZE.like(size+"%"))
@@ -145,7 +144,6 @@ public class GoodsDAO extends BasicDAO {
 		goods = (Goods) g;
 		
 		return context.update(TB_GOODS)
-				   .set(TB_GOODS.ID, goods.getId())
 				   .set(TB_GOODS.CODE, goods.getCode())
 				   .set(TB_GOODS.PRICE, goods.getPrice())
 				   .set(TB_GOODS.NAME, goods.getName())

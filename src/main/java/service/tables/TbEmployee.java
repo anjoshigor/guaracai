@@ -35,7 +35,7 @@ import service.tables.records.TbEmployeeRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TbEmployee extends TableImpl<TbEmployeeRecord> {
 
-    private static final long serialVersionUID = 822230911;
+    private static final long serialVersionUID = -1714528544;
 
     /**
      * The reference instance of <code>public.tb_employee</code>
@@ -186,7 +186,7 @@ public class TbEmployee extends TableImpl<TbEmployeeRecord> {
      */
     @Override
     public List<UniqueKey<TbEmployeeRecord>> getKeys() {
-        return Arrays.<UniqueKey<TbEmployeeRecord>>asList(Keys.EMPLOYEE_PKEY);
+        return Arrays.<UniqueKey<TbEmployeeRecord>>asList(Keys.EMPLOYEE_PKEY, Keys.TB_EMPLOYEE_CPF_KEY, Keys.TB_EMPLOYEE_USERNAME_KEY);
     }
 
     /**

@@ -74,15 +74,15 @@ public class CategoryDAO extends BasicDAO {
 		return categoryList.get(0);
 	}
 	
-	public List<Category> findByName(String name){
+	public Category findByName(String name){
 		
 		Result<TbCategoryRecord> result = context.selectFrom(TB_CATEGORY)
-										 		  .where(TB_CATEGORY.NAME.like("%"+name+"%"))
+										 		  .where(TB_CATEGORY.NAME.equal(name))
 										 		  .orderBy(TB_CATEGORY.NAME)
 										          .fetch();
 		inflate(result);
 		
-		return categoryList;
+		return categoryList.get(0);
 	}
 	
 	@Override

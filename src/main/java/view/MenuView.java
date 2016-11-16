@@ -279,7 +279,6 @@ public class MenuView extends JFrame {
 	}
 
 	public JLabel getLblImageButtonVenda() {
-		System.out.println("get imagebutton venda");
 		return lblImageButtonVenda;
 	}
 

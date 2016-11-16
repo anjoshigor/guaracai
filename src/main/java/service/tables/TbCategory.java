@@ -35,7 +35,7 @@ import service.tables.records.TbCategoryRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TbCategory extends TableImpl<TbCategoryRecord> {
 
-    private static final long serialVersionUID = -410672807;
+    private static final long serialVersionUID = 295606606;
 
     /**
      * The reference instance of <code>public.tb_category</code>
@@ -116,7 +116,7 @@ public class TbCategory extends TableImpl<TbCategoryRecord> {
      */
     @Override
     public List<UniqueKey<TbCategoryRecord>> getKeys() {
-        return Arrays.<UniqueKey<TbCategoryRecord>>asList(Keys.CATEGORY_PKEY);
+        return Arrays.<UniqueKey<TbCategoryRecord>>asList(Keys.CATEGORY_PKEY, Keys.TB_CATEGORY_NAME_KEY);
     }
 
     /**

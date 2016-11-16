@@ -5,10 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.ParseException;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Vector;
-
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
@@ -79,12 +76,9 @@ public class SearchControl {
 			searchResultsView.getResultTable().getColumnModel().getColumn(1).setHeaderValue("nome");
 			searchResultsView.getResultTable().getColumnModel().getColumn(2).setHeaderValue("descrição");
 			
-			List<Category> categoryList = categoryDAO.findByName(search);
-			
-			int size = categoryList.size();
-			
-			for(int i = 0; i < size;  i++)	
-				model.addRow(new Object[]{" "+categoryList.get(i).getId()," "+ categoryList.get(i).getName()," "+ categoryList.get(i).getDescription()});
+			Category category = categoryDAO.findByName(search);
+		
+			model.addRow(new Object[]{" "+category.getId()," "+ category.getName()," "+ category.getDescription()});
 			
 		} else if(comboxFilter.equals("cliente")){
 			searchResultsView.getResultTable().getColumnModel().getColumn(0).setHeaderValue("id");
@@ -93,16 +87,16 @@ public class SearchControl {
 
 			List<Client> clientList = null;
 	
-			if(CONTENT_CLIENT[0].equals("nome"))
+			if(CONTENT_CLIENT[0].equals(comboxField))
 				clientList = clientDAO.findByName(search);
 			
-			else if(CONTENT_CLIENT[1].equals("nascimento"))
+			else if(CONTENT_CLIENT[1].equals(comboxField))
 				clientList = clientDAO.findByDateOfBirth(search);
 			
-			else if(CONTENT_CLIENT[2].equals("saldo"))
+			else if(CONTENT_CLIENT[2].equals(comboxField))
 				clientList = clientDAO.findByBalance(Double.parseDouble(search));
 			
-			else if(CONTENT_CLIENT[3].equals("valor em compras"))
+			else if(CONTENT_CLIENT[3].equals(comboxField))
 				clientList = clientDAO.findByAmountSpent(Double.parseDouble(search));
 			
 			int size = clientList.size();
@@ -118,25 +112,25 @@ public class SearchControl {
 			
 			List<Employee> employeeList = null;
 			
-			if(CONTENT_EMPLOYEE[0].equals("nome"))
+			if(CONTENT_EMPLOYEE[0].equals(comboxField))
 				employeeList = employeeDAO.findByName(search);
 			
-			else if(CONTENT_EMPLOYEE[1].equals("data nascimento"))
+			else if(CONTENT_EMPLOYEE[1].equals(comboxField))
 				employeeList = employeeDAO.findByDateOfBirth(search);
 			
-			else if(CONTENT_EMPLOYEE[2].equals("cpf"))
+			else if(CONTENT_EMPLOYEE[2].equals(comboxField))
 				employeeList = employeeDAO.findByCpf(search);
 			
-			else if(CONTENT_EMPLOYEE[3].equals("cidade"))
+			else if(CONTENT_EMPLOYEE[3].equals(comboxField))
 				employeeList = employeeDAO.findByCity(search);
 			
-			else if(CONTENT_EMPLOYEE[4].equals("bairro"))
+			else if(CONTENT_EMPLOYEE[4].equals(comboxField))
 				employeeList = employeeDAO.findByDistrict(search);
 			
-			else if(CONTENT_EMPLOYEE[5].equals("estado"))
+			else if(CONTENT_EMPLOYEE[5].equals(comboxField))
 				employeeList = employeeDAO.findByState(search);
 			
-			else if(CONTENT_EMPLOYEE[6].equals("tipo"))
+			else if(CONTENT_EMPLOYEE[6].equals(comboxField))
 				employeeList = employeeDAO.findByType(search);
 			
 			int size = employeeList.size();
@@ -146,24 +140,24 @@ public class SearchControl {
 			
 		} else if(comboxFilter.equals("produto")){
 			List<Goods> goodsList = null;
-			
-			if(CONTENT_GOODS[0].equals("codigo"))
+	
+			if(CONTENT_GOODS[0].equals(comboxField))
 				goodsList = goodsDAO.findByCode(Integer.parseInt(search));
 			
-			else if(CONTENT_GOODS[1].equals("categoria"))
+			else if(CONTENT_GOODS[1].equals(comboxField))
 				goodsList = goodsDAO.findByCategoryId(Integer.parseInt(search));
 	
-			else if(CONTENT_GOODS[2].equals("nome"))
+			else if(CONTENT_GOODS[2].equals(comboxField))
 				goodsList = goodsDAO.findByName(search);
-			
-			else if(CONTENT_GOODS[3].equals("preço"))
+		
+			else if(CONTENT_GOODS[3].equals(comboxField))
 				goodsList = goodsDAO.findByPrice(Double.parseDouble(search));
 			
-			else if(CONTENT_GOODS[4].equals("codigo"))
-				goodsList = goodsDAO.findByCode(Integer.parseInt(search));	
+			else if(CONTENT_GOODS[4].equals(comboxField))
+				goodsList = goodsDAO.findBySize(search);	
 			
 			int size = goodsList.size();
-			
+		
 			for(int i = 0; i < size;  i++)	
 				model.addRow(new Object[]{" "+goodsList.get(i).getId()," "+ goodsList.get(i).getName()," "+ goodsList.get(i).getSize()});
 		}	
@@ -171,6 +165,7 @@ public class SearchControl {
 	
 	private void selectedComboxFilter(){
 		comboxFilter = String.valueOf(searchView.getComboFiltro().getSelectedItem());
+		searchView.getTxtPesquisar().setText("");
 		searchView.getComboCampo().removeAllItems();
 		
 		if(comboxFilter.equals("categoria")){
@@ -193,6 +188,7 @@ public class SearchControl {
 	
 	private void selectedComboxFieldFormatter() throws ParseException {
 		comboxField = String.valueOf(searchView.getComboCampo().getSelectedItem());
+		searchView.getTxtPesquisar().setText("");
 		MaskFormatter mask;
 		
 		if(comboxField.equals("data nascimento")){
@@ -218,8 +214,8 @@ public class SearchControl {
 			else if (e.getSource() == searchView.getComboCampo()){
 				try {
 					selectedComboxFieldFormatter();
-				} catch (ParseException ep) {
-					ep.printStackTrace();
+				} catch (ParseException pe) {
+					pe.printStackTrace();
 				}
 			}
 		}
