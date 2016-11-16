@@ -42,6 +42,7 @@ public class EmployeeDAO extends BasicDAO {
 			          .set(TB_EMPLOYEE.PHONE, employee.getPhone())
 			          .set(TB_EMPLOYEE.CPF, employee.getCpf())
 			          .set(TB_EMPLOYEE.USERNAME, employee.getUsername())
+			          .set(TB_EMPLOYEE.PASSWORD, employee.getPassword())
 			          .set(TB_EMPLOYEE.AGENCY, employee.getAgency())
 			          .set(TB_EMPLOYEE.COUNT, employee.getCount())
 			          .set(TB_EMPLOYEE.TYPE, employee.getType())
@@ -93,6 +94,7 @@ public class EmployeeDAO extends BasicDAO {
 									r.getValue(TB_EMPLOYEE.PHONE),
 									r.getValue(TB_EMPLOYEE.CPF),
 									r.getValue(TB_EMPLOYEE.USERNAME),
+									r.getValue(TB_EMPLOYEE.PASSWORD),
 									adress,
 									r.getValue(TB_EMPLOYEE.AGENCY),
 									r.getValue(TB_EMPLOYEE.COUNT),
@@ -146,21 +148,20 @@ public class EmployeeDAO extends BasicDAO {
 		return employeeList;
 	}
 	
-	public List<Employee> findById(int id){
+	public Employee findById(int id){
 		
 		Result<TbEmployeeRecord> result = context.selectFrom(TB_EMPLOYEE)
 		 		  							   .where(TB_EMPLOYEE.ID.equal(id))
-		 		  							   .orderBy(TB_EMPLOYEE.NAME)
 		 		  							   .fetch();
 		inflate(result);
 		
-		return employeeList;
+		return employeeList.get(0);
 	}
 	
 	public List<Employee> findByName(String name){
 		
 		Result<TbEmployeeRecord> result = context.selectFrom(TB_EMPLOYEE)
-		 		  							   .where(TB_EMPLOYEE.NAME.equal(name))
+		 		  							   .where(TB_EMPLOYEE.NAME.like("%"+name+"%"))
 		 		  							   .orderBy(TB_EMPLOYEE.NAME)
 		 		  							   .fetch();
 		inflate(result);
@@ -202,10 +203,12 @@ public class EmployeeDAO extends BasicDAO {
 					  .set(TB_EMPLOYEE.NUMBER, employee.getAddress().getNumber())
 					  .set(TB_EMPLOYEE.STATE, employee.getAddress().getState())
 			          .set(TB_EMPLOYEE.NAME, employee.getUsername())
+			          .set(TB_EMPLOYEE.PASSWORD, employee.getPassword())
 			          .set(TB_EMPLOYEE.DATE_OF_BIRTH, employee.getDateOfBirth())
 			          .set(TB_EMPLOYEE.PHONE, employee.getPhone())
 			          .set(TB_EMPLOYEE.CPF, employee.getCpf())
 			          .set(TB_EMPLOYEE.USERNAME, employee.getUsername())
+			          .set(TB_EMPLOYEE.PASSWORD, employee.getPassword())
 			          .set(TB_EMPLOYEE.AGENCY, employee.getAgency())
 			          .set(TB_EMPLOYEE.COUNT, employee.getCount())
 			          .set(TB_EMPLOYEE.TYPE, employee.getType())

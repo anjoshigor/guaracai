@@ -94,12 +94,12 @@ public class ClientRegisterView extends JFrame {
 	
 	// constructor
 	public ClientRegisterView() {
-		initLoginView();
+		initClientRegisterView();
 		clientRegisterControl = new ClientRegisterControl(this);
 	}
 	
 	// methods
-	private void initLoginView() {
+	private void initClientRegisterView() {
 		final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setUndecorated(true);
@@ -163,6 +163,7 @@ public class ClientRegisterView extends JFrame {
 		panelForm.add(panelNome);
 		
 		txtNome = new JTextField();
+		txtNome.setForeground(new Color(51, 51, 51));
 		txtNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		txtNome.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		txtNome.setBounds(143, 200, 620, 33);

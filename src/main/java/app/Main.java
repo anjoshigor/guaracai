@@ -1,11 +1,10 @@
 package app;
 
-import util.PgSqlConnectionUtil;
 import view.*;
 
 public class Main {
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 		new LoginView().setVisible(true);
 	}
 }

@@ -15,8 +15,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import java.awt.Font;
-
-
+/**
+ * 
+ * @author alvesmarcos
+ *
+ */
 public class MenuView extends JFrame {
 	
 	// atributes
@@ -146,13 +149,14 @@ public class MenuView extends JFrame {
 		panelMenu.add(lblImageButtonConsultaOut);
 		
 		lblImageButtonConfiguracoesOut = new JLabel();
-		lblImageButtonConfiguracoesOut.setBounds(572, 363, 250, 250);
+		lblImageButtonConfiguracoesOut.setBounds(211, 363, 250, 250);
 		lblImageButtonConfiguracoesOut.setIcon(GraphicsUtil.adjustImage("/drawable/background-out.png", lblImageButtonConfiguracoesOut.getSize()));
 		lblImageButtonConfiguracoesOut.setVisible(false);
 		panelMenu.add(lblImageButtonConfiguracoesOut);
 		
+		
 		lblImageButtonVendaOut = new JLabel();
-		lblImageButtonVendaOut.setBounds(211, 363, 250, 250);
+		lblImageButtonVendaOut.setBounds(572, 363, 250, 250);
 		lblImageButtonVendaOut.setIcon(GraphicsUtil.adjustImage("/drawable/background-out.png", lblImageButtonVendaOut.getSize()));
 		lblImageButtonVendaOut.setVisible(false);
 		panelMenu.add(lblImageButtonVendaOut);
@@ -222,6 +226,13 @@ public class MenuView extends JFrame {
 		lblImageVenda.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panelMenu.add(lblImageVenda);
 		
+		lblImageButtonVenda = new JLabel();
+		lblImageButtonVenda.setBounds(572, 363, 250, 250);
+		lblImageButtonVenda.setIcon(GraphicsUtil.adjustImage("/drawable/background-button.png", lblImageButtonVenda.getSize()));
+		lblImageButtonVenda.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+		panelMenu.add(lblImageButtonVenda);
+		
 		lblImageButtonCadastro = new JLabel();
 		lblImageButtonCadastro.setBounds(28, 61, 250, 250);
 		lblImageButtonCadastro.setIcon(GraphicsUtil.adjustImage("/drawable/background-button.png", lblImageButtonCadastro.getSize()));
@@ -241,16 +252,12 @@ public class MenuView extends JFrame {
 		panelMenu.add(lblImageButtonConsulta);
 		
 		lblImageButtonConfiguracoes = new JLabel();
-		lblImageButtonConfiguracoes.setBounds(572, 363, 250, 250);
+		lblImageButtonConfiguracoes.setBounds(211, 363, 250, 250);
 		lblImageButtonConfiguracoes.setIcon(GraphicsUtil.adjustImage("/drawable/background-button.png", lblImageButtonConfiguracoes.getSize()));
 		lblImageButtonConfiguracoes.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panelMenu.add(lblImageButtonConfiguracoes);
 		
-		lblImageButtonVenda = new JLabel();
-		lblImageButtonVenda.setBounds(211, 363, 250, 250);
-		lblImageButtonVenda.setIcon(GraphicsUtil.adjustImage("/drawable/background-button.png", lblImageButtonVenda.getSize()));
-		lblImageButtonVenda.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		panelMenu.add(lblImageButtonVenda);
+		
 	}
 	
 	// methods getters

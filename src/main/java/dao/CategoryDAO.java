@@ -64,26 +64,25 @@ public class CategoryDAO extends BasicDAO {
 		}
 	}
 	
-	public List<Category> findById(int id){
+	public Category findById(int id){
 	
 		Result<TbCategoryRecord> result = context.selectFrom(TB_CATEGORY)
 										 		  .where(TB_CATEGORY.ID.equal(id))
-										 		  .orderBy(TB_CATEGORY.NAME)
 										          .fetch();
 		inflate(result);
 		
-		return categoryList;
+		return categoryList.get(0);
 	}
 	
-	public List<Category> findByName(String name){
+	public Category findByName(String name){
 		
 		Result<TbCategoryRecord> result = context.selectFrom(TB_CATEGORY)
-										 		  .where(TB_CATEGORY.NAME.equal(name))
+										 		  .where(TB_CATEGORY.NAME.like("%"+name+"%"))
 										 		  .orderBy(TB_CATEGORY.NAME)
 										          .fetch();
 		inflate(result);
 		
-		return categoryList;
+		return categoryList.get(0);
 	}
 	
 	@Override

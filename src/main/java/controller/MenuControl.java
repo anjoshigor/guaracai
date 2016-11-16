@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import view.MenuView;
 import view.RegisterView;
+import view.SaleView;
 import view.SearchView;
 
 /**
@@ -85,6 +86,9 @@ public class MenuControl {
 			}
 			else if(e.getSource() == menuView.getLblImageButtonConsulta()){
 				new SearchView().setVisible(true);
+			}
+			else if(e.getSource() == menuView.getLblImageButtonVenda()){
+				new SaleView().setVisible(true);
 			}
 		}
 		

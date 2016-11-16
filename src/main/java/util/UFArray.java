@@ -1,8 +1,5 @@
 package util;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
 public final class UFArray {
 	private final static String[] listOfUfs = new String[] {
 			"AC",

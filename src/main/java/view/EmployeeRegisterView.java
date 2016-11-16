@@ -158,12 +158,12 @@ public class EmployeeRegisterView extends JFrame {
 	
 	// constructor
 	public EmployeeRegisterView() {
-		initLoginView();
+		initEmployeeRegisterView();
 		employeeRegisterControl = new EmployeeRegisterControl(this);
 	}
 	
 	// methods
-	private void initLoginView() {
+	private void initEmployeeRegisterView() {
 		final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setUndecorated(true);

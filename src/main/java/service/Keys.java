@@ -55,8 +55,11 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final UniqueKey<TbCategoryRecord> CATEGORY_PKEY = UniqueKeys0.CATEGORY_PKEY;
+    public static final UniqueKey<TbCategoryRecord> TB_CATEGORY_NAME_KEY = UniqueKeys0.TB_CATEGORY_NAME_KEY;
     public static final UniqueKey<TbClientRecord> CLIENT_PKEY = UniqueKeys0.CLIENT_PKEY;
     public static final UniqueKey<TbEmployeeRecord> EMPLOYEE_PKEY = UniqueKeys0.EMPLOYEE_PKEY;
+    public static final UniqueKey<TbEmployeeRecord> TB_EMPLOYEE_CPF_KEY = UniqueKeys0.TB_EMPLOYEE_CPF_KEY;
+    public static final UniqueKey<TbEmployeeRecord> TB_EMPLOYEE_USERNAME_KEY = UniqueKeys0.TB_EMPLOYEE_USERNAME_KEY;
     public static final UniqueKey<TbExpensesRecord> EXPENSES_PKEY = UniqueKeys0.EXPENSES_PKEY;
     public static final UniqueKey<TbGoodsRecord> GOODS_PKEY = UniqueKeys0.GOODS_PKEY;
     public static final UniqueKey<TbSaleRecord> SALE_PKEY = UniqueKeys0.SALE_PKEY;
@@ -84,8 +87,11 @@ public class Keys {
 
     private static class UniqueKeys0 extends AbstractKeys {
         public static final UniqueKey<TbCategoryRecord> CATEGORY_PKEY = createUniqueKey(TbCategory.TB_CATEGORY, "category_pkey", TbCategory.TB_CATEGORY.ID);
+        public static final UniqueKey<TbCategoryRecord> TB_CATEGORY_NAME_KEY = createUniqueKey(TbCategory.TB_CATEGORY, "tb_category_name_key", TbCategory.TB_CATEGORY.NAME);
         public static final UniqueKey<TbClientRecord> CLIENT_PKEY = createUniqueKey(TbClient.TB_CLIENT, "client_pkey", TbClient.TB_CLIENT.ID);
         public static final UniqueKey<TbEmployeeRecord> EMPLOYEE_PKEY = createUniqueKey(TbEmployee.TB_EMPLOYEE, "employee_pkey", TbEmployee.TB_EMPLOYEE.ID);
+        public static final UniqueKey<TbEmployeeRecord> TB_EMPLOYEE_CPF_KEY = createUniqueKey(TbEmployee.TB_EMPLOYEE, "tb_employee_cpf_key", TbEmployee.TB_EMPLOYEE.CPF);
+        public static final UniqueKey<TbEmployeeRecord> TB_EMPLOYEE_USERNAME_KEY = createUniqueKey(TbEmployee.TB_EMPLOYEE, "tb_employee_username_key", TbEmployee.TB_EMPLOYEE.USERNAME);
         public static final UniqueKey<TbExpensesRecord> EXPENSES_PKEY = createUniqueKey(TbExpenses.TB_EXPENSES, "expenses_pkey", TbExpenses.TB_EXPENSES.ID);
         public static final UniqueKey<TbGoodsRecord> GOODS_PKEY = createUniqueKey(TbGoods.TB_GOODS, "goods_pkey", TbGoods.TB_GOODS.ID);
         public static final UniqueKey<TbSaleRecord> SALE_PKEY = createUniqueKey(TbSale.TB_SALE, "sale_pkey", TbSale.TB_SALE.ID);

@@ -12,23 +12,17 @@ import javax.swing.JTable;
 
 import util.GraphicsUtil;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Cursor;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
+import controller.SearchResultsControl;
+
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JTextArea;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 /**
  * 
  * @author anjoshigor
@@ -57,17 +51,16 @@ public class SearchResultsView extends JFrame {
 	private JLabel lblImageButtonVoltar;
 	
 	
-	// TODO controller
-	//private SearchControl searchControl;
+	private SearchResultsControl searchResultsControl;
 	
 	// constructor
 	public SearchResultsView() {
-		initLoginView();
-		//searchControl = new SearchControl(this);
+		initSearchResultsView();
+		searchResultsControl = new SearchResultsControl(this);
 	}
 	
 	// methods
-	private void initLoginView() {
+	private void initSearchResultsView() {
 		final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setUndecorated(true);
@@ -186,6 +179,7 @@ public class SearchResultsView extends JFrame {
 		lblVoltar.setForeground(Color.WHITE);
 		lblVoltar.setFont(new Font("DejaVu Sans",Font.PLAIN, 24));
 		lblVoltar.setBounds(getWidth() - 150,20,150,60);
+		lblVoltar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		contentPane.add(lblVoltar);
 		
 		lblImageButtonVoltar =  new JLabel();
@@ -197,4 +191,11 @@ public class SearchResultsView extends JFrame {
 		
 	}
 
+	public JTable getResultTable() {
+		return resultTable;
+	}
+	
+	public JLabel getLblImageButtonVoltar() {
+		return lblImageButtonVoltar;
+	}
 }

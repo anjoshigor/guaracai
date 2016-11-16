@@ -22,11 +22,12 @@ public class Employee extends Person {
 		this.password = "";
 	}
 	
-	public Employee(int id, String name, String dateOfBirth, String phone, String cpf, String username, Address address,
-					String agency, String count, String type, String email) {
+	public Employee(int id, String name, String dateOfBirth, String phone, String cpf, String username, String password,
+			Address address, String agency, String count, String type, String email) {
 		super(id, name, dateOfBirth, phone, email);
 		this.cpf = cpf;
 		this.username = username;
+		this.password = password;
 		this.address = address;
 		this.agency = agency;
 		this.count = count;

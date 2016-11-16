@@ -13,6 +13,7 @@ import controller.SearchControl;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 /**
@@ -22,7 +23,7 @@ import javax.swing.ImageIcon;
  */
 @SuppressWarnings("serial")
 public class SearchView extends JFrame {
-	
+
 	// attributes
 
 	/**Outermost content**/
@@ -62,12 +63,12 @@ public class SearchView extends JFrame {
 	
 	// constructor
 	public SearchView() {
-		initLoginView();
+		initSearchView();
 		searchControl = new SearchControl(this);
 	}
 	
 	// methods
-	private void initLoginView() {
+	private void initSearchView() {
 		final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setUndecorated(true);
@@ -117,7 +118,7 @@ public class SearchView extends JFrame {
 		panelFiltro.setBackground((new Color(Integer.parseInt("BD7DF5", 16))));
 		panelForm.add(panelFiltro);
 		
-		comboFiltro = new JComboBox<>(new String[] {"produto", "cliente", "funcionário", "categoria"});
+		comboFiltro = new JComboBox<String>(new String[] {" ", "produto", "cliente", "funcionário", "categoria"});
 		comboFiltro.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		comboFiltro.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		comboFiltro.setBounds(143, 238, 200, 33);
@@ -206,6 +207,10 @@ public class SearchView extends JFrame {
 
 	public JLabel getLblImageButtonVoltar() {
 		return lblImageButtonVoltar;
+	}
+
+	public JTextField getTxtPesquisar() {
+		return txtPesquisar;
 	}
 }
 	

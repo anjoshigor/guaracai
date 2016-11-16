@@ -97,12 +97,12 @@ public class GoodsRegisterView extends JFrame {
 	
 	// constructor
 	public GoodsRegisterView() {
-		initLoginView();
+		initGoodsView();
 		goodsRegisterControl = new GoodsRegisterControl(this);
 	}
 	
 	// methods
-	private void initLoginView() {
+	private void initGoodsView() {
 		final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setUndecorated(true);
@@ -196,7 +196,6 @@ public class GoodsRegisterView extends JFrame {
 		comboCategoria.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		comboCategoria.setForeground(Color.DARK_GRAY);
 		comboCategoria.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-		comboCategoria.addItem("Teste");
 		panelForm.add(comboCategoria);
 		
 		/**Value Field**/

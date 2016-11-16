@@ -122,7 +122,7 @@ public class SaleDAO extends BasicDAO {
 		return saleList;
 	}
 	
-	public List<Sale> findById(int id){
+	public Sale findById(int id){
 		
 		Result<TbSaleRecord> result = context.selectFrom(TB_SALE)
 											.where(TB_SALE.ID.equal(id))
@@ -131,13 +131,13 @@ public class SaleDAO extends BasicDAO {
 		
 		inflate(result);
 		
-		return saleList;
+		return saleList.get(0);
 	}
 	
 	public List<Sale> findByTotal(double total){
 		
 		Result<TbSaleRecord> result = context.selectFrom(TB_SALE)
-											.where(TB_SALE.TOTAL.equal(total))
+											.where(TB_SALE.TOTAL.like(total+"%"))
 											.orderBy(TB_SALE.TOTAL)
 											.fetch();
 		
