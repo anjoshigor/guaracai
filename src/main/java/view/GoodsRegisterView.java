@@ -362,5 +362,13 @@ public class GoodsRegisterView extends JFrame {
 		this.whoCalled = whoCalled;
 	}
 
+	public void setLblTitleProduto(JLabel lblTitleProduto) {
+		this.lblTitleProduto = lblTitleProduto;
+	}
+
+	public JLabel getLblTitleProduto() {
+		return lblTitleProduto;
+	}
+
 }
 	
