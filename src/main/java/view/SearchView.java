@@ -23,7 +23,7 @@ import javax.swing.ImageIcon;
  */
 @SuppressWarnings("serial")
 public class SearchView extends JFrame {
-	
+
 	// attributes
 
 	/**Outermost content**/
@@ -49,7 +49,7 @@ public class SearchView extends JFrame {
 	
 	/**search field**/
 	private JLabel lblButtonPesquisar;
-	private JFormattedTextField txtPesquisar;
+	private JTextField txtPesquisar;
 	
 	/**Back Button**/
 	private JLabel lblVoltar;
@@ -118,7 +118,7 @@ public class SearchView extends JFrame {
 		panelFiltro.setBackground((new Color(Integer.parseInt("BD7DF5", 16))));
 		panelForm.add(panelFiltro);
 		
-		comboFiltro = new JComboBox<>(new String[] {"produto", "cliente", "funcionário", "categoria"});
+		comboFiltro = new JComboBox<String>(new String[] {" ", "produto", "cliente", "funcionário", "categoria"});
 		comboFiltro.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		comboFiltro.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		comboFiltro.setBounds(143, 238, 200, 33);
@@ -144,7 +144,7 @@ public class SearchView extends JFrame {
 		panelForm.add(comboCampo);
 		
 		/**Searchbar**/
-		txtPesquisar = new JFormattedTextField();
+		txtPesquisar = new JTextField();
 		txtPesquisar.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		txtPesquisar.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		txtPesquisar.setBounds(30, 275, 655, 33);
@@ -209,7 +209,7 @@ public class SearchView extends JFrame {
 		return lblImageButtonVoltar;
 	}
 
-	public JFormattedTextField getTxtPesquisar() {
+	public JTextField getTxtPesquisar() {
 		return txtPesquisar;
 	}
 }

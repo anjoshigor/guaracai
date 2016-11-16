@@ -94,12 +94,12 @@ public class ClientRegisterView extends JFrame {
 	
 	// constructor
 	public ClientRegisterView() {
-		initLoginView();
+		initClientRegisterView();
 		clientRegisterControl = new ClientRegisterControl(this);
 	}
 	
 	// methods
-	private void initLoginView() {
+	private void initClientRegisterView() {
 		final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setUndecorated(true);

@@ -15,8 +15,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import java.awt.Font;
-
-
+/**
+ * 
+ * @author alvesmarcos
+ *
+ */
 public class MenuView extends JFrame {
 	
 	// atributes

@@ -146,8 +146,6 @@ public class SaleView extends JFrame {
 		//saleControl = new SaleControl(this);
 	}
 	
-	
-	
 	private void initSaleView() {
 		final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

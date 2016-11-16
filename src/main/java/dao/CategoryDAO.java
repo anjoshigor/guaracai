@@ -77,7 +77,7 @@ public class CategoryDAO extends BasicDAO {
 	public Category findByName(String name){
 		
 		Result<TbCategoryRecord> result = context.selectFrom(TB_CATEGORY)
-										 		  .where(TB_CATEGORY.NAME.equal(name))
+										 		  .where(TB_CATEGORY.NAME.like("%"+name+"%"))
 										 		  .orderBy(TB_CATEGORY.NAME)
 										          .fetch();
 		inflate(result);

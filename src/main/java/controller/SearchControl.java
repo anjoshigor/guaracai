@@ -4,11 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.text.ParseException;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.MaskFormatter;
-
 import dao.CategoryDAO;
 import dao.ClientDAO;
 import dao.EmployeeDAO;
@@ -64,6 +61,7 @@ public class SearchControl {
 	
 	private void seek(){
 		SearchResultsView searchResultsView = new SearchResultsView();
+		comboxField = String.valueOf(searchView.getComboCampo().getSelectedItem());
 		
 		DefaultTableModel model = (DefaultTableModel) searchResultsView.getResultTable().getModel();
 		model.setRowCount(0);
@@ -140,13 +138,15 @@ public class SearchControl {
 			
 		} else if(comboxFilter.equals("produto")){
 			List<Goods> goodsList = null;
-	
+
 			if(CONTENT_GOODS[0].equals(comboxField))
 				goodsList = goodsDAO.findByCode(Integer.parseInt(search));
 			
-			else if(CONTENT_GOODS[1].equals(comboxField))
-				goodsList = goodsDAO.findByCategoryId(Integer.parseInt(search));
-	
+			else if(CONTENT_GOODS[1].equals(comboxField)){
+				Category tmpCategory = categoryDAO.findByName(search);
+			
+				goodsList = goodsDAO.findByCategoryId(tmpCategory.getId());
+			}
 			else if(CONTENT_GOODS[2].equals(comboxField))
 				goodsList = goodsDAO.findByName(search);
 		
@@ -186,38 +186,11 @@ public class SearchControl {
 		}
 	}
 	
-	private void selectedComboxFieldFormatter() throws ParseException {
-		comboxField = String.valueOf(searchView.getComboCampo().getSelectedItem());
-		searchView.getTxtPesquisar().setText("");
-		MaskFormatter mask;
-		
-		if(comboxField.equals("data nascimento")){
-			// mask date
-			mask = new MaskFormatter("##/##/####");
-			mask.install(searchView.getTxtPesquisar());
-			
-		} else if(comboxField.equals("cpf")){
-			// mask cpf
-			mask = new MaskFormatter("###.###.###-##");
-			mask.install(searchView.getTxtPesquisar());
-
-		} else if(comboxField.equals("estado")){
-			//TODO
-		} 
-	}
-	
 	private class Events implements ActionListener, MouseListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == searchView.getComboFiltro())
 				selectedComboxFilter();
-			else if (e.getSource() == searchView.getComboCampo()){
-				try {
-					selectedComboxFieldFormatter();
-				} catch (ParseException pe) {
-					pe.printStackTrace();
-				}
-			}
 		}
 		@Override
 		public void mouseClicked(MouseEvent e) {
@@ -228,9 +201,8 @@ public class SearchControl {
 				employeeDAO.disconnect();
 				goodsDAO.disconnect();
 			
-			} else if(e.getSource() == searchView.getLblButtonPesquisar()){
+			} else if(e.getSource() == searchView.getLblButtonPesquisar())
 				seek();
-			}
 		}
 
 		@Override
