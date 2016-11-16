@@ -31,7 +31,9 @@ public class CategoryRegisterControl {
 		
 		categoryRegisterView.getBtnCadastrar().addActionListener(events);
 		categoryRegisterView.getBtnLimpar().addActionListener(events);
+		categoryRegisterView.getBtnOK().addActionListener(events);
 		categoryRegisterView.getLblImageButtonVoltar().addMouseListener(events);
+		
 		
 	}
 	
@@ -49,8 +51,11 @@ public class CategoryRegisterControl {
 		} else {
 			category.setName(categoryRegisterView.getTxtNome().getText());
 			category.setDescription(categoryRegisterView.getTxtDescricao().getText());
-	
-			categoryDAO.add(category);
+			
+			if(categoryDAO.add(category)==1){
+				categoryRegisterView.getPanelDialog().setVisible(true);
+			} 
+			
 		}
 	}
 	
@@ -58,10 +63,14 @@ public class CategoryRegisterControl {
 	private class Events implements ActionListener, MouseListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource() == categoryRegisterView.getBtnCadastrar())
+			if(e.getSource() == categoryRegisterView.getBtnCadastrar()){
 				insert();
-			else if(e.getSource() == categoryRegisterView.getBtnLimpar())
-				cleanFields();
+			}else if(e.getSource() == categoryRegisterView.getBtnOK()){
+					categoryRegisterView.getPanelDialog().setVisible(false);
+					cleanFields();
+			} if (e.getSource() == categoryRegisterView.getBtnLimpar()){
+					cleanFields();
+			}
 		}
 
 		public void mouseClicked(MouseEvent e) {

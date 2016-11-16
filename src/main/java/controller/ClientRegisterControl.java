@@ -36,6 +36,7 @@ public class ClientRegisterControl {
 		clientRegisterView.getTxtValorEmCompras().addFocusListener(events);
 		clientRegisterView.getBtnCadastrar().addActionListener(events);
 		clientRegisterView.getBtnLimpar().addActionListener(events);
+		clientRegisterView.getBtnOK().addActionListener(events);
 		clientRegisterView.getLblImageButtonVoltar().addMouseListener(events);
 	}
 	
@@ -72,7 +73,9 @@ public class ClientRegisterControl {
 		client.setBalance(balance);
 		client.setAmountSpent(amountSpent);
 	
-		clientDAO.add(client);
+		if(clientDAO.add(client)==1){
+			clientRegisterView.getPanelDialog().setVisible(true);
+		}
 	}
 	
 	// inner class
@@ -85,8 +88,12 @@ public class ClientRegisterControl {
 				} catch (ParseException pe) {
 					pe.printStackTrace();
 				}
-			} else if(e.getSource() == clientRegisterView.getBtnLimpar())
+			} else if(e.getSource() == clientRegisterView.getBtnOK()){
+				clientRegisterView.getPanelDialog().setVisible(false);
 				cleanFields();
+			} if (e.getSource() == clientRegisterView.getBtnLimpar()){
+					cleanFields();
+			}
 		}
 		
 		public void mouseClicked(MouseEvent e) {

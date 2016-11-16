@@ -50,6 +50,7 @@ public class GoodsRegisterControl {
 		goodsRegisterView.getBtnCadastrar().addActionListener(events);
 		goodsRegisterView.getBtnLimpar().addActionListener(events);
 		goodsRegisterView.getLblImageButtonVoltar().addMouseListener(events);
+		goodsRegisterView.getBtnOK().addActionListener(events);
 	}
 	
 	public GoodsRegisterControl(GoodsRegisterView goodsRegisterView, Goods goods) {
@@ -96,7 +97,7 @@ public class GoodsRegisterControl {
 	
 	private void insert() throws ParseException {
 		goods = new Goods();
-		Category categoryName = categoryDAO.findByName(String.valueOf(goodsRegisterView.getComboCategoria().getSelectedItem()));
+		Category categoryName = categoryDAO.findByName(String.valueOf(goodsRegisterView.getComboCategoria().getSelectedItem())).get(0);
 		
 		double price = 0.0;
 		    
@@ -114,11 +115,13 @@ public class GoodsRegisterControl {
 		goods.setSize(goodsRegisterView.getTxtTamanho().getText());
 		goods.setDescription(goodsRegisterView.getTxtDescricao().getText());
 		
-		goodsDAO.add(goods);
+		if(goodsDAO.add(goods)==1){
+			goodsRegisterView.getPanelDialog().setVisible(true);
+		}
 	}
 	
 	private void update(Goods goods) throws ParseException {
-		Category categoryName = categoryDAO.findByName(String.valueOf(goodsRegisterView.getComboCategoria().getSelectedItem()));
+		Category categoryName = categoryDAO.findByName(String.valueOf(goodsRegisterView.getComboCategoria().getSelectedItem())).get(0);
 		
 		double price = 0.0;
 		    
@@ -136,7 +139,10 @@ public class GoodsRegisterControl {
 		goods.setSize(goodsRegisterView.getTxtTamanho().getText());
 		goods.setDescription(goodsRegisterView.getTxtDescricao().getText());
 		
-		goodsDAO.update(goods);
+		if(goodsDAO.update(goods)==1){
+			goodsRegisterView.getLblMessageError().setText("<html>Produto atualizad</br>com sucesso!</html>");
+			goodsRegisterView.getPanelDialog().setVisible(true);
+		}
 		
 	}
 	
@@ -151,21 +157,28 @@ public class GoodsRegisterControl {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == goodsRegisterView.getBtnCadastrar()) {
-				try {
+					try {
+						if(goodsRegisterView.getWhoCalled() == 1){
+							insert();
+							}
+						else{
+							update(goods);
+						}
+					} catch (ParseException pe) {
+						pe.printStackTrace();
+					}
+				
+				} else if(e.getSource() == goodsRegisterView.getBtnLimpar()){
 					if(goodsRegisterView.getWhoCalled() == 0)
-						insert();
+						delete(goods);
 					else
-						update(goods);
-				} catch (ParseException pe) {
-					pe.printStackTrace();
+						cleanFields();
+				} else if(e.getSource() == goodsRegisterView.getBtnOK()){
+						goodsRegisterView.getPanelDialog().setVisible(false);
+						cleanFields();
 				}
-			} else if(e.getSource() == goodsRegisterView.getBtnLimpar())
-				if(goodsRegisterView.getWhoCalled() == 0)
-					delete(goods);
-				else
-					cleanFields();
-						
 		}
+						
 		
 		@Override
 		public void mouseClicked(MouseEvent e) {
