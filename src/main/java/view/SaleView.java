@@ -457,7 +457,6 @@ public class SaleView extends JFrame {
 		txtDesconto.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		txtDesconto.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		txtDesconto.setBounds(345, 460, 150, 33);
-		txtDesconto.setEditable(false);
 		panelForm.add(txtDesconto);
 		
 		/** Observation **/
@@ -535,6 +534,10 @@ public class SaleView extends JFrame {
 	}
 
 
+
+	public JLabel getLblPesquisa() {
+		return lblPesquisa;
+	}
 
 	public JTextField getTxtCod() {
 		return txtCod;
@@ -640,6 +643,10 @@ public class SaleView extends JFrame {
 
 	public JLabel getLblDeletar() {
 		return lblDeletar;
+	}
+
+	public JLabel getLblImageButtonPesquisa() {
+		return lblImageButtonPesquisa;
 	}
 
 	public JButton getBtnCancelar() {

@@ -10,6 +10,7 @@ import dao.GoodsDAO;
 import model.Goods;
 import view.PaymentView;
 import view.SaleView;
+import view.SearchView;
 
 /**
  * 
@@ -52,6 +53,9 @@ public class SaleControl {
 		saleView.getTxtQtd().addActionListener(events);
 		saleView.getBtnCancelar().addActionListener(events);
 		saleView.getBtnFinalizar().addActionListener(events);
+		saleView.getLblImageButtonPesquisa().addMouseListener(events);
+		saleView.getLblPesquisa().addMouseListener(events);
+		saleView.getTxtDesconto().addActionListener(events);
 	}
 	
 	private void addItemTable(){
@@ -106,6 +110,12 @@ public class SaleControl {
 			saleView.getComboTamanho().requestFocus();
 		}	
 	}
+	
+	private void subDesconto(){
+		double sub = Double.parseDouble(saleView.getTxtDesconto().getText().replaceAll(",", "\\."));
+		subTotal -=sub;
+		saleView.getTxtTotal().setText(String.format("%.2f", subTotal).replaceAll("\\.", ","));
+	}
 
 	private class Events implements ActionListener, MouseListener {
 		@Override
@@ -118,21 +128,31 @@ public class SaleControl {
 			
 			else if(e.getSource() == saleView.getTxtQtd())
 				saleView.getBtnAdicionar().requestFocus();
-			
+
+			else if(e.getSource() == saleView.getTxtDesconto()){
+				saleView.getTxtAreaMotivo().requestFocus();
+				subDesconto();
+			}
 			else if(e.getSource() == saleView.getBtnAdicionar())
 				addItemTable();
 			
 			else if(e.getSource() == saleView.getBtnCancelar())
 				saleView.dispose();
 			
-			else if(e.getSource() == saleView.getBtnFinalizar())
-				new PaymentView().setVisible(true);
+			else if(e.getSource() == saleView.getBtnFinalizar()){
+				PaymentView pagamento = new PaymentView();
+				pagamento.getTxtTotal().setText(saleView.getTxtTotal().getText());
+				pagamento.setVisible(true);
+			}
 		}
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			if(e.getSource() == saleView.getLblDeletar())
 				removeItemTable();
+			else if(e.getSource() == saleView.getLblImageButtonPesquisa() || e.getSource() == saleView.getLblPesquisa())
+				new SearchView().setVisible(true);
+			
 		}
 
 		@Override

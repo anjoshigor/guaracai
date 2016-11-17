@@ -237,6 +237,7 @@ public class PaymentView extends JFrame {
 		txtTotal.setFont(new Font("DejaVu Sans", Font.BOLD, 22));
 		txtTotal.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		txtTotal.setBounds(530, 50, 320, 70);
+		txtTotal.setEditable(false);
 		panelMenu.add(txtTotal);
 		
 		/** Recebido **/
@@ -275,6 +276,7 @@ public class PaymentView extends JFrame {
 		txtResto.setFont(new Font("DejaVu Sans", Font.PLAIN, 22));
 		txtResto.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		txtResto.setBounds(530, 210, 320, 70);
+		txtResto.setEditable(false);
 		panelMenu.add(txtResto);
 		
 		/** Troco **/
@@ -294,6 +296,7 @@ public class PaymentView extends JFrame {
 		txtTroco.setFont(new Font("DejaVu Sans", Font.BOLD, 22));
 		txtTroco.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		txtTroco.setBounds(530, 290, 320, 70);
+		txtTroco.setEditable(false);
 		panelMenu.add(txtTroco);
 		
 		/** Button Pay **/
@@ -335,5 +338,49 @@ public class PaymentView extends JFrame {
 
 	public JPanel getPanelMenu() {
 		return panelMenu;
+	}
+
+	public JLabel getLblImageButtonDinheiro() {
+		return lblImageButtonDinheiro;
+	}
+
+	public JLabel getLblImageButtonDebito() {
+		return lblImageButtonDebito;
+	}
+
+	public JLabel getLblImageButtonDebitoOut() {
+		return lblImageButtonDebitoOut;
+	}
+
+	public JLabel getLblImageButtonCreditoOut() {
+		return lblImageButtonCreditoOut;
+	}
+
+	public JTextField getTxtTotal() {
+		return txtTotal;
+	}
+
+	public JTextField getTxtRecebido() {
+		return txtRecebido;
+	}
+
+	public JTextField getTxtResto() {
+		return txtResto;
+	}
+
+	public JTextField getTxtTroco() {
+		return txtTroco;
+	}
+
+	public JButton getBtnPagar() {
+		return btnPagar;
+	}
+
+	public JButton getBtnCancelar() {
+		return btnCancelar;
+	}
+
+	public JButton getBtnCreditar() {
+		return btnCreditar;
 	}
 }
