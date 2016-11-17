@@ -2,16 +2,12 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.5
--- Dumped by pg_dump version 9.5.5
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
-SET row_security = off;
 
 --
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
@@ -34,7 +30,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: tb_category; Type: TABLE; Schema: public; Owner: postgres
+-- Name: tb_category; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE tb_category (
@@ -44,7 +40,7 @@ CREATE TABLE tb_category (
 );
 
 
-ALTER TABLE tb_category OWNER TO postgres;
+ALTER TABLE public.tb_category OWNER TO postgres;
 
 --
 -- Name: category_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -58,7 +54,7 @@ CREATE SEQUENCE category_id_seq
     CACHE 1;
 
 
-ALTER TABLE category_id_seq OWNER TO postgres;
+ALTER TABLE public.category_id_seq OWNER TO postgres;
 
 --
 -- Name: category_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -68,7 +64,7 @@ ALTER SEQUENCE category_id_seq OWNED BY tb_category.id;
 
 
 --
--- Name: tb_client; Type: TABLE; Schema: public; Owner: postgres
+-- Name: tb_client; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE tb_client (
@@ -82,7 +78,7 @@ CREATE TABLE tb_client (
 );
 
 
-ALTER TABLE tb_client OWNER TO postgres;
+ALTER TABLE public.tb_client OWNER TO postgres;
 
 --
 -- Name: client_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -96,7 +92,7 @@ CREATE SEQUENCE client_id_seq
     CACHE 1;
 
 
-ALTER TABLE client_id_seq OWNER TO postgres;
+ALTER TABLE public.client_id_seq OWNER TO postgres;
 
 --
 -- Name: client_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -106,7 +102,7 @@ ALTER SEQUENCE client_id_seq OWNED BY tb_client.id;
 
 
 --
--- Name: tb_employee; Type: TABLE; Schema: public; Owner: postgres
+-- Name: tb_employee; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE tb_employee (
@@ -130,7 +126,7 @@ CREATE TABLE tb_employee (
 );
 
 
-ALTER TABLE tb_employee OWNER TO postgres;
+ALTER TABLE public.tb_employee OWNER TO postgres;
 
 --
 -- Name: employee_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -144,7 +140,7 @@ CREATE SEQUENCE employee_id_seq
     CACHE 1;
 
 
-ALTER TABLE employee_id_seq OWNER TO postgres;
+ALTER TABLE public.employee_id_seq OWNER TO postgres;
 
 --
 -- Name: employee_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -154,7 +150,7 @@ ALTER SEQUENCE employee_id_seq OWNED BY tb_employee.id;
 
 
 --
--- Name: tb_expenses; Type: TABLE; Schema: public; Owner: postgres
+-- Name: tb_expenses; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE tb_expenses (
@@ -165,7 +161,7 @@ CREATE TABLE tb_expenses (
 );
 
 
-ALTER TABLE tb_expenses OWNER TO postgres;
+ALTER TABLE public.tb_expenses OWNER TO postgres;
 
 --
 -- Name: expenses_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -179,7 +175,7 @@ CREATE SEQUENCE expenses_id_seq
     CACHE 1;
 
 
-ALTER TABLE expenses_id_seq OWNER TO postgres;
+ALTER TABLE public.expenses_id_seq OWNER TO postgres;
 
 --
 -- Name: expenses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -189,7 +185,7 @@ ALTER SEQUENCE expenses_id_seq OWNED BY tb_expenses.id;
 
 
 --
--- Name: tb_goods; Type: TABLE; Schema: public; Owner: postgres
+-- Name: tb_goods; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE tb_goods (
@@ -203,7 +199,7 @@ CREATE TABLE tb_goods (
 );
 
 
-ALTER TABLE tb_goods OWNER TO postgres;
+ALTER TABLE public.tb_goods OWNER TO postgres;
 
 --
 -- Name: produto_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -217,7 +213,7 @@ CREATE SEQUENCE produto_id_seq
     CACHE 1;
 
 
-ALTER TABLE produto_id_seq OWNER TO postgres;
+ALTER TABLE public.produto_id_seq OWNER TO postgres;
 
 --
 -- Name: produto_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -227,7 +223,7 @@ ALTER SEQUENCE produto_id_seq OWNED BY tb_goods.id;
 
 
 --
--- Name: tb_sale; Type: TABLE; Schema: public; Owner: postgres
+-- Name: tb_sale; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE tb_sale (
@@ -241,7 +237,7 @@ CREATE TABLE tb_sale (
 );
 
 
-ALTER TABLE tb_sale OWNER TO postgres;
+ALTER TABLE public.tb_sale OWNER TO postgres;
 
 --
 -- Name: sale_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -255,7 +251,7 @@ CREATE SEQUENCE sale_id_seq
     CACHE 1;
 
 
-ALTER TABLE sale_id_seq OWNER TO postgres;
+ALTER TABLE public.sale_id_seq OWNER TO postgres;
 
 --
 -- Name: sale_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -310,7 +306,7 @@ ALTER TABLE ONLY tb_sale ALTER COLUMN id SET DEFAULT nextval('sale_id_seq'::regc
 -- Name: category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('category_id_seq', 2, true);
+SELECT pg_catalog.setval('category_id_seq', 16, true);
 
 
 --
@@ -324,7 +320,7 @@ SELECT pg_catalog.setval('client_id_seq', 8, true);
 -- Name: employee_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('employee_id_seq', 3, true);
+SELECT pg_catalog.setval('employee_id_seq', 4, true);
 
 
 --
@@ -338,7 +334,7 @@ SELECT pg_catalog.setval('expenses_id_seq', 1, false);
 -- Name: produto_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('produto_id_seq', 1, true);
+SELECT pg_catalog.setval('produto_id_seq', 2, true);
 
 
 --
@@ -355,6 +351,20 @@ SELECT pg_catalog.setval('sale_id_seq', 1, false);
 COPY tb_category (id, name, description) FROM stdin;
 1	Outros	Categoria sem definiçao ate o momento
 2	Verdes	Laranjas e Frutas
+3	Energéticos	Sucos com açai e guarana para melhorar sua energia
+4	Super energeticos	Aumentam ainda mais sua energia
+5	Funcionais	Deixam seu organismo em perfeito funcionamento
+6	Super Funcionais	Mais funcionais ainda
+7	Sucos	Sucos normais de uma fruta
+8	Saudaveis	Para quem quer manter a saude em dia
+9	Super Saudaveis	Para quem quer dar uma revigorada boa
+10	Shakes	Shakes deliciosos
+11	Vitaminas	Vitaminas deliciosas para qualquer momento do dia
+12	Super Vitaminas	Para quem treina bastante e precisa de suplementaçao
+13	Na tigela	Açai cremoso na tigela
+14	Frozen	Casquinha ou frozen no copinho
+15	Montado	O cliente faz a sua escolha
+16	Extra	Qualquer condimento adicionado
 \.
 
 
@@ -378,6 +388,7 @@ COPY tb_client (id, name, date_of_birth, phone, amount_spent, balance, email) FR
 COPY tb_employee (id, name, date_of_birth, phone, email, cpf, username, password, type, agency, count, complement, number, city, street, district, state) FROM stdin;
 1	Marcos Henrique Alves da Silva	08111995  	83999606821    	marcos.alves@cc.ci.ufpb.br	10000974471   	alvesmarcos	quinho	Administrador	\N	\N	Apto 401	611	João Pessoa	Rua Rejane Freire Matos	Bancários	PB
 3	marcos	02/12/2012	(32) 3332-2333 	amdm	100.093.299-32	marcos	ey	Gerente	2332	msa		403	JP	JP	cidade unviersid	AC
+4	admin	25/32/1896	(83) 9918-7066 	higor.araujo@cc.ci.ufpb.br	529.655.972-04	admin	root	Gerente	2386432	356132	apt203	932	JP	JP	Bancarios	PB
 \.
 
 
@@ -396,6 +407,7 @@ COPY tb_expenses (id, description, cost, employee_id) FROM stdin;
 COPY tb_goods (id, code, price, name, description, category_id, size) FROM stdin;
 0	12	12	Maça	Um fruta	1	unico
 1	190	7.20000000000000018	Leite de manga	Leite de manga vindo da vaca.	1	Unico
+2	90	0.5	Amendoim extra	porção extra de amendoim	16	Porção
 \.
 
 
@@ -408,7 +420,7 @@ COPY tb_sale (id, date, observation, total, discount, client_id, employee_id) FR
 
 
 --
--- Name: category_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: category_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY tb_category
@@ -416,7 +428,7 @@ ALTER TABLE ONLY tb_category
 
 
 --
--- Name: client_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: client_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY tb_client
@@ -424,7 +436,7 @@ ALTER TABLE ONLY tb_client
 
 
 --
--- Name: employee_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: employee_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY tb_employee
@@ -432,7 +444,7 @@ ALTER TABLE ONLY tb_employee
 
 
 --
--- Name: expenses_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: expenses_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY tb_expenses
@@ -440,7 +452,7 @@ ALTER TABLE ONLY tb_expenses
 
 
 --
--- Name: goods_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: goods_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY tb_goods
@@ -448,7 +460,7 @@ ALTER TABLE ONLY tb_goods
 
 
 --
--- Name: sale_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: sale_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY tb_sale
@@ -456,7 +468,7 @@ ALTER TABLE ONLY tb_sale
 
 
 --
--- Name: tb_category_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: tb_category_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY tb_category
@@ -464,7 +476,7 @@ ALTER TABLE ONLY tb_category
 
 
 --
--- Name: tb_employee_cpf_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: tb_employee_cpf_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY tb_employee
@@ -472,7 +484,7 @@ ALTER TABLE ONLY tb_employee
 
 
 --
--- Name: tb_employee_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: tb_employee_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY tb_employee
