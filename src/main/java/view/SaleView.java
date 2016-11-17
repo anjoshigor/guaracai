@@ -25,6 +25,8 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
+import controller.SaleControl;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
@@ -59,7 +61,7 @@ public class SaleView extends JFrame {
 	
 	/**size field**/
 	private JLabel lblTamanho;
-	private JTextField txtTamanho;
+	private JComboBox<String> comboTamanho;
 	
 	/**qtd field**/
 	private JLabel lblQtd;
@@ -132,8 +134,8 @@ public class SaleView extends JFrame {
 	private JPanel panDeletar;
 	private JTextField txtDeletar;
 	
-	// TODO controller
-	//private SaleControl saleControl;
+	
+	private SaleControl saleControl;
 	
 	/**
 	 * Construtor da classe SaleView(). 
@@ -143,7 +145,7 @@ public class SaleView extends JFrame {
 	 */
 	public SaleView() {
 		initSaleView();
-		//saleControl = new SaleControl(this);
+		saleControl = new SaleControl(this);
 	}
 	
 	private void initSaleView() {
@@ -194,7 +196,9 @@ public class SaleView extends JFrame {
 		txtNomeDoProduto.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		txtNomeDoProduto.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		txtNomeDoProduto.setBounds(90, 35, 350, 35);
+		txtNomeDoProduto.setEditable(false);
 		panelForm.add(txtNomeDoProduto);
+		
 		
 		/**size field**/
 		lblTamanho = new JLabel("tamanho");
@@ -203,12 +207,6 @@ public class SaleView extends JFrame {
 		lblTamanho.setBounds(445, 0, 120, 33);
 		lblTamanho.setHorizontalAlignment(SwingConstants.LEFT);
 		panelForm.add(lblTamanho);
-		
-		txtTamanho = new JTextField();
-		txtTamanho.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
-		txtTamanho.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-		txtTamanho.setBounds(445, 35, 120, 35);
-		panelForm.add(txtTamanho);
 		
 		/**qtd field**/
 		lblQtd = new JLabel("qtd");
@@ -496,6 +494,11 @@ public class SaleView extends JFrame {
 		panDeletar.setBounds(530,550,150,40);
 		panDeletar.setBackground(new Color(Integer.parseInt("BD7DF5",16)));
 		panelForm.add(panDeletar);
+		
+		comboTamanho = new JComboBox<>();
+		comboTamanho.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
+		comboTamanho.setBounds(445, 34, 120, 37);
+		panelForm.add(comboTamanho);
 	}
 
 
@@ -503,20 +506,14 @@ public class SaleView extends JFrame {
 	public JTextField getTxtCod() {
 		return txtCod;
 	}
-
-
+	
+	public JComboBox<String> getComboTamanho() {
+		return comboTamanho;
+	}
 
 	public JTextField getTxtNomeDoProduto() {
 		return txtNomeDoProduto;
 	}
-
-
-
-	public JTextField getTxtTamanho() {
-		return txtTamanho;
-	}
-
-
 
 	public JTextField getTxtQtd() {
 		return txtQtd;
@@ -617,5 +614,4 @@ public class SaleView extends JFrame {
 	public JTextField getTxtDeletar() {
 		return txtDeletar;
 	}
-
 }

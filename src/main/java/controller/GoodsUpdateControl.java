@@ -54,7 +54,7 @@ public class GoodsUpdateControl {
 		goods.setCode(Integer.parseInt(goodsRegisterView.getTxtCod().getText()));
 		//goods.setCategoryId(); Depois que alterar a combo box
 		goods.setPrice(Double.parseDouble(goodsRegisterView.getTxtValor().getText()));
-		goods.setSize(Integer.parseInt(goodsRegisterView.getTxtTamanho().getText()));
+//		goods.setSize(Integer.parseInt(goodsRegisterView.getTxtTamanho().getText()));
 		goods.setDescription(goodsRegisterView.getTxtDescricao().getText());
 		
 		goodsDAO.add(goods);
