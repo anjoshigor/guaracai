@@ -135,20 +135,13 @@ public class SaleView extends JFrame {
 	private JPanel panDeletar;
 	private JTextField txtDeletar;
 	
-<<<<<<< HEAD
-	
 	private SaleControl saleControl;
-=======
+	
 	/** DIALOG **/
 	private JLabel lblIconMessage;
 	private JLabel lblMessagedialog;
 	private JButton btnOK;
 	private JPanel panelDialog;
-	
-	// TODO controller
-	//private SaleControl saleControl;
->>>>>>> 961b115ac77c0d853bde092b296c4b83db8bfbc9
-	
 	/**
 	 * Construtor da classe SaleView(). 
 	 * 
@@ -521,6 +514,7 @@ public class SaleView extends JFrame {
 		lblDeletar.setForeground(Color.WHITE);
 		lblDeletar.setFont(new Font("DejaVu Sans", Font.BOLD, 14));
 		lblDeletar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDeletar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panelForm.add(lblDeletar);
 		
 		txtDeletar = new JTextField();
@@ -643,6 +637,10 @@ public class SaleView extends JFrame {
 	}
 
 
+
+	public JLabel getLblDeletar() {
+		return lblDeletar;
+	}
 
 	public JButton getBtnCancelar() {
 		return btnCancelar;

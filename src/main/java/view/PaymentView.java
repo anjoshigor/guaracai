@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import controller.PaymentControl;
 import controller.RegisterControl;
 import util.GraphicsUtil;
 
@@ -82,11 +83,11 @@ public class PaymentView extends JFrame {
 	
 	
 	//TODO controller
-	//private PaymentControl paymentControl;
+	private PaymentControl paymentControl;
 
 	public PaymentView() {
 		initPaymentView();
-		//paymentControl =  new PaymentControl(this);
+		paymentControl =  new PaymentControl(this);
 		
 	}
 	
