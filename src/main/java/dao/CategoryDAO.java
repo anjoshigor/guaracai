@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.jooq.Record;
 import org.jooq.Result;
+import org.jooq.exception.DataAccessException;
+
 import model.Category;
 import service.tables.records.TbCategoryRecord;
 
@@ -25,13 +27,12 @@ public class CategoryDAO extends BasicDAO {
 	}
 	
 	@Override
-	public int add(Object c) {
+	public int add(Object c){
 		category = (Category) c;
-		
 		return context.insertInto(TB_CATEGORY)
-				      .set(TB_CATEGORY.NAME, category.getName())
-				      .set(TB_CATEGORY.DESCRIPTION, category.getDescription())
-				      .execute();
+				.set(TB_CATEGORY.NAME, category.getName())
+				.set(TB_CATEGORY.DESCRIPTION, category.getDescription())
+				.execute();
 	}
 
 	@Override
@@ -74,7 +75,7 @@ public class CategoryDAO extends BasicDAO {
 		return categoryList.get(0);
 	}
 	
-	public Category findByName(String name){
+	public List<Category> findByName(String name){
 		
 		Result<TbCategoryRecord> result = context.selectFrom(TB_CATEGORY)
 										 		  .where(TB_CATEGORY.NAME.like("%"+name+"%"))
@@ -82,7 +83,7 @@ public class CategoryDAO extends BasicDAO {
 										          .fetch();
 		inflate(result);
 		
-		return categoryList.get(0);
+		return categoryList;
 	}
 	
 	@Override

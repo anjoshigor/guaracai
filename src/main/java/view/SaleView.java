@@ -20,6 +20,7 @@ import java.awt.Cursor;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
@@ -134,8 +135,19 @@ public class SaleView extends JFrame {
 	private JPanel panDeletar;
 	private JTextField txtDeletar;
 	
+<<<<<<< HEAD
 	
 	private SaleControl saleControl;
+=======
+	/** DIALOG **/
+	private JLabel lblIconMessage;
+	private JLabel lblMessagedialog;
+	private JButton btnOK;
+	private JPanel panelDialog;
+	
+	// TODO controller
+	//private SaleControl saleControl;
+>>>>>>> 961b115ac77c0d853bde092b296c4b83db8bfbc9
 	
 	/**
 	 * Construtor da classe SaleView(). 
@@ -169,6 +181,33 @@ public class SaleView extends JFrame {
 		panelForm.setLocation(GraphicsUtil.getLocaleCenter(panelForm.getSize(), screenSize));
 		panelForm.setBackground(new Color(Integer.parseInt("9013FE", 16)));
 		contentPane.add(panelForm);
+		
+		/** DIALOG MESSAGE **/
+		panelDialog = new JPanel();
+		panelDialog.setBackground(new Color(Integer.parseInt("827C7B", 16)));
+		panelDialog.setBorder(new LineBorder(Color.WHITE, 2));
+		panelDialog.setBounds(300, 190, 416, 225);
+		panelDialog.setLayout(null);
+		panelDialog.setVisible(false);
+		panelForm.add(panelDialog);
+		
+		lblIconMessage = new JLabel("");
+		lblIconMessage.setBounds(25, 46, 100, 100);
+		lblIconMessage.setIcon(GraphicsUtil.adjustImage("/drawable/warning.png", lblIconMessage.getSize()));
+		panelDialog.add(lblIconMessage);
+		
+		lblMessagedialog = new JLabel("<html>Produto não<br>encontrado!<html>");
+		lblMessagedialog.setForeground(Color.WHITE);
+		lblMessagedialog.setFont(new Font("DejaVu Sans", Font.PLAIN, 26));
+		lblMessagedialog.setBounds(151, 46, 208, 97);
+		panelDialog.add(lblMessagedialog);
+		
+		btnOK = new JButton("OK");
+		btnOK.setBackground(Color.WHITE);
+		btnOK.setForeground(Color.DARK_GRAY);
+		btnOK.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
+		btnOK.setBounds(160, 158, 105, 34);
+		panelDialog.add(btnOK);
 		
 		/**Code field**/
 		lblCod = new JLabel("cod");

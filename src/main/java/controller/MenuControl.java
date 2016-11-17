@@ -6,6 +6,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
+import view.ConfigView;
 import view.MenuView;
 import view.RegisterView;
 import view.SaleView;
@@ -89,6 +91,9 @@ public class MenuControl {
 			}
 			else if(e.getSource() == menuView.getLblImageButtonVenda()){
 				new SaleView().setVisible(true);
+			}
+			else if(e.getSource() == menuView.getLblImageButtonConfiguracoes()){
+				new ConfigView().setVisible(true);
 			}
 		}
 		

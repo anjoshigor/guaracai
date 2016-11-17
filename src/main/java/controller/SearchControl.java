@@ -74,9 +74,14 @@ public class SearchControl {
 			searchResultsView.getResultTable().getColumnModel().getColumn(1).setHeaderValue("nome");
 			searchResultsView.getResultTable().getColumnModel().getColumn(2).setHeaderValue("descrição");
 			
-			Category category = categoryDAO.findByName(search);
-		
-			model.addRow(new Object[]{" "+category.getId()," "+ category.getName()," "+ category.getDescription()});
+			List<Category> categoryList = categoryDAO.findByName(search);
+			
+			int size = categoryList.size();
+			
+			for(int i = 0; i < size;  i++)	
+				model.addRow(new Object[]{" "+categoryList.get(i).getId()," "+ categoryList.get(i).getName()," "+ categoryList.get(i).getDescription()});
+			
+			
 			
 		} else if(comboxFilter.equals("cliente")){
 			searchResultsView.getResultTable().getColumnModel().getColumn(0).setHeaderValue("id");
@@ -143,7 +148,7 @@ public class SearchControl {
 				goodsList = goodsDAO.findByCode(Integer.parseInt(search));
 			
 			else if(CONTENT_GOODS[1].equals(comboxField)){
-				Category tmpCategory = categoryDAO.findByName(search);
+				Category tmpCategory = categoryDAO.findByName(search).get(0);
 			
 				goodsList = goodsDAO.findByCategoryId(tmpCategory.getId());
 			}

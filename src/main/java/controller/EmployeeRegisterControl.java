@@ -35,6 +35,7 @@ public class EmployeeRegisterControl {
 		employeeRegisterView.getBtnCadastrar().addActionListener(events);
 		employeeRegisterView.getBtnLimpar().addActionListener(events);
 		employeeRegisterView.getLblImageButtonVoltar().addMouseListener(events);
+		employeeRegisterView.getBtnOK().addActionListener(events);
 	}
 	
 	
@@ -80,7 +81,9 @@ public class EmployeeRegisterControl {
 		employee.setUsername(employeeRegisterView.getTxtLogin().getText());
 		employee.setPassword(String.valueOf(employeeRegisterView.getPwdSenha().getPassword()));
 		
-		employeeDAO.add(employee);
+		if(employeeDAO.add(employee)==1){
+			employeeRegisterView.getPanelDialog().setVisible(true);
+		}
 	}
 		
 	//inner class
@@ -90,9 +93,11 @@ public class EmployeeRegisterControl {
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == employeeRegisterView.getBtnCadastrar()){
 				insert();
-			}
-			else if(e.getSource() == employeeRegisterView.getBtnLimpar()){
+			} else if(e.getSource() == employeeRegisterView.getBtnOK()){
+				employeeRegisterView.getPanelDialog().setVisible(false);
 				cleanFields();
+			} if (e.getSource() == employeeRegisterView.getBtnLimpar()){
+					cleanFields();
 			}
 			
 			
