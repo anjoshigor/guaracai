@@ -75,7 +75,8 @@ public class SaleControl {
 		subTotal += Double.parseDouble(subTotalFormatted);
 		
 		saleView.getTxtSubtotal().setText(String.format("%.2f", subTotal).replaceAll("\\.", ","));
-		saleView.getTxtTotal().setText(String.format("%.2f", subTotal).replaceAll("\\.", ","));
+		//saleView.getTxtTotal().setText(String.format("%.2f", subTotal).replaceAll("\\.", ","));
+		subDesconto();
 		
 		saleView.getTxtCod().setText("");
 		saleView.getComboTamanho().removeAllItems();
@@ -113,7 +114,7 @@ public class SaleControl {
 	
 	private void subDesconto(){
 		double sub = Double.parseDouble(saleView.getTxtDesconto().getText().replaceAll(",", "\\."));
-		subTotal -=sub;
+		double subTotal = Double.parseDouble(saleView.getTxtSubtotal().getText().replaceAll(",", "\\.")) - sub;
 		saleView.getTxtTotal().setText(String.format("%.2f", subTotal).replaceAll("\\.", ","));
 	}
 
