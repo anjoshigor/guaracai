@@ -21,6 +21,7 @@ public class SaleControl {
 	
 	// attributes
 	private SaleView saleView;
+	private PaymentView pagamento;
 	private GoodsDAO goodsDAO;
 	private List<Goods> goodsList;
 	private Events events;
@@ -37,6 +38,8 @@ public class SaleControl {
 		this.itemCount = 0;
 		
 		this.subTotal = 0.0;
+
+		pagamento = new PaymentView(this);
 		
 		modelTable = (DefaultTableModel) saleView.getPedidoTable().getModel();
 		modelTable.setRowCount(0);
@@ -141,7 +144,6 @@ public class SaleControl {
 				saleView.dispose();
 			
 			else if(e.getSource() == saleView.getBtnFinalizar()){
-				PaymentView pagamento = new PaymentView();
 				pagamento.getTxtTotal().setText(saleView.getTxtTotal().getText());
 				pagamento.setVisible(true);
 			}
@@ -164,5 +166,9 @@ public class SaleControl {
 		public void mouseEntered(MouseEvent e) { }
 		@Override
 		public void mouseExited(MouseEvent e) { }
+	}
+
+	public SaleView getSaleView() {
+		return saleView;
 	}
 }

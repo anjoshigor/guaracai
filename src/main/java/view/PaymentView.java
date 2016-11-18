@@ -20,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 
 import controller.PaymentControl;
 import controller.RegisterControl;
+import controller.SaleControl;
 import util.GraphicsUtil;
 
 public class PaymentView extends JFrame {
@@ -85,9 +86,9 @@ public class PaymentView extends JFrame {
 	//TODO controller
 	private PaymentControl paymentControl;
 
-	public PaymentView() {
+	public PaymentView(SaleControl saleControl) {
 		initPaymentView();
-		paymentControl =  new PaymentControl(this);
+		paymentControl =  new PaymentControl(this, saleControl);
 		
 	}
 	
@@ -328,6 +329,8 @@ public class PaymentView extends JFrame {
 		btnCancelar.setBounds(520, 480, 200, 60);
 		btnCancelar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panelMenu.add(btnCancelar);
+		
+		
 
 	}
 	
@@ -382,5 +385,21 @@ public class PaymentView extends JFrame {
 
 	public JButton getBtnCreditar() {
 		return btnCreditar;
+	}
+
+	public JLabel getLblImageButtonDinheiroOut() {
+		return lblImageButtonDinheiroOut;
+	}
+
+	public JLabel getLblImageButtonSaldoOut() {
+		return lblImageButtonSaldoOut;
+	}
+
+	public JLabel getLblImageButtonCredito() {
+		return lblImageButtonCredito;
+	}
+
+	public JLabel getLblImageButtonSaldo() {
+		return lblImageButtonSaldo;
 	}
 }
