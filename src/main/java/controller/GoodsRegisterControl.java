@@ -88,6 +88,20 @@ public class GoodsRegisterControl {
 		goodsRegisterView.getTxtDescricao().setText("");
 	}
 	
+private boolean checkFields(){
+		
+		if(goodsRegisterView.getTxtNome().getText().isEmpty() ||
+		   goodsRegisterView.getTxtCod().getText().isEmpty() || 
+		   goodsRegisterView.getTxtValor().getText().isEmpty() ||
+		   goodsRegisterView.getTxtTamanho().getText().isEmpty()){
+			
+			return false;
+		}
+		
+		return true;
+	}
+	
+	
 	private void initComboxCategory(){
 		List<Category> categoryList = categoryDAO.getAll();
 		
