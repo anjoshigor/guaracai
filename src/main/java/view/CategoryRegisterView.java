@@ -265,6 +265,10 @@ public class CategoryRegisterView extends JFrame {
 	public JLabel getLblImageButtonVoltar() {
 		return lblImageButtonVoltar;
 	}
+
+	public JPanel getContentPane() {
+		return contentPane;
+	}
 	
 	
 

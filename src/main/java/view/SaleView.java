@@ -658,4 +658,8 @@ public class SaleView extends JFrame {
 	public JTextField getTxtDeletar() {
 		return txtDeletar;
 	}
+
+	public JPanel getContentPane() {
+		return contentPane;
+	}
 }

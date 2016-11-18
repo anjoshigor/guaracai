@@ -5,9 +5,18 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
 import dao.GoodsDAO;
 import model.Goods;
+import view.CategoryRegisterView;
+import view.ClientRegisterView;
+import view.EmployeeRegisterView;
+import view.GoodsRegisterView;
 import view.PaymentView;
 import view.SaleView;
 import view.SearchView;
@@ -28,6 +37,7 @@ public class SaleControl {
 	private DefaultTableModel modelTable;
 	private int itemCount;
 	private double subTotal;
+	private static final int IFW = JComponent.WHEN_IN_FOCUSED_WINDOW;
 	
 	// constructor
 	public SaleControl(SaleView saleView){
@@ -48,6 +58,16 @@ public class SaleControl {
 		saleView.getTxtDesconto().setText("0,00");
 		saleView.getTxtTotal().setText("0,00");
 		
+		this.saleView.getContentPane().getInputMap(IFW).put(KeyStroke.getKeyStroke("F11"),"finalizar");
+		this.saleView.getContentPane().getInputMap(IFW).put(KeyStroke.getKeyStroke("F12"),"cancelar");
+		this.saleView.getContentPane().getInputMap(IFW).put(KeyStroke.getKeyStroke("F6"),"consultar");
+		this.saleView.getContentPane().getInputMap(IFW).put(KeyStroke.getKeyStroke("DELETE"),"deletar");
+		
+		this.saleView.getContentPane().getActionMap().put("finalizar", finalizarAction);
+		this.saleView.getContentPane().getActionMap().put("cancelar", cancelarAction);
+		this.saleView.getContentPane().getActionMap().put("consultar", consultarAction);
+		this.saleView.getContentPane().getActionMap().put("deletar", deletarAction);
+		
 		// add listeners
 		saleView.getTxtCod().addActionListener(events);
 		saleView.getLblDeletar().addMouseListener(events);
@@ -60,6 +80,34 @@ public class SaleControl {
 		saleView.getLblPesquisa().addMouseListener(events);
 		saleView.getTxtDesconto().addActionListener(events);
 	}
+	
+	/**ACTIONS**/
+	
+	Action finalizarAction = new AbstractAction() {
+	    public void actionPerformed(ActionEvent e) {
+	    	pagamento.getTxtTotal().setText(saleView.getTxtTotal().getText());
+			pagamento.setVisible(true);
+	    }
+	};
+	
+	Action cancelarAction = new AbstractAction() {
+	    public void actionPerformed(ActionEvent e) {
+	    	saleView.dispose();
+	    }
+	};
+	
+	Action consultarAction = new AbstractAction() {
+	    public void actionPerformed(ActionEvent e) {
+	    	new SearchView().setVisible(true);
+	    }
+	};
+	
+	Action deletarAction = new AbstractAction() {
+	    public void actionPerformed(ActionEvent e) {
+	    	removeItemTable();
+	    }
+	};
+	
 	
 	private void addItemTable(){
 

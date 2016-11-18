@@ -1,10 +1,17 @@
 package controller;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
+
 //import controller.RegisterControl.Events;
 import view.RegisterView;
+
 import view.CategoryRegisterView;
 import view.ClientRegisterView;
 import view.EmployeeRegisterView;
@@ -16,11 +23,23 @@ public class RegisterControl {
 		private RegisterView registerView;
 		//private MenuView menuView;
 		private Events events;
+		private static final int IFW = JComponent.WHEN_IN_FOCUSED_WINDOW;
 		
 		public RegisterControl(RegisterView registerView){
 			
 			this.registerView = registerView;
 			this.events = new Events();
+			
+			this.registerView.getContentPane().getInputMap(IFW).put(KeyStroke.getKeyStroke("F1"),"produto");
+			this.registerView.getContentPane().getInputMap(IFW).put(KeyStroke.getKeyStroke("F2"),"cliente");
+			this.registerView.getContentPane().getInputMap(IFW).put(KeyStroke.getKeyStroke("F3"),"funcionario");
+			this.registerView.getContentPane().getInputMap(IFW).put(KeyStroke.getKeyStroke("F4"),"categoria");
+			
+			this.registerView.getContentPane().getActionMap().put("produto", produtoAction);
+			this.registerView.getContentPane().getActionMap().put("cliente", clienteAction);
+			this.registerView.getContentPane().getActionMap().put("funcionario", funcionarioAction);
+			this.registerView.getContentPane().getActionMap().put("categoria", categoriaAction);
+
 			
 			registerView.getLblImageButtonProduto().addMouseListener(events);
 			registerView.getLblImageButtonCliente().addMouseListener(events);
@@ -29,7 +48,34 @@ public class RegisterControl {
 			registerView.getLblImageButtonVoltar().addMouseListener(events);
 		}
 	
-	// methods
+
+		/**ACTIONS**/
+	
+		Action produtoAction = new AbstractAction() {
+		    public void actionPerformed(ActionEvent e) {
+		    	new GoodsRegisterView().setVisible(true);
+		    }
+		};
+		
+		Action clienteAction = new AbstractAction() {
+		    public void actionPerformed(ActionEvent e) {
+		    	new ClientRegisterView().setVisible(true);
+		    }
+		};
+		
+		Action funcionarioAction = new AbstractAction() {
+		    public void actionPerformed(ActionEvent e) {
+		    	new EmployeeRegisterView().setVisible(true);
+		    }
+		};
+		
+		Action categoriaAction = new AbstractAction() {
+		    public void actionPerformed(ActionEvent e) {
+		    	new CategoryRegisterView().setVisible(true);
+		    }
+		};
+			
+		// methods
 		private void effectSelected(boolean bprod, boolean bcli, boolean bfun, boolean bcat){
 			registerView.getLblImageButtonProdutoOut().setVisible(bprod);
 			registerView.getLblImageButtonClienteOut().setVisible(bcli);

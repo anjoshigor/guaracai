@@ -5,9 +5,18 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
+
 import dao.CategoryDAO;
 import model.Category;
 import view.CategoryRegisterView;
+import view.ConfigView;
+import view.RegisterView;
+import view.SaleView;
+import view.SearchView;
 
 /**
  * 
@@ -21,6 +30,7 @@ public class CategoryRegisterControl {
 	private Events events;
 	private CategoryDAO categoryDAO;
 	private Category category;
+	private static final int IFW = JComponent.WHEN_IN_FOCUSED_WINDOW;
 	
 	// constructor
 	public CategoryRegisterControl(CategoryRegisterView categoryRegisterView){
@@ -29,6 +39,15 @@ public class CategoryRegisterControl {
 		this.categoryDAO = new CategoryDAO();
 		this.category = null;
 		
+		this.categoryRegisterView.getContentPane().getInputMap(IFW).put(KeyStroke.getKeyStroke("F11"),"cadastrar");
+		this.categoryRegisterView.getContentPane().getInputMap(IFW).put(KeyStroke.getKeyStroke("F12"),"limpar");
+		//TODO this.categoryRegisterView.getContentPane().getInputMap(IFW).put(KeyStroke.getKeyStroke("ESC"),"voltar");
+		
+		this.categoryRegisterView.getContentPane().getActionMap().put("cadastrar", cadastrarAction);
+		this.categoryRegisterView.getContentPane().getActionMap().put("limpar", limparAction);
+		this.categoryRegisterView.getContentPane().getActionMap().put("voltar", voltarAction);
+
+		
 		categoryRegisterView.getBtnCadastrar().addActionListener(events);
 		categoryRegisterView.getBtnLimpar().addActionListener(events);
 		categoryRegisterView.getBtnOK().addActionListener(events);
@@ -36,6 +55,29 @@ public class CategoryRegisterControl {
 		
 		
 	}
+	
+
+/**ACTIONS**/
+	
+	Action cadastrarAction = new AbstractAction() {
+	    public void actionPerformed(ActionEvent e) {
+	    	insert();
+	    }
+	};
+	
+	Action limparAction = new AbstractAction() {
+	    public void actionPerformed(ActionEvent e) {
+	    	cleanFields();
+	    }
+	};
+	
+	Action voltarAction = new AbstractAction() {
+	    public void actionPerformed(ActionEvent e) {
+	    	categoryRegisterView.dispose();
+	    	categoryDAO.disconnect();
+	    }
+	};
+	
 	
 	private void cleanFields(){
 		categoryRegisterView.getTxtNome().setText("");
@@ -54,6 +96,7 @@ public class CategoryRegisterControl {
 			
 			if(categoryDAO.add(category)==1){
 				categoryRegisterView.getPanelDialog().setVisible(true);
+				categoryRegisterView.getBtnOK().requestFocus();
 			} 
 			
 		}
