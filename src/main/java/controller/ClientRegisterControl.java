@@ -16,7 +16,11 @@ import model.Client;
 import util.GraphicsUtil;
 import util.SystemConstUtil;
 import view.ClientRegisterView;
-
+/**
+ * 
+ * @author alvesmarcos
+ *
+ */
 public class ClientRegisterControl {
 	
 	// attributes
@@ -53,6 +57,7 @@ public class ClientRegisterControl {
 		clientRegisterView.getBtnLimpar().setText("Deletar");
 		clientRegisterView.getLblTitleClient().setText("Atualização de Clientes");
 		clientRegisterView.getLblTitleClient().setFont(new Font("DejaVu Sans", Font.PLAIN, 50));
+		
 		clientRegisterView.getTxtDataNasc().setText(client.getDateOfBirth());
 		clientRegisterView.getTxtEmail().setText(client.getEmail());
 		clientRegisterView.getTxtNome().setText(client.getName());
@@ -136,6 +141,7 @@ public class ClientRegisterControl {
 	
 	private void showPanelDialog(){
 		clientRegisterView.getPanelDialog().setVisible(true);
+		
 		clientRegisterView.getTxtDataNasc().setEnabled(false);
 		clientRegisterView.getTxtEmail().setEnabled(false);
 		clientRegisterView.getTxtNome().setEnabled(false);

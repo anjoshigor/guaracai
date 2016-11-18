@@ -34,6 +34,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 
 import controller.EmployeeRegisterControl;
+import model.Employee;
 /**
  * 
  * @author anjoshigor
@@ -43,14 +44,6 @@ import controller.EmployeeRegisterControl;
 public class EmployeeRegisterView extends JFrame {
 	
 	// attributes
-
-	public JButton getBtnOK() {
-		return btnOK;
-	}
-
-	public JPanel getPanelDialog() {
-		return panelDialog;
-	}
 
 	/**Outermost content**/
 	private JPanel contentPane;
@@ -168,6 +161,10 @@ public class EmployeeRegisterView extends JFrame {
 	private JButton btnOK;
 	private JPanel panelDialog;
 
+	/* DIALOG CONFIRM */
+	private JButton btnSim;
+	private JButton btnNao;
+	
 	// TODO controller
 	private EmployeeRegisterControl employeeRegisterControl;
 	
@@ -177,6 +174,12 @@ public class EmployeeRegisterView extends JFrame {
 		employeeRegisterControl = new EmployeeRegisterControl(this);
 	}
 	
+	// constructor
+	public EmployeeRegisterView(Employee employee) {
+		initEmployeeRegisterView();
+		employeeRegisterControl = new EmployeeRegisterControl(this, employee);
+	}
+		
 	// methods
 	private void initEmployeeRegisterView() {
 		final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -208,7 +211,7 @@ public class EmployeeRegisterView extends JFrame {
 		panelDialog = new JPanel();
 		panelDialog.setBackground(new Color(Integer.parseInt("827C7B", 16)));
 		panelDialog.setBorder(new LineBorder(Color.WHITE, 2));
-		panelDialog.setBounds(300, 190, 416, 225);
+		panelDialog.setBounds(186, 163, 416, 225);
 		panelDialog.setLayout(null);
 		panelDialog.setVisible(false);
 		panelForm.add(panelDialog);
@@ -221,7 +224,7 @@ public class EmployeeRegisterView extends JFrame {
 		lblMessagedialog = new JLabel("<html>Cadastro realizado<br>com sucesso!<html>");
 		lblMessagedialog.setForeground(Color.WHITE);
 		lblMessagedialog.setFont(new Font("DejaVu Sans", Font.PLAIN, 26));
-		lblMessagedialog.setBounds(151, 46, 208, 97);
+		lblMessagedialog.setBounds(151, 46, 240, 97);
 		panelDialog.add(lblMessagedialog);
 		
 		btnOK = new JButton("OK");
@@ -230,6 +233,24 @@ public class EmployeeRegisterView extends JFrame {
 		btnOK.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		btnOK.setBounds(160, 158, 105, 34);
 		panelDialog.add(btnOK);
+		
+		/** DIALOG MESSAGE CONFIRM **/
+		
+		btnNao = new JButton("NÃO");
+		btnNao.setBackground(Color.WHITE);
+		btnNao.setForeground(Color.DARK_GRAY);
+		btnNao.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
+		btnNao.setBounds(254, 158, 105, 34);
+		panelDialog.add(btnNao);
+		btnNao.setVisible(false);
+		
+		btnSim = new JButton("SIM");
+		btnSim.setBackground(Color.WHITE);
+		btnSim.setForeground(Color.DARK_GRAY);
+		btnSim.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
+		btnSim.setBounds(134, 158, 105, 34);
+		panelDialog.add(btnSim);
+		btnSim.setVisible(false);
 		
 		
 		/**Employee Icon**/
@@ -648,6 +669,14 @@ public class EmployeeRegisterView extends JFrame {
 	public JFormattedTextField getTxtDataNasc() {
 		return txtDataNasc;
 	}
+	
+	public JButton getBtnOK() {
+		return btnOK;
+	}
+
+	public JPanel getPanelDialog() {
+		return panelDialog;
+	}
 
 	public JTextField getTxtAgencia() {
 		return txtAgencia;
@@ -737,6 +766,25 @@ public class EmployeeRegisterView extends JFrame {
 	public JLabel getLblImageButtonVoltar() {
 		return lblImageButtonVoltar;
 	}
+	
+	public JButton getBtnNao() {
+		return btnNao;
+	}
 
+	public JButton getBtnSim() {
+		return btnSim;
+	}
+
+	public JLabel getLblIconMessage() {
+		return lblIconMessage;
+	}
+
+	public JLabel getLblMessagedialog() {
+		return lblMessagedialog;
+	}
+
+	public JLabel getLblTitleEmployee() {
+		return lblTitleEmployee;
+	}
 }
 	

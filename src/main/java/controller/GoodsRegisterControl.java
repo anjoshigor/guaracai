@@ -62,7 +62,7 @@ public class GoodsRegisterControl {
 		this.goods = goods;
 		goodsRegisterView.getBtnCadastrar().setText("Atualizar");
 		goodsRegisterView.getBtnLimpar().setText("Deletar");
-		goodsRegisterView.getLblTitleProduto().setText("Atualização de Categoria");
+		goodsRegisterView.getLblTitleProduto().setText("Atualização de Produtos");
 		goodsRegisterView.getLblTitleProduto().setFont(new Font("DejaVu Sans", Font.PLAIN, 50));
 		
 		goodsRegisterView.getTxtNome().setText(goods.getName());

@@ -15,6 +15,7 @@ import model.Goods;
 import util.SystemConstUtil;
 import view.CategoryRegisterView;
 import view.ClientRegisterView;
+import view.EmployeeRegisterView;
 import view.GoodsRegisterView;
 import view.SearchResultsView;
 /**
@@ -46,7 +47,7 @@ public class SearchResultsControl {
 							new GoodsRegisterView((Goods) o.get(indexRow)).setVisible(true);
 							break;
 						case SystemConstUtil.EMPLOYEE:
-						//	new EmployeeRegisterView((Employee) o.get(indexRow)).setVisible(true);
+							new EmployeeRegisterView((Employee) o.get(indexRow)).setVisible(true);
 							break;
 					}
 					searchResults.dispose();
