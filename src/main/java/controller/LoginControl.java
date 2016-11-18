@@ -67,11 +67,8 @@ public class LoginControl {
 	private int validateLogin() {
 		String user = loginView.getTxtUsuario().getText();
 		String password = String.valueOf(loginView.getPwdSenha().getPassword());
-		
-		if(user.equals("guaracai") && password.equals("123"))
-			return 1;
-		else
-			return employeeDAO.checkLogin(user, password);
+	
+		return employeeDAO.checkLogin(user, password);
 	}
 	
 	// inner class
