@@ -1,6 +1,7 @@
 package controller;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -9,10 +10,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.List;
 import java.util.Locale;
 
 import dao.ClientDAO;
 import model.Client;
+import util.GraphicsUtil;
+import util.SystemConstUtil;
 import view.ClientRegisterView;
 
 
@@ -23,6 +27,7 @@ public class ClientRegisterControl {
 	private Events events;
 	private ClientDAO clientDAO;
 	private Client client;	
+	private short call;
 
 	// constructor
 	public ClientRegisterControl(ClientRegisterView clientRegisterView){
@@ -30,6 +35,7 @@ public class ClientRegisterControl {
 		this.events = new Events();
 		this.clientDAO = new ClientDAO();
 		this.client = null;
+		this.call = SystemConstUtil.INSERT;
 		
 		// add listeners
 		clientRegisterView.getTxtSaldo().addFocusListener(events);
@@ -40,6 +46,26 @@ public class ClientRegisterControl {
 		clientRegisterView.getLblImageButtonVoltar().addMouseListener(events);
 	}
 	
+	public ClientRegisterControl(ClientRegisterView clientRegisterView, Client client){
+		this(clientRegisterView);
+		this.call = SystemConstUtil.UPDATE;
+		this.client = client;
+		clientRegisterView.getBtnCadastrar().setText("Atualizar");
+		clientRegisterView.getBtnLimpar().setText("Deletar");
+		clientRegisterView.getLblTitleClient().setText("Atualização de Clientes");
+		clientRegisterView.getLblTitleClient().setFont(new Font("DejaVu Sans", Font.PLAIN, 50));
+		clientRegisterView.getTxtDataNasc().setText(client.getDateOfBirth());
+		clientRegisterView.getTxtEmail().setText(client.getEmail());
+		clientRegisterView.getTxtNome().setText(client.getName());
+		clientRegisterView.getTxtTelefone().setText(client.getPhone());
+		
+		String mask = String.format("R$ %.2f", client.getBalance());
+		clientRegisterView.getTxtSaldo().setText(mask.replaceAll("\\.", ","));
+		
+		mask = String.format("R$ %.2f", client.getAmountSpent());
+		clientRegisterView.getTxtValorEmCompras().setText(mask.replaceAll("\\.", ","));
+	}
+	
 	private void cleanFields(){
 		clientRegisterView.getTxtDataNasc().setText("");
 		clientRegisterView.getTxtEmail().setText("");
@@ -47,11 +73,22 @@ public class ClientRegisterControl {
 		clientRegisterView.getTxtSaldo().setText("R$ 0,00");
 		clientRegisterView.getTxtTelefone().setText("");
 		clientRegisterView.getTxtValorEmCompras().setText("R$ 0,00");
+		
+		clientRegisterView.getTxtNome().requestFocus();
 	}
 	
-	private void insert() throws ParseException {
-		client = new Client();
-		
+	private boolean checkFields(){
+		if(clientRegisterView.getTxtNome().getText().isEmpty() ||
+		   clientRegisterView.getTxtEmail().getText().isEmpty() ||
+		   clientRegisterView.getTxtDataNasc().getText().isEmpty() ||
+		   clientRegisterView.getTxtTelefone().getText().isEmpty()){
+				
+			return false;
+		}
+		return true;	
+	}
+	
+	private void inflate(){
 		client.setName(clientRegisterView.getTxtNome().getText());
 		client.setPhone(clientRegisterView.getTxtTelefone().getText());
 		client.setDateOfBirth(clientRegisterView.getTxtDataNasc().getText());
@@ -64,18 +101,66 @@ public class ClientRegisterControl {
 	    String formattedBalance = clientRegisterView.getTxtSaldo().getText().replaceAll("R\\$ ", "");
 	    String formattedAmountSpent = clientRegisterView.getTxtValorEmCompras().getText().replaceAll("R\\$ ", "");
 	    
-	    if(!formattedBalance.equals("0,00"))
-			balance = nf.parse(formattedBalance).doubleValue();
-	    
-	    if(!formattedAmountSpent.equals("0,00"))
-	    	amountSpent = nf.parse(formattedAmountSpent).doubleValue();
-	    
+	    try {
+		    if(!formattedBalance.equals("0,00"))
+				balance = nf.parse(formattedBalance).doubleValue();
+		    if(!formattedAmountSpent.equals("0,00"))
+		    	amountSpent = nf.parse(formattedAmountSpent).doubleValue();
+	  
+	    } catch(ParseException ep){
+	    	ep.printStackTrace();
+	    }
 		client.setBalance(balance);
 		client.setAmountSpent(amountSpent);
+	}
 	
-		if(clientDAO.add(client)==1){
-			clientRegisterView.getPanelDialog().setVisible(true);
-		}
+	private void insert() {
+		client = new Client();
+		inflate();
+		
+		if(checkFields()){
+			clientDAO.add(client);
+			showPanelDialog();
+		} else 
+			clientRegisterView.getLblMessageError().setVisible(true);
+	}
+	
+	private void update() {
+		inflate();
+		
+		if(checkFields()){
+			showPanelDialog();
+			clientDAO.update(client);
+		} else 
+			clientRegisterView.getLblMessageError().setVisible(true);
+	}
+	
+	private void showPanelDialog(){
+		clientRegisterView.getPanelDialog().setVisible(true);
+		clientRegisterView.getTxtDataNasc().setEnabled(false);
+		clientRegisterView.getTxtEmail().setEnabled(false);
+		clientRegisterView.getTxtNome().setEnabled(false);
+		clientRegisterView.getTxtSaldo().setEnabled(false);
+		clientRegisterView.getTxtTelefone().setEnabled(false);
+		clientRegisterView.getTxtValorEmCompras().setEnabled(false);
+		
+		clientRegisterView.getBtnCadastrar().setEnabled(false);
+		clientRegisterView.getBtnLimpar().setEnabled(false);
+	}
+	
+	private void disposePanelDialog(){
+		clientRegisterView.getPanelDialog().setVisible(false);
+		clientRegisterView.getTxtDataNasc().setEnabled(true);
+		clientRegisterView.getTxtEmail().setEnabled(true);
+		clientRegisterView.getTxtNome().setEnabled(true);
+		clientRegisterView.getTxtSaldo().setEnabled(true);
+		clientRegisterView.getTxtTelefone().setEnabled(true);
+		clientRegisterView.getTxtValorEmCompras().setEnabled(true);
+		
+		clientRegisterView.getBtnCadastrar().setEnabled(true);
+		clientRegisterView.getBtnLimpar().setEnabled(true);
+		
+		cleanFields();
 	}
 	
 	// inner class
@@ -83,17 +168,31 @@ public class ClientRegisterControl {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == clientRegisterView.getBtnCadastrar()){
-				try {
+				if(call == SystemConstUtil.INSERT)
 					insert();
-				} catch (ParseException pe) {
-					pe.printStackTrace();
-				}
+				else if(call == SystemConstUtil.UPDATE)
+					update();
+			
 			} else if(e.getSource() == clientRegisterView.getBtnOK()){
-				clientRegisterView.getPanelDialog().setVisible(false);
-				cleanFields();
-			} if (e.getSource() == clientRegisterView.getBtnLimpar()){
-					cleanFields();
+				disposePanelDialog();
+				
+				if(call == SystemConstUtil.UPDATE)
+					clientRegisterView.dispose();
 			}
+			else if(e.getSource() == clientRegisterView.getBtnLimpar())
+				if(call == SystemConstUtil.INSERT)
+					cleanFields();
+				else if(call == SystemConstUtil.UPDATE){
+					clientDAO.delete(client);
+					clientRegisterView.getBtnOK().setVisible(false);
+					clientRegisterView.getBtnSim().setVisible(true);
+					clientRegisterView.getBtnNao().setVisible(true);
+					
+					clientRegisterView.getLblMessagedialog().setText("<html>Você realmente<br>excluir registro ?<html>");
+					clientRegisterView.getLblIconMessage().setIcon(GraphicsUtil.adjustImage("/drawable/warning.png", 
+																	clientRegisterView.getLblIconMessage().getSize()));
+					showPanelDialog();
+				}
 		}
 		
 		public void mouseClicked(MouseEvent e) {

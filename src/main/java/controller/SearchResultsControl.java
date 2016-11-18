@@ -2,6 +2,14 @@ package controller;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import model.Client;
+import view.ClientRegisterView;
 import view.SearchResultsView;
 /**
  * 
@@ -10,12 +18,24 @@ import view.SearchResultsView;
  */
 public class SearchResultsControl {
 	
-	//private SearchResultsView searchResultsView;
-	
 	public SearchResultsControl(SearchResultsView searchResultsView){
-		SearchResultsView searchResult = searchResultsView;
+		SearchResultsView searchResults = searchResultsView;
 		
-		searchResult.getLblImageButtonVoltar().addMouseListener(new MouseListener() {
+		searchResultsView.getResultTable().getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			@Override
+		    public void valueChanged(ListSelectionEvent event) {
+		        int indexRow = searchResultsView.getResultTable().getSelectedRow();
+		        
+				if (indexRow > -1) {
+					List<Object> o = (List<Object>) searchResults.getObjectList();
+					new ClientRegisterView((Client) o.get(indexRow)).setVisible(true);
+					
+					searchResults.dispose();
+		        }
+		    }
+		});
+		
+		searchResults.getLblImageButtonVoltar().addMouseListener(new MouseListener() {
 			@Override
 			public void mouseReleased(MouseEvent e) { }
 			

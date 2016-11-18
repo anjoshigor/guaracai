@@ -2,7 +2,9 @@ package view;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JFrame;
@@ -49,7 +51,7 @@ public class SearchResultsView extends JFrame {
 	/**Back Button**/
 	private JLabel lblVoltar;
 	private JLabel lblImageButtonVoltar;
-	
+	private List<?> objectList;
 	
 	private SearchResultsControl searchResultsControl;
 	
@@ -153,6 +155,7 @@ public class SearchResultsView extends JFrame {
 		rows.add("tamanho");
 		
 		resultTable = new JTable(fakeData,rows);
+		resultTable.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		JTableHeader tableHeader = resultTable.getTableHeader();
 		TableColumn coluna0 = resultTable.getColumnModel().getColumn(0);
 		coluna0.setMaxWidth(50);
@@ -190,7 +193,16 @@ public class SearchResultsView extends JFrame {
 		contentPane.add(lblImageButtonVoltar);
 		
 	}
-
+	
+	public void setObjectList(List<?> l){
+		objectList = l;
+	}
+	
+	public Object getObjectList(){
+		return objectList;
+	}
+	
+	
 	public JTable getResultTable() {
 		return resultTable;
 	}

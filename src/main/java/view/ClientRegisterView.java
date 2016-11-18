@@ -7,6 +7,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Locale;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -21,6 +22,8 @@ import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
 import controller.ClientRegisterControl;
+import model.Client;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -105,12 +108,21 @@ public class ClientRegisterView extends JFrame {
 	private JButton btnOK;
 	private JPanel panelDialog;
 
+	/* DIALOG CONFIRM */
+	private JButton btnSim;
+	private JButton btnNao;
+	
 	private ClientRegisterControl clientRegisterControl;
 	
 	// constructor
 	public ClientRegisterView() {
 		initClientRegisterView();
 		clientRegisterControl = new ClientRegisterControl(this);
+	}
+	
+	public ClientRegisterView(Client client){
+		initClientRegisterView();
+		clientRegisterControl = new ClientRegisterControl(this, client);
 	}
 	
 	// methods
@@ -153,7 +165,7 @@ public class ClientRegisterView extends JFrame {
 		panelDialog = new JPanel();
 		panelDialog.setBackground(new Color(Integer.parseInt("827C7B", 16)));
 		panelDialog.setBorder(new LineBorder(Color.WHITE, 2));
-		panelDialog.setBounds(300, 190, 416, 225);
+		panelDialog.setBounds(186, 163, 416, 225);
 		panelDialog.setLayout(null);
 		panelDialog.setVisible(false);
 		panelForm.add(panelDialog);
@@ -166,7 +178,7 @@ public class ClientRegisterView extends JFrame {
 		lblMessagedialog = new JLabel("<html>Cadastro realizado<br>com sucesso!<html>");
 		lblMessagedialog.setForeground(Color.WHITE);
 		lblMessagedialog.setFont(new Font("DejaVu Sans", Font.PLAIN, 26));
-		lblMessagedialog.setBounds(151, 46, 208, 97);
+		lblMessagedialog.setBounds(151, 46, 240, 97);
 		panelDialog.add(lblMessagedialog);
 		
 		btnOK = new JButton("OK");
@@ -175,6 +187,24 @@ public class ClientRegisterView extends JFrame {
 		btnOK.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		btnOK.setBounds(160, 158, 105, 34);
 		panelDialog.add(btnOK);
+		
+	/** DIALOG MESSAGE CONFIRM **/
+		
+		btnNao = new JButton("NÃO");
+		btnNao.setBackground(Color.WHITE);
+		btnNao.setForeground(Color.DARK_GRAY);
+		btnNao.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
+		btnNao.setBounds(254, 158, 105, 34);
+		panelDialog.add(btnNao);
+		btnNao.setVisible(false);
+		
+		btnSim = new JButton("SIM");
+		btnSim.setBackground(Color.WHITE);
+		btnSim.setForeground(Color.DARK_GRAY);
+		btnSim.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
+		btnSim.setBounds(134, 158, 105, 34);
+		panelDialog.add(btnSim);
+		btnSim.setVisible(false);
 		
 		/**Client Icon**/
 		lblIconClient = new JLabel();
@@ -192,7 +222,7 @@ public class ClientRegisterView extends JFrame {
 		panelForm.add(lblTitleClient);
 		
 		/**Name field**/
-		lblNome = new JLabel("nome");
+		lblNome = new JLabel("nome *");
 		lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		lblNome.setForeground(Color.WHITE);
 		lblNome.setBounds(30, 200, 112, 33);
@@ -261,7 +291,7 @@ public class ClientRegisterView extends JFrame {
 		
 		/**Birthday Field**/
 		
-		lblDataNasc = new JLabel("data nasc");
+		lblDataNasc = new JLabel("data nasc *");
 		lblDataNasc.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		lblDataNasc.setForeground(Color.WHITE);
 		lblDataNasc.setBounds(370, 275, 125, 33);
@@ -426,6 +456,27 @@ public class ClientRegisterView extends JFrame {
 	public JButton getBtnLimpar() {
 		return btnLimpar;
 	}
+
+	public JLabel getLblTitleClient() {
+		return lblTitleClient;
+	}
+	
+	public JButton getBtnNao() {
+		return btnNao;
+	}
+
+	public JButton getBtnSim() {
+		return btnSim;
+	}
+
+	public JLabel getLblIconMessage() {
+		return lblIconMessage;
+	}
+
+	public JLabel getLblMessagedialog() {
+		return lblMessagedialog;
+	}
+
 
 }
 	

@@ -58,12 +58,21 @@ public class SearchControl {
 		searchView.getLblButtonPesquisar().addMouseListener(events);
 		searchView.getLblImageButtonVoltar().addMouseListener(events);
 	}
-	
+
 	private void seek(){
 		SearchResultsView searchResultsView = new SearchResultsView();
 		comboxField = String.valueOf(searchView.getComboCampo().getSelectedItem());
 		
-		DefaultTableModel model = (DefaultTableModel) searchResultsView.getResultTable().getModel();
+		DefaultTableModel model = new DefaultTableModel(null, new String[]{"cod", "nome do produto", "tamanho"}) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+			       return false;
+			  }
+		};			
+		searchResultsView.getResultTable().setModel(model);
+		searchResultsView.getResultTable().getColumnModel().getColumn(0).setMaxWidth(50);
+		searchResultsView.getResultTable().getColumnModel().getColumn(0).setPreferredWidth(50);
+		
 		model.setRowCount(0);
 		
 		searchResultsView.setVisible(true);
@@ -81,7 +90,7 @@ public class SearchControl {
 			for(int i = 0; i < size;  i++)	
 				model.addRow(new Object[]{" "+categoryList.get(i).getId()," "+ categoryList.get(i).getName()," "+ categoryList.get(i).getDescription()});
 			
-			
+			searchResultsView.setObjectList(categoryList);
 			
 		} else if(comboxFilter.equals("cliente")){
 			searchResultsView.getResultTable().getColumnModel().getColumn(0).setHeaderValue("id");
@@ -107,6 +116,7 @@ public class SearchControl {
 			for(int i = 0; i < size;  i++)	
 				model.addRow(new Object[]{" "+clientList.get(i).getId()," "+ clientList.get(i).getName()," "+ clientList.get(i).getPhone()});
 			
+			searchResultsView.setObjectList(clientList);
 				
 		} else if(comboxFilter.equals("funcionário")){
 			searchResultsView.getResultTable().getColumnModel().getColumn(0).setHeaderValue("id");
@@ -141,6 +151,8 @@ public class SearchControl {
 			for(int i = 0; i < size;  i++)	
 				model.addRow(new Object[]{" "+employeeList.get(i).getId()," "+ employeeList.get(i).getName()," "+ employeeList.get(i).getCpf()});
 			
+			searchResultsView.setObjectList(employeeList);
+			
 		} else if(comboxFilter.equals("produto")){
 			List<Goods> goodsList = null;
 
@@ -165,6 +177,8 @@ public class SearchControl {
 		
 			for(int i = 0; i < size;  i++)	
 				model.addRow(new Object[]{" "+goodsList.get(i).getId()," "+ goodsList.get(i).getName()," "+ goodsList.get(i).getSize()});
+			
+			searchResultsView.setObjectList(goodsList);
 		}	
 	}
 	

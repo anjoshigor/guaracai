@@ -8,7 +8,6 @@ public abstract class Person {
 	protected String email;
 
 	public Person(){
-		this.id = 0;
 		this.name = "";
 		this.dateOfBirth = "";
 		this.phone = "";

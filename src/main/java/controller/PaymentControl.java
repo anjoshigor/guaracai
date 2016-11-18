@@ -125,9 +125,9 @@ public class PaymentControl {
 			txtResto.setText("0,00");
 			txtRecebido.setText("0,00");
 		} else {
-			paymentView.dispose();
-			saleControl.getSaleView().dispose();
 			new SaleView().setVisible(true);
+			saleControl.getSaleView().dispose();
+			paymentView.dispose();
 		}
 	}
 	

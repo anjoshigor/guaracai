@@ -33,7 +33,7 @@ public class ClientDAO extends BasicDAO {
 			          .set(TB_CLIENT.PHONE, client.getPhone())
 			          .set(TB_CLIENT.NAME, client.getName())
 			          .set(TB_CLIENT.EMAIL, client.getEmail())
-			          .set(TB_CLIENT.AMOUNT_SPENT, client.getBalance())
+			          .set(TB_CLIENT.AMOUNT_SPENT, client.getAmountSpent())
 			          .set(TB_CLIENT.BALANCE, client.getBalance())
 			          .execute();
 	}
@@ -135,7 +135,7 @@ public class ClientDAO extends BasicDAO {
 					  .set(TB_CLIENT.PHONE, client.getPhone())
 					  .set(TB_CLIENT.NAME, client.getName())
 					  .set(TB_CLIENT.EMAIL, client.getEmail())
-					  .set(TB_CLIENT.AMOUNT_SPENT, client.getBalance())
+					  .set(TB_CLIENT.AMOUNT_SPENT, client.getAmountSpent())
 		              .set(TB_CLIENT.BALANCE, client.getBalance()) 
 			          .where(TB_CLIENT.ID.equal(client.getId()))
 			          .execute();
