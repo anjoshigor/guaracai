@@ -320,4 +320,8 @@ public class MenuView extends JFrame {
 	public JLabel getLblCloseMessage() {
 		return lblCloseMessage;
 	}
+
+	public JPanel getContentPane() {
+		return contentPane;
+	}
 }

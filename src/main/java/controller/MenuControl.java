@@ -7,6 +7,11 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
+
 import view.ConfigView;
 import view.MenuView;
 import view.RegisterView;
@@ -23,13 +28,24 @@ public class MenuControl {
 	// attributes
 	private MenuView menuView;
 	private Events events;
-	
+	private static final int IFW = JComponent.WHEN_IN_FOCUSED_WINDOW;
 	// constructor
 	public MenuControl(MenuView menuView){
 		this.menuView = menuView;
 		this.events = new Events();
 		
-		menuView.addKeyListener(events);
+		this.menuView.getContentPane().getInputMap(IFW).put(KeyStroke.getKeyStroke("F1"),"cadastro");
+		this.menuView.getContentPane().getInputMap(IFW).put(KeyStroke.getKeyStroke("F2"),"relatorio");
+		this.menuView.getContentPane().getInputMap(IFW).put(KeyStroke.getKeyStroke("F3"),"consulta");
+		this.menuView.getContentPane().getInputMap(IFW).put(KeyStroke.getKeyStroke("F4"),"configuracoes");
+		this.menuView.getContentPane().getInputMap(IFW).put(KeyStroke.getKeyStroke("F5"),"venda");
+		
+		this.menuView.getContentPane().getActionMap().put("cadastro", cadastroAction);
+		this.menuView.getContentPane().getActionMap().put("relatorio", relatorioAction);
+		this.menuView.getContentPane().getActionMap().put("consulta", consultaAction);
+		this.menuView.getContentPane().getActionMap().put("configuracoes", configuracoesAction);
+		this.menuView.getContentPane().getActionMap().put("venda", vendaAction);
+
 		
 		menuView.getLblImageButtonCadastro().addMouseListener(events);
 		menuView.getLblImageButtonRelatorio().addMouseListener(events);
@@ -42,7 +58,39 @@ public class MenuControl {
 		menuView.getBtnSim().addActionListener(events);
 	}
 	
-	// methods
+/**ACTIONS**/
+	
+	Action cadastroAction = new AbstractAction() {
+	    public void actionPerformed(ActionEvent e) {
+	    	new RegisterView().setVisible(true);
+	    }
+	};
+	
+	Action relatorioAction = new AbstractAction() {
+	    public void actionPerformed(ActionEvent e) {
+	    	//unimplemented
+	    }
+	};
+	
+	Action consultaAction = new AbstractAction() {
+	    public void actionPerformed(ActionEvent e) {
+	    	new SearchView().setVisible(true);
+	    }
+	};
+	
+	Action configuracoesAction = new AbstractAction() {
+	    public void actionPerformed(ActionEvent e) {
+	    	new ConfigView().setVisible(true);
+	    }
+	};
+	
+	Action vendaAction = new AbstractAction() {
+	    public void actionPerformed(ActionEvent e) {
+	    	new SaleView().setVisible(true);
+	    }
+	};
+	
+	// methods	
 	private void effectSelected(boolean bcad, boolean breal, boolean bcons, boolean bconfig, boolean bvend){
 		menuView.getLblImageButtonCadastroOut().setVisible(bcad);
 		menuView.getLblImageButtonRelatorioOut().setVisible(breal);
@@ -52,7 +100,7 @@ public class MenuControl {
 	}
 	
 	// inner class
-	private class Events implements ActionListener, KeyListener, MouseListener {
+	private class Events implements ActionListener, MouseListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == menuView.getBtnNao())
@@ -61,18 +109,6 @@ public class MenuControl {
 			else if(e.getSource() == menuView.getBtnSim())
 				menuView.dispose();
 		}
-		@Override
-		public void keyTyped(KeyEvent e) { /* unimplemented method */ }
-		
-		@Override
-		public void keyPressed(KeyEvent e) {
-			if(e.getID() == KeyEvent.VK_1){
-				new RegisterView().setVisible(true);
-			}
-		}
-		
-		@Override
-		public void keyReleased(KeyEvent e) { /* unimplemented method */ }
 		
 		@Override
 		public void mouseClicked(MouseEvent e) {
