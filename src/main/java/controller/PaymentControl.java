@@ -25,7 +25,7 @@ public class PaymentControl {
 	private Events events;
 	private double total;
 	private JTextField txtTroco, txtResto, txtTotal, txtRecebido;
-	 private static final int IFW = JComponent.WHEN_IN_FOCUSED_WINDOW;
+	private static final int IFW = JComponent.WHEN_IN_FOCUSED_WINDOW;
 	
 	public PaymentControl(PaymentView paymentView, SaleControl saleControl){
 		this.paymentView = paymentView;
