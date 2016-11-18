@@ -183,7 +183,7 @@ public class GoodsRegisterView extends JFrame {
 		panelForm.add(lblTitleProduto);
 		
 		/**Name field**/
-		lblNome = new JLabel("nome");
+		lblNome = new JLabel("nome *");
 		lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		lblNome.setForeground(Color.WHITE);
 		lblNome.setBounds(30, 200, 112, 33);
@@ -203,7 +203,7 @@ public class GoodsRegisterView extends JFrame {
 		
 		
 		/**Code field**/
-		lblCod = new JLabel("cod");
+		lblCod = new JLabel("cod *");
 		lblCod.setBounds(30, 238, 50, 33);
 		lblCod.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		lblCod.setForeground(Color.WHITE);
@@ -222,7 +222,7 @@ public class GoodsRegisterView extends JFrame {
 		panelForm.add(txtCod);
 		
 		/**Category Field**/
-		lblCategoria = new JLabel("categoria");
+		lblCategoria = new JLabel("categoria *");
 		lblCategoria.setBounds(206, 238, 140, 33);
 		lblCategoria.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		lblCategoria.setForeground(Color.WHITE);
@@ -242,7 +242,7 @@ public class GoodsRegisterView extends JFrame {
 		panelForm.add(comboCategoria);
 		
 		/**Value Field**/
-		lblValor = new JLabel("valor");
+		lblValor = new JLabel("valor *");
 		lblValor.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		lblValor.setForeground(Color.WHITE);
 		lblValor.setBounds(30, 275, 112, 33);
@@ -262,7 +262,7 @@ public class GoodsRegisterView extends JFrame {
 		
 		
 		/**Size Field**/
-		lblTamanho = new JLabel("tamanho");
+		lblTamanho = new JLabel("tamanho *");
 		lblTamanho.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		lblTamanho.setForeground(Color.WHITE);
 		lblTamanho.setBounds(352, 275, 125, 33);

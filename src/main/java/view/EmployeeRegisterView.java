@@ -248,7 +248,7 @@ public class EmployeeRegisterView extends JFrame {
 		panelForm.add(lblTitleEmployee);
 		
 		/**Name field**/
-		lblNome = new JLabel("nome");
+		lblNome = new JLabel("nome *");
 		lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		lblNome.setForeground(Color.WHITE);
 		lblNome.setBounds(30, 167, 112, 33);
@@ -286,7 +286,7 @@ public class EmployeeRegisterView extends JFrame {
 		panelForm.add(txtEmail);
 		
 		/**phone Field**/
-		lblTelefone = new JLabel("telefone");
+		lblTelefone = new JLabel("telefone *");
 		lblTelefone.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		lblTelefone.setForeground(Color.WHITE);
 		lblTelefone.setBounds(30, 242, 125, 33);
@@ -316,7 +316,7 @@ public class EmployeeRegisterView extends JFrame {
 		
 		/**Birthday Field**/
 		
-		lblDataNasc = new JLabel("data nasc");
+		lblDataNasc = new JLabel("data nasc *");
 		lblDataNasc.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		lblDataNasc.setForeground(Color.WHITE);
 		lblDataNasc.setBounds(370, 242, 125, 33);
@@ -384,7 +384,7 @@ public class EmployeeRegisterView extends JFrame {
 		panelForm.add(txtConta);
 		
 		/**CPF Field**/
-		lblCPF = new JLabel("CPF");
+		lblCPF = new JLabel("CPF *");
 		lblCPF.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		lblCPF.setForeground(Color.WHITE);
 		lblCPF.setBounds(30, 316, 100, 33);
@@ -410,7 +410,7 @@ public class EmployeeRegisterView extends JFrame {
 		panelForm.add(txtCPF);
 		
 		/**Employee Type Field**/
-		lblTipoFunc = new JLabel("tipo func");
+		lblTipoFunc = new JLabel("tipo func *");
 		lblTipoFunc.setBounds(335, 316, 140, 33);
 		lblTipoFunc.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		lblTipoFunc.setForeground(Color.WHITE);
@@ -555,7 +555,7 @@ public class EmployeeRegisterView extends JFrame {
 
 
 		/** Login Field**/
-		lblLogin = new JLabel("login");
+		lblLogin = new JLabel("login *");
 		lblLogin.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		lblLogin.setForeground(Color.WHITE);
 		lblLogin.setBounds(30, 464, 125, 33);
@@ -575,7 +575,7 @@ public class EmployeeRegisterView extends JFrame {
 		panelForm.add(txtLogin);
 		
 		/**Password Field**/
-		lblSenha = new JLabel("senha");
+		lblSenha = new JLabel("senha *");
 		lblSenha.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		lblSenha.setForeground(Color.WHITE);
 		lblSenha.setBounds(370, 464, 125, 33);
@@ -737,7 +737,6 @@ public class EmployeeRegisterView extends JFrame {
 	public JLabel getLblImageButtonVoltar() {
 		return lblImageButtonVoltar;
 	}
-
 
 }
 	
