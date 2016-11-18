@@ -10,15 +10,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.util.List;
 import java.util.Locale;
-
 import dao.ClientDAO;
 import model.Client;
 import util.GraphicsUtil;
 import util.SystemConstUtil;
 import view.ClientRegisterView;
-
 
 public class ClientRegisterControl {
 	
@@ -38,6 +35,8 @@ public class ClientRegisterControl {
 		this.call = SystemConstUtil.INSERT;
 		
 		// add listeners
+		clientRegisterView.getBtnSim().addActionListener(events);
+		clientRegisterView.getBtnNao().addActionListener(events);
 		clientRegisterView.getTxtSaldo().addFocusListener(events);
 		clientRegisterView.getTxtValorEmCompras().addFocusListener(events);
 		clientRegisterView.getBtnCadastrar().addActionListener(events);
@@ -179,20 +178,26 @@ public class ClientRegisterControl {
 				if(call == SystemConstUtil.UPDATE)
 					clientRegisterView.dispose();
 			}
-			else if(e.getSource() == clientRegisterView.getBtnLimpar())
+			else if(e.getSource() == clientRegisterView.getBtnLimpar()){
 				if(call == SystemConstUtil.INSERT)
 					cleanFields();
 				else if(call == SystemConstUtil.UPDATE){
-					clientDAO.delete(client);
 					clientRegisterView.getBtnOK().setVisible(false);
 					clientRegisterView.getBtnSim().setVisible(true);
 					clientRegisterView.getBtnNao().setVisible(true);
 					
-					clientRegisterView.getLblMessagedialog().setText("<html>Você realmente<br>excluir registro ?<html>");
+					clientRegisterView.getLblMessagedialog().setText("<html>Deseja realmente<br>excluir registro ?<html>");
 					clientRegisterView.getLblIconMessage().setIcon(GraphicsUtil.adjustImage("/drawable/warning.png", 
 																	clientRegisterView.getLblIconMessage().getSize()));
 					showPanelDialog();
 				}
+			} else if(e.getSource() == clientRegisterView.getBtnSim()){
+				clientDAO.delete(client);
+				clientRegisterView.dispose();
+			
+			} else if(e.getSource() == clientRegisterView.getBtnNao()){
+				clientRegisterView.dispose();
+			}
 		}
 		
 		public void mouseClicked(MouseEvent e) {
