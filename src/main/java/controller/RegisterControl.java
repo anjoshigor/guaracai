@@ -95,9 +95,7 @@ public class RegisterControl {
 					registerView.dispose();
 				}
 				if(e.getSource() == registerView.getLblImageButtonProduto() ){
-					GoodsRegisterView cadastro = new GoodsRegisterView();
-					cadastro.setWhoCalled(1);
-					cadastro.setVisible(true);
+					new GoodsRegisterView().setVisible(true);
 					registerView.dispose();
 				}
 				if(e.getSource() == registerView.getLblImageButtonCliente() ){

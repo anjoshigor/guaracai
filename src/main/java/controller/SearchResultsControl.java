@@ -10,9 +10,12 @@ import javax.swing.event.ListSelectionListener;
 
 import model.Category;
 import model.Client;
+import model.Employee;
+import model.Goods;
 import util.SystemConstUtil;
 import view.CategoryRegisterView;
 import view.ClientRegisterView;
+import view.GoodsRegisterView;
 import view.SearchResultsView;
 /**
  * 
@@ -40,10 +43,10 @@ public class SearchResultsControl {
 							new CategoryRegisterView((Category) o.get(indexRow)).setVisible(true);
 							break;
 						case SystemConstUtil.GOODS:
-							new ClientRegisterView((Client) o.get(indexRow)).setVisible(true);
+							new GoodsRegisterView((Goods) o.get(indexRow)).setVisible(true);
 							break;
 						case SystemConstUtil.EMPLOYEE:
-							new ClientRegisterView((Client) o.get(indexRow)).setVisible(true);
+						//	new EmployeeRegisterView((Employee) o.get(indexRow)).setVisible(true);
 							break;
 					}
 					searchResults.dispose();

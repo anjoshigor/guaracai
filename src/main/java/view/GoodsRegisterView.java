@@ -15,6 +15,7 @@ import javax.swing.border.LineBorder;
 import controller.GoodsRegisterControl;
 import controller.LoginControl;
 import model.Category;
+import model.Goods;
 
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -102,18 +103,24 @@ public class GoodsRegisterView extends JFrame {
 	private JButton btnOK;
 	private JPanel panelDialog;
 	
+	/* DIALOG CONFIRM */
+	private JButton btnSim;
+	private JButton btnNao;
 	
 	//controller
 	private GoodsRegisterControl goodsRegisterControl;
-	
-	//Shared Variable
-	private int whoCalled;
 	
 	
 	// constructor
 	public GoodsRegisterView() {
 		initGoodsView();
 		goodsRegisterControl = new GoodsRegisterControl(this);
+	}
+
+	// constructor
+	public GoodsRegisterView(Goods goods) {
+		initGoodsView();
+		goodsRegisterControl = new GoodsRegisterControl(this, goods);
 	}
 	
 	// methods
@@ -143,7 +150,7 @@ public class GoodsRegisterView extends JFrame {
 		panelDialog = new JPanel();
 		panelDialog.setBackground(new Color(Integer.parseInt("827C7B", 16)));
 		panelDialog.setBorder(new LineBorder(Color.WHITE, 2));
-		panelDialog.setBounds(300, 190, 416, 225);
+		panelDialog.setBounds(186, 163, 416, 225);
 		panelDialog.setLayout(null);
 		panelDialog.setVisible(false);
 		panelForm.add(panelDialog);
@@ -156,7 +163,7 @@ public class GoodsRegisterView extends JFrame {
 		lblMessagedialog = new JLabel("<html>Cadastro realizado<br>com sucesso!<html>");
 		lblMessagedialog.setForeground(Color.WHITE);
 		lblMessagedialog.setFont(new Font("DejaVu Sans", Font.PLAIN, 26));
-		lblMessagedialog.setBounds(151, 46, 208, 97);
+		lblMessagedialog.setBounds(151, 46, 240, 97);
 		panelDialog.add(lblMessagedialog);
 		
 		btnOK = new JButton("OK");
@@ -165,7 +172,24 @@ public class GoodsRegisterView extends JFrame {
 		btnOK.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		btnOK.setBounds(160, 158, 105, 34);
 		panelDialog.add(btnOK);
-		
+
+		/** DIALOG MESSAGE CONFIRM **/
+
+		btnNao = new JButton("NÃO");
+		btnNao.setBackground(Color.WHITE);
+		btnNao.setForeground(Color.DARK_GRAY);
+		btnNao.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
+		btnNao.setBounds(254, 158, 105, 34);
+		panelDialog.add(btnNao);
+		btnNao.setVisible(false);
+
+		btnSim = new JButton("SIM");
+		btnSim.setBackground(Color.WHITE);
+		btnSim.setForeground(Color.DARK_GRAY);
+		btnSim.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
+		btnSim.setBounds(134, 158, 105, 34);
+		panelDialog.add(btnSim);
+		btnSim.setVisible(false);
 		
 		/**Category Icon**/
 		lblIconProduto = new JLabel();
@@ -204,21 +228,21 @@ public class GoodsRegisterView extends JFrame {
 		
 		/**Code field**/
 		lblCod = new JLabel("cod *");
-		lblCod.setBounds(30, 238, 50, 33);
+		lblCod.setBounds(30, 238, 67, 33);
 		lblCod.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		lblCod.setForeground(Color.WHITE);
 		lblCod.setHorizontalAlignment(SwingConstants.CENTER);
 		panelForm.add(lblCod);
 		
 		panelCod = new JPanel(null);
-		panelCod.setBounds(30, 238, 50, 33);
+		panelCod.setBounds(30, 238, 67, 33);
 		panelCod.setBackground((new Color(Integer.parseInt("BD7DF5", 16))));
 		panelForm.add(panelCod);
 		
 		txtCod = new JTextField();
 		txtCod.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		txtCod.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-		txtCod.setBounds(81, 238, 120, 33);
+		txtCod.setBounds(99, 238, 103, 33);
 		panelForm.add(txtCod);
 		
 		/**Category Field**/
@@ -254,10 +278,11 @@ public class GoodsRegisterView extends JFrame {
 		panelValor.setBackground((new Color(Integer.parseInt("BD7DF5", 16))));
 		panelForm.add(panelValor);
 		
-		txtValor = new JTextField();
+		txtValor = new JTextField("R$ 0,00");
 		txtValor.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		txtValor.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		txtValor.setBounds(143, 275, 205, 33);
+		txtValor.setForeground(Color.GRAY);
 		panelForm.add(txtValor);
 		
 		
@@ -397,20 +422,24 @@ public class GoodsRegisterView extends JFrame {
 		return lblImageButtonVoltar;
 	}
 
-	public int getWhoCalled() {
-		return whoCalled;
-	}
-
-	public void setWhoCalled(int whoCalled) {
-		this.whoCalled = whoCalled;
-	}
-
-	public void setLblTitleProduto(JLabel lblTitleProduto) {
-		this.lblTitleProduto = lblTitleProduto;
-	}
-
 	public JLabel getLblTitleProduto() {
 		return lblTitleProduto;
+	}
+	
+	public JButton getBtnNao() {
+		return btnNao;
+	}
+
+	public JButton getBtnSim() {
+		return btnSim;
+	}
+
+	public JLabel getLblIconMessage() {
+		return lblIconMessage;
+	}
+
+	public JLabel getLblMessagedialog() {
+		return lblMessagedialog;
 	}
 
 }

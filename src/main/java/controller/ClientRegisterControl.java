@@ -149,6 +149,8 @@ public class ClientRegisterControl {
 	
 	private void disposePanelDialog(){
 		clientRegisterView.getPanelDialog().setVisible(false);
+		clientRegisterView.getTxtNome().requestFocus();
+		
 		clientRegisterView.getTxtDataNasc().setEnabled(true);
 		clientRegisterView.getTxtEmail().setEnabled(true);
 		clientRegisterView.getTxtNome().setEnabled(true);

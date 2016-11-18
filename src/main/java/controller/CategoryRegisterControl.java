@@ -138,6 +138,8 @@ public class CategoryRegisterControl {
 	
 	private void disposePanelDialog(){
 		categoryRegisterView.getPanelDialog().setVisible(false);
+		categoryRegisterView.getTxtNome().requestFocus();
+		
 		
 		categoryRegisterView.getTxtDescricao().setEnabled(true);
 		categoryRegisterView.getTxtNome().setEnabled(true);

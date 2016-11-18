@@ -4,6 +4,7 @@
 package controller;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -14,14 +15,12 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Locale;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-
 import dao.CategoryDAO;
 import dao.GoodsDAO;
 import model.Category;
 import model.Goods;
+import util.GraphicsUtil;
+import util.SystemConstUtil;
 import view.GoodsRegisterView;
 
 
@@ -36,6 +35,7 @@ public class GoodsRegisterControl {
 	private GoodsDAO goodsDAO;
 	private CategoryDAO categoryDAO;
 	private Goods goods;
+	private short call;
 	
 	public GoodsRegisterControl(GoodsRegisterView goodsRegisterView) {
 		this.goodsRegisterView = goodsRegisterView;
@@ -43,6 +43,7 @@ public class GoodsRegisterControl {
 		this.goodsDAO = new GoodsDAO();
 		this.categoryDAO = new CategoryDAO();
 		this.goods = null;
+		this.call = SystemConstUtil.INSERT;
 		initComboxCategory();
 		
 		//add listeners
@@ -51,32 +52,28 @@ public class GoodsRegisterControl {
 		goodsRegisterView.getBtnLimpar().addActionListener(events);
 		goodsRegisterView.getLblImageButtonVoltar().addMouseListener(events);
 		goodsRegisterView.getBtnOK().addActionListener(events);
+		goodsRegisterView.getBtnNao().addActionListener(events);
+		goodsRegisterView.getBtnSim().addActionListener(events);
 	}
 	
 	public GoodsRegisterControl(GoodsRegisterView goodsRegisterView, Goods goods) {
-		this.goodsRegisterView = goodsRegisterView;
-		this.events = new Events();
-		this.goodsDAO = new GoodsDAO();
-		this.categoryDAO = new CategoryDAO();
+		this(goodsRegisterView);
+		this.call = SystemConstUtil.UPDATE;
 		this.goods = goods;
-		initComboxCategory();
+		goodsRegisterView.getBtnCadastrar().setText("Atualizar");
+		goodsRegisterView.getBtnLimpar().setText("Deletar");
+		goodsRegisterView.getLblTitleProduto().setText("Atualização de Categoria");
+		goodsRegisterView.getLblTitleProduto().setFont(new Font("DejaVu Sans", Font.PLAIN, 50));
 		
-		if(goodsRegisterView.getWhoCalled() == 0){
-			JLabel lblTitleUpdateProduto =  goodsRegisterView.getLblTitleProduto();
-			lblTitleUpdateProduto.setText("Atualização de Produtos");
-			
-			JButton btnAtualizar= goodsRegisterView.getBtnCadastrar();
-			btnAtualizar.setText("Atualizar");
-			
-			JButton btnDeletar = goodsRegisterView.getBtnLimpar();
-			btnDeletar.setText("Deletar");
-		}
+		goodsRegisterView.getTxtNome().setText(goods.getName());
+		goodsRegisterView.getTxtCod().setText(String.valueOf(goods.getCode()));
+		goodsRegisterView.getComboCategoria().setSelectedItem(categoryDAO.findById(goods.getCategoryId()).getName());
 		
-		//add listeners
-		goodsRegisterView.getTxtValor().addFocusListener(events);
-		goodsRegisterView.getBtnCadastrar().addActionListener(events);
-		goodsRegisterView.getBtnLimpar().addActionListener(events);
-		goodsRegisterView.getLblImageButtonVoltar().addMouseListener(events);
+		String mask = String.format("R$ %.2f", goods.getPrice());
+		goodsRegisterView.getTxtValor().setText(mask.replaceAll("\\.", ","));
+		
+		goodsRegisterView.getTxtTamanho().setText(goods.getSize());
+		goodsRegisterView.getTxtDescricao().setText(goods.getDescription());
 	}
 	
 	private void cleanFields(){
@@ -88,7 +85,7 @@ public class GoodsRegisterControl {
 		goodsRegisterView.getTxtDescricao().setText("");
 	}
 	
-private boolean checkFields(){
+	private boolean checkFields(){
 		
 		if(goodsRegisterView.getTxtNome().getText().isEmpty() ||
 		   goodsRegisterView.getTxtCod().getText().isEmpty() || 
@@ -109,88 +106,116 @@ private boolean checkFields(){
 			goodsRegisterView.getComboCategoria().addItem(c.getName());
 	}
 	
-	private void insert() throws ParseException {
+	private void inflate(){
+		Category categoryName = categoryDAO.findByName(String.valueOf(goodsRegisterView.getComboCategoria().getSelectedItem())).get(0);
+		double price = 0.0;   
+		NumberFormat nf = NumberFormat.getNumberInstance(new Locale("pt", "BR"));
+		    
+		String formattedPrice = goodsRegisterView.getTxtValor().getText().replaceAll("R\\$ ", "");
+		try {
+			if (!formattedPrice.equals("0,00"))
+				price = nf.parse(formattedPrice).doubleValue();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		goods.setName(goodsRegisterView.getTxtNome().getText());
+		goods.setCode(Integer.parseInt(goodsRegisterView.getTxtCod().getText()));
+		goods.setCategoryId(categoryDAO.findById(categoryName.getId()).getId());
+		goods.setPrice(price);
+		goods.setSize(goodsRegisterView.getTxtTamanho().getText());
+		goods.setDescription(goodsRegisterView.getTxtDescricao().getText());
+	}
+	
+	private void insert() {
 		goods = new Goods();
-		Category categoryName = categoryDAO.findByName(String.valueOf(goodsRegisterView.getComboCategoria().getSelectedItem())).get(0);
+		inflate();
 		
-		double price = 0.0;
-		    
-		NumberFormat nf = NumberFormat.getNumberInstance(new Locale("pt", "BR"));
-		    
-		String formattedPrice = goodsRegisterView.getTxtValor().getText().replaceAll("R\\$ ", "");
-		    
-		if(!formattedPrice.equals("0,00"))
-			price = nf.parse(formattedPrice).doubleValue();
-		
-		goods.setName(goodsRegisterView.getTxtNome().getText());
-		goods.setCode(Integer.parseInt(goodsRegisterView.getTxtCod().getText()));
-		goods.setCategoryId(categoryDAO.findById(categoryName.getId()).getId());
-		goods.setPrice(price);
-		goods.setSize(goodsRegisterView.getTxtTamanho().getText());
-		goods.setDescription(goodsRegisterView.getTxtDescricao().getText());
-		
-		if(goodsDAO.add(goods)==1){
-			goodsRegisterView.getPanelDialog().setVisible(true);
-		}
+		if(checkFields()) {
+			showPanelDialog();
+			goodsDAO.add(goods);
+		} else {
+			goodsRegisterView.getLblMessageError().setVisible(true);
+		} 
 	}
 	
-	private void update(Goods goods) throws ParseException {
-		Category categoryName = categoryDAO.findByName(String.valueOf(goodsRegisterView.getComboCategoria().getSelectedItem())).get(0);
+	private void showPanelDialog(){
+		goodsRegisterView.getPanelDialog().setVisible(true);
 		
-		double price = 0.0;
-		    
-		NumberFormat nf = NumberFormat.getNumberInstance(new Locale("pt", "BR"));
-		    
-		String formattedPrice = goodsRegisterView.getTxtValor().getText().replaceAll("R\\$ ", "");
-		    
-		if(!formattedPrice.equals("0,00"))
-			price = nf.parse(formattedPrice).doubleValue();
+		goodsRegisterView.getTxtNome().setEnabled(false);
+		goodsRegisterView.getTxtCod().setEnabled(false);
+		goodsRegisterView.getComboCategoria().setEnabled(false);
+		goodsRegisterView.getTxtValor().setEnabled(false);
+		goodsRegisterView.getTxtTamanho().setEnabled(false);
+		goodsRegisterView.getTxtDescricao().setEnabled(false);
 		
-		goods.setName(goodsRegisterView.getTxtNome().getText());
-		goods.setCode(Integer.parseInt(goodsRegisterView.getTxtCod().getText()));
-		goods.setCategoryId(categoryDAO.findById(categoryName.getId()).getId());
-		goods.setPrice(price);
-		goods.setSize(goodsRegisterView.getTxtTamanho().getText());
-		goods.setDescription(goodsRegisterView.getTxtDescricao().getText());
-		
-		if(goodsDAO.update(goods)==1){
-			goodsRegisterView.getLblMessageError().setText("<html>Produto atualizad</br>com sucesso!</html>");
-			goodsRegisterView.getPanelDialog().setVisible(true);
-		}
-		
+		goodsRegisterView.getBtnCadastrar().setEnabled(false);
+		goodsRegisterView.getBtnLimpar().setEnabled(false);
 	}
 	
-	private void delete(Goods goods){
-		//TODO
-		goodsDAO.delete(goods);
+	private void disposePanelDialog(){
+		goodsRegisterView.getPanelDialog().setVisible(false);
+		goodsRegisterView.getTxtNome().requestFocus();
+		
+		goodsRegisterView.getTxtNome().setEnabled(true);
+		goodsRegisterView.getTxtCod().setEnabled(true);
+		goodsRegisterView.getComboCategoria().setEnabled(true);
+		goodsRegisterView.getTxtValor().setEnabled(true);
+		goodsRegisterView.getTxtTamanho().setEnabled(true);
+		goodsRegisterView.getTxtDescricao().setEnabled(true);
+		
+		goodsRegisterView.getBtnCadastrar().setEnabled(true);
+		goodsRegisterView.getBtnLimpar().setEnabled(true);
+		
+		cleanFields();
 	}
-
+	
+	private void update(){
+		inflate();
+		
+		if(checkFields()){
+			showPanelDialog();
+			goodsDAO.update(goods);
+		} else 
+			goodsRegisterView.getLblMessageError().setVisible(true);
+	}
+	
 	//inner class
 	private class Events implements ActionListener,FocusListener, MouseListener{
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == goodsRegisterView.getBtnCadastrar()) {
-					try {
-						if(goodsRegisterView.getWhoCalled() == 1){
-							insert();
-							}
-						else{
-							update(goods);
-						}
-					} catch (ParseException pe) {
-						pe.printStackTrace();
-					}
-				
-				} else if(e.getSource() == goodsRegisterView.getBtnLimpar()){
-					if(goodsRegisterView.getWhoCalled() == 0)
-						delete(goods);
-					else
-						cleanFields();
-				} else if(e.getSource() == goodsRegisterView.getBtnOK()){
-						goodsRegisterView.getPanelDialog().setVisible(false);
-						cleanFields();
+				if(call == SystemConstUtil.INSERT)
+					insert();
+				else if(call == SystemConstUtil.UPDATE)
+					update();
+			
+			} else if (e.getSource() == goodsRegisterView.getBtnLimpar()) {
+				if(call == SystemConstUtil.INSERT)
+					cleanFields();
+				else if(call == SystemConstUtil.UPDATE){
+					goodsRegisterView.getBtnOK().setVisible(false);
+					goodsRegisterView.getBtnSim().setVisible(true);
+					goodsRegisterView.getBtnNao().setVisible(true);
+					
+					goodsRegisterView.getLblMessagedialog().setText("<html>Deseja realmente<br>excluir registro ?<html>");
+					goodsRegisterView.getLblIconMessage().setIcon(GraphicsUtil.adjustImage("/drawable/warning.png", 
+							goodsRegisterView.getLblIconMessage().getSize()));
+					showPanelDialog();
 				}
+				
+			} else if (e.getSource() == goodsRegisterView.getBtnOK()) {
+				disposePanelDialog();
+				if(call == SystemConstUtil.UPDATE)
+					goodsRegisterView.dispose();
+			
+			} else if(e.getSource() == goodsRegisterView.getBtnSim()){
+				goodsDAO.delete(goods);
+				goodsRegisterView.dispose();
+			
+			} else if(e.getSource() == goodsRegisterView.getBtnNao()){
+				goodsRegisterView.dispose();
+			}
 		}
 						
 		
