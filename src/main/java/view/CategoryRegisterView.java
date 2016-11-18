@@ -177,7 +177,7 @@ public class CategoryRegisterView extends JFrame {
 		panelForm.add(lblCategoryTitle);
 		
 		/**Name field**/
-		lblNome = new JLabel("nome");
+		lblNome = new JLabel("nome *");
 		lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		lblNome.setForeground(Color.WHITE);
 		lblNome.setBounds(30, 200, 112, 33);

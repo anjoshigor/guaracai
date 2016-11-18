@@ -4,10 +4,16 @@
 package controller;
 
 import view.EmployeeRegisterView;
+
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
+import javax.swing.JDialog;
 
 import dao.EmployeeDAO;
 import model.Address;
@@ -58,6 +64,20 @@ public class EmployeeRegisterControl {
 		employeeRegisterView.getPwdSenha().setText("");	
 	}
 	
+	private boolean checkFields(){
+		
+		if(employeeRegisterView.getTxtNome().getText().isEmpty() ||
+		   employeeRegisterView.getTxtDataNasc().getText().isEmpty() || 
+		   employeeRegisterView.getTxtTelefone().getText().isEmpty() ||
+		   employeeRegisterView.getTxtCPF().getText().isEmpty() ||
+		   employeeRegisterView.getTxtLogin().getText().isEmpty()){
+			
+			return false;
+		}
+		
+		return true;
+	}
+	
 	private void insert(){
 		
 		employee = new Employee();
@@ -81,8 +101,11 @@ public class EmployeeRegisterControl {
 		employee.setUsername(employeeRegisterView.getTxtLogin().getText());
 		employee.setPassword(String.valueOf(employeeRegisterView.getPwdSenha().getPassword()));
 		
-		if(employeeDAO.add(employee)==1){
-			employeeRegisterView.getPanelDialog().setVisible(true);
+		if(checkFields()){
+			employeeDAO.add(employee);
+			
+		}else{
+			System.out.println("Error !");
 		}
 	}
 		
@@ -123,7 +146,6 @@ public class EmployeeRegisterControl {
 
 		@Override
 		public void mouseExited(MouseEvent e) {/* unimplemented method */ }
-	
+		
 	}
-	
 }
