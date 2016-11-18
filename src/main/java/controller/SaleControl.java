@@ -70,6 +70,7 @@ public class SaleControl {
 		
 		// add listeners
 		saleView.getTxtCod().addActionListener(events);
+		saleView.getTxtDeletar().addActionListener(events);
 		saleView.getLblDeletar().addMouseListener(events);
 		saleView.getComboTamanho().addActionListener(events);
 		saleView.getBtnAdicionar().addActionListener(events);
@@ -180,6 +181,9 @@ public class SaleControl {
 			
 			else if(e.getSource() == saleView.getTxtQtd())
 				saleView.getBtnAdicionar().requestFocus();
+
+			else if(e.getSource() == saleView.getTxtDeletar())
+				removeItemTable();
 
 			else if(e.getSource() == saleView.getTxtDesconto()){
 				saleView.getTxtAreaMotivo().requestFocus();
