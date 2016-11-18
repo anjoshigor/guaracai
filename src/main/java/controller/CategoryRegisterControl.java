@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -12,6 +13,8 @@ import javax.swing.KeyStroke;
 
 import dao.CategoryDAO;
 import model.Category;
+import util.GraphicsUtil;
+import util.SystemConstUtil;
 import view.CategoryRegisterView;
 import view.ConfigView;
 import view.RegisterView;
@@ -30,6 +33,7 @@ public class CategoryRegisterControl {
 	private Events events;
 	private CategoryDAO categoryDAO;
 	private Category category;
+	private short call;
 	private static final int IFW = JComponent.WHEN_IN_FOCUSED_WINDOW;
 	
 	// constructor
@@ -38,6 +42,7 @@ public class CategoryRegisterControl {
 		this.events = new Events();
 		this.categoryDAO = new CategoryDAO();
 		this.category = null;
+		this.call = SystemConstUtil.INSERT;
 		
 		this.categoryRegisterView.getContentPane().getInputMap(IFW).put(KeyStroke.getKeyStroke("F11"),"cadastrar");
 		this.categoryRegisterView.getContentPane().getInputMap(IFW).put(KeyStroke.getKeyStroke("F12"),"limpar");
@@ -47,13 +52,26 @@ public class CategoryRegisterControl {
 		this.categoryRegisterView.getContentPane().getActionMap().put("limpar", limparAction);
 		this.categoryRegisterView.getContentPane().getActionMap().put("voltar", voltarAction);
 
-		
+		categoryRegisterView.getBtnNao().addActionListener(events);
+		categoryRegisterView.getBtnSim().addActionListener(events);
 		categoryRegisterView.getBtnCadastrar().addActionListener(events);
 		categoryRegisterView.getBtnLimpar().addActionListener(events);
 		categoryRegisterView.getBtnOK().addActionListener(events);
-		categoryRegisterView.getLblImageButtonVoltar().addMouseListener(events);
+		categoryRegisterView.getLblImageButtonVoltar().addMouseListener(events);	
+	}
+	
+	public CategoryRegisterControl(CategoryRegisterView categoryRegisterView, Category category){
+		this(categoryRegisterView);
 		
+		this.call = SystemConstUtil.UPDATE;
+		this.category = category;
+		categoryRegisterView.getBtnCadastrar().setText("Atualizar");
+		categoryRegisterView.getBtnLimpar().setText("Deletar");
+		categoryRegisterView.getLblTitleCategory().setText("Atualização de Categoria");
+		categoryRegisterView.getLblTitleCategory().setFont(new Font("DejaVu Sans", Font.PLAIN, 48));
 		
+		categoryRegisterView.getTxtNome().setText(category.getName());
+		categoryRegisterView.getTxtDescricao().setText(category.getDescription());
 	}
 	
 
@@ -79,27 +97,65 @@ public class CategoryRegisterControl {
 	};
 	
 	
+	public boolean checkFields(){
+		if(categoryRegisterView.getTxtNome().getText().isEmpty() || 
+		   categoryRegisterView.getTxtDescricao().getText().isEmpty())
+			return false;
+		return true;
+	}
+	
 	private void cleanFields(){
 		categoryRegisterView.getTxtNome().setText("");
 		categoryRegisterView.getTxtDescricao().setText("");
 	}
 	
+	private void inflate(){
+		category.setName(categoryRegisterView.getTxtNome().getText());
+		category.setDescription(categoryRegisterView.getTxtDescricao().getText());
+	}
+	
 	private void insert(){
 		category = new Category();
+		inflate();
 		
-		if(categoryRegisterView.getTxtNome().getText().isEmpty() || 
-		   categoryRegisterView.getTxtDescricao().getText().isEmpty()) {
-			categoryRegisterView.getLblMessageError().setVisible(true);
+		if(checkFields()) {
+			showPanelDialog();
+			categoryDAO.add(category);
 		} else {
-			category.setName(categoryRegisterView.getTxtNome().getText());
-			category.setDescription(categoryRegisterView.getTxtDescricao().getText());
-			
-			if(categoryDAO.add(category)==1){
-				categoryRegisterView.getPanelDialog().setVisible(true);
-				categoryRegisterView.getBtnOK().requestFocus();
-			} 
-			
-		}
+			categoryRegisterView.getLblMessageError().setVisible(true);
+		} 
+	}
+	
+	private void showPanelDialog(){
+		categoryRegisterView.getPanelDialog().setVisible(true);
+		
+		categoryRegisterView.getTxtDescricao().setEnabled(false);
+		categoryRegisterView.getTxtNome().setEnabled(false);
+		
+		categoryRegisterView.getBtnCadastrar().setEnabled(false);
+		categoryRegisterView.getBtnLimpar().setEnabled(false);
+	}
+	
+	private void disposePanelDialog(){
+		categoryRegisterView.getPanelDialog().setVisible(false);
+		
+		categoryRegisterView.getTxtDescricao().setEnabled(true);
+		categoryRegisterView.getTxtNome().setEnabled(true);
+		
+		categoryRegisterView.getBtnCadastrar().setEnabled(true);
+		categoryRegisterView.getBtnLimpar().setEnabled(true);
+		
+		cleanFields();
+	}
+	
+	private void update(){
+		inflate();
+		
+		if(checkFields()){
+			showPanelDialog();
+			categoryDAO.update(category);
+		} else 
+			categoryRegisterView.getLblMessageError().setVisible(true);
 	}
 	
 	// inner class
@@ -107,12 +163,34 @@ public class CategoryRegisterControl {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == categoryRegisterView.getBtnCadastrar()){
-				insert();
-			}else if(e.getSource() == categoryRegisterView.getBtnOK()){
-					categoryRegisterView.getPanelDialog().setVisible(false);
+				if(call == SystemConstUtil.INSERT)
+					insert();
+				else if(call == SystemConstUtil.UPDATE)
+					update();
+			} else if(e.getSource() == categoryRegisterView.getBtnOK()){
+				disposePanelDialog();
+				if(call == SystemConstUtil.UPDATE)
+					categoryRegisterView.dispose();
+				
+			} else if (e.getSource() == categoryRegisterView.getBtnLimpar()){
+				if(call == SystemConstUtil.INSERT)
 					cleanFields();
-			} if (e.getSource() == categoryRegisterView.getBtnLimpar()){
-					cleanFields();
+				else if(call == SystemConstUtil.UPDATE){
+					categoryRegisterView.getBtnOK().setVisible(false);
+					categoryRegisterView.getBtnSim().setVisible(true);
+					categoryRegisterView.getBtnNao().setVisible(true);
+					
+					categoryRegisterView.getLblMessagedialog().setText("<html>Deseja realmente<br>excluir registro ?<html>");
+					categoryRegisterView.getLblIconMessage().setIcon(GraphicsUtil.adjustImage("/drawable/warning.png", 
+																		categoryRegisterView.getLblIconMessage().getSize()));
+					showPanelDialog();
+				}
+			} else if(e.getSource() == categoryRegisterView.getBtnSim()){
+				categoryDAO.delete(category);
+				categoryRegisterView.dispose();
+			
+			} else if(e.getSource() == categoryRegisterView.getBtnNao()){
+				categoryRegisterView.dispose();
 			}
 		}
 

@@ -14,6 +14,7 @@ import javax.swing.border.LineBorder;
 
 import controller.CategoryRegisterControl;
 import controller.LoginControl;
+import model.Category;
 
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -73,6 +74,10 @@ public class CategoryRegisterView extends JFrame {
 	private JButton btnOK;
 	private JPanel panelDialog;
 	
+
+	/* DIALOG CONFIRM */
+	private JButton btnSim;
+	private JButton btnNao;
 	
 	private CategoryRegisterControl categoryRegisterControl;
 	
@@ -80,6 +85,12 @@ public class CategoryRegisterView extends JFrame {
 	public CategoryRegisterView() {
 		initCategoryRegisterView();
 		categoryRegisterControl = new CategoryRegisterControl(this);
+	}
+	
+	// constructor
+	public CategoryRegisterView(Category category) {
+		initCategoryRegisterView();
+		categoryRegisterControl = new CategoryRegisterControl(this, category);
 	}
 	
 	// methods
@@ -109,7 +120,7 @@ public class CategoryRegisterView extends JFrame {
 		panelDialog = new JPanel();
 		panelDialog.setBackground(new Color(Integer.parseInt("827C7B", 16)));
 		panelDialog.setBorder(new LineBorder(Color.WHITE, 2));
-		panelDialog.setBounds(300, 190, 416, 225);
+		panelDialog.setBounds(186, 163, 416, 225);
 		panelDialog.setLayout(null);
 		panelDialog.setVisible(false);
 		panelForm.add(panelDialog);
@@ -122,7 +133,7 @@ public class CategoryRegisterView extends JFrame {
 		lblMessagedialog = new JLabel("<html>Cadastro realizado<br>com sucesso!<html>");
 		lblMessagedialog.setForeground(Color.WHITE);
 		lblMessagedialog.setFont(new Font("DejaVu Sans", Font.PLAIN, 26));
-		lblMessagedialog.setBounds(151, 46, 208, 97);
+		lblMessagedialog.setBounds(151, 46, 240, 97);
 		panelDialog.add(lblMessagedialog);
 		
 		btnOK = new JButton("OK");
@@ -131,6 +142,24 @@ public class CategoryRegisterView extends JFrame {
 		btnOK.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		btnOK.setBounds(160, 158, 105, 34);
 		panelDialog.add(btnOK);
+
+		/** DIALOG MESSAGE CONFIRM **/
+
+		btnNao = new JButton("NÃO");
+		btnNao.setBackground(Color.WHITE);
+		btnNao.setForeground(Color.DARK_GRAY);
+		btnNao.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
+		btnNao.setBounds(254, 158, 105, 34);
+		panelDialog.add(btnNao);
+		btnNao.setVisible(false);
+
+		btnSim = new JButton("SIM");
+		btnSim.setBackground(Color.WHITE);
+		btnSim.setForeground(Color.DARK_GRAY);
+		btnSim.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
+		btnSim.setBounds(134, 158, 105, 34);
+		panelDialog.add(btnSim);
+		btnSim.setVisible(false);
 		
 		/**Category Icon**/
 		lblCategoryIcon = new JLabel();
@@ -270,7 +299,24 @@ public class CategoryRegisterView extends JFrame {
 		return contentPane;
 	}
 	
+	public JLabel getLblTitleCategory() {
+		return lblCategoryTitle;
+	}
 	
+	public JButton getBtnNao() {
+		return btnNao;
+	}
 
+	public JButton getBtnSim() {
+		return btnSim;
+	}
+
+	public JLabel getLblIconMessage() {
+		return lblIconMessage;
+	}
+
+	public JLabel getLblMessagedialog() {
+		return lblMessagedialog;
+	}
 }
 	

@@ -14,6 +14,7 @@ import model.Category;
 import model.Client;
 import model.Employee;
 import model.Goods;
+import util.SystemConstUtil;
 import view.SearchResultsView;
 import view.SearchView;
 /**
@@ -91,7 +92,8 @@ public class SearchControl {
 				model.addRow(new Object[]{" "+categoryList.get(i).getId()," "+ categoryList.get(i).getName()," "+ categoryList.get(i).getDescription()});
 			
 			searchResultsView.setObjectList(categoryList);
-			
+			searchResultsView.setCall(SystemConstUtil.CATEGORY);
+
 		} else if(comboxFilter.equals("cliente")){
 			searchResultsView.getResultTable().getColumnModel().getColumn(0).setHeaderValue("id");
 			searchResultsView.getResultTable().getColumnModel().getColumn(1).setHeaderValue("nome");
@@ -117,6 +119,7 @@ public class SearchControl {
 				model.addRow(new Object[]{" "+clientList.get(i).getId()," "+ clientList.get(i).getName()," "+ clientList.get(i).getPhone()});
 			
 			searchResultsView.setObjectList(clientList);
+			searchResultsView.setCall(SystemConstUtil.CLIENT);
 				
 		} else if(comboxFilter.equals("funcionário")){
 			searchResultsView.getResultTable().getColumnModel().getColumn(0).setHeaderValue("id");
@@ -153,6 +156,8 @@ public class SearchControl {
 			
 			searchResultsView.setObjectList(employeeList);
 			
+			searchResultsView.setCall(SystemConstUtil.EMPLOYEE);
+			
 		} else if(comboxFilter.equals("produto")){
 			List<Goods> goodsList = null;
 
@@ -179,6 +184,8 @@ public class SearchControl {
 				model.addRow(new Object[]{" "+goodsList.get(i).getId()," "+ goodsList.get(i).getName()," "+ goodsList.get(i).getSize()});
 			
 			searchResultsView.setObjectList(goodsList);
+			
+			searchResultsView.setCall(SystemConstUtil.GOODS);
 		}	
 	}
 	

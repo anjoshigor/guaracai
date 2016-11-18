@@ -52,6 +52,7 @@ public class SearchResultsView extends JFrame {
 	private JLabel lblVoltar;
 	private JLabel lblImageButtonVoltar;
 	private List<?> objectList;
+	private short call;
 	
 	private SearchResultsControl searchResultsControl;
 	
@@ -192,6 +193,14 @@ public class SearchResultsView extends JFrame {
 		lblImageButtonVoltar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		contentPane.add(lblImageButtonVoltar);
 		
+	}
+	
+	public void setCall(short c){
+		call = c;
+	}
+	
+	public short getCall(){
+		return call;
 	}
 	
 	public void setObjectList(List<?> l){
