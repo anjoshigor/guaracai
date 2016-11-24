@@ -74,7 +74,7 @@ public class ClientDAO extends BasicDAO {
 	public List<Client> findByAmountSpent(double amountSpent){
 		
 		Result<TbClientRecord> result = context.selectFrom(TB_CLIENT)
-		 		  							   .where(TB_CLIENT.AMOUNT_SPENT.like(amountSpent+"%"))
+		 		  							   .where(TB_CLIENT.AMOUNT_SPENT.equal(amountSpent))
 		 		  							   .orderBy(TB_CLIENT.NAME)
 		 		  							   .fetch();
 		inflate(result);
